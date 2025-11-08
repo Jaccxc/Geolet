@@ -1,5 +1,5 @@
 {
-  "name": "UPDATE_THIS_WITH_YOUR_APP_NAME",
+  "name": "Geolet",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,9 +10,9 @@
     "email:build": "email build",
     "email:dev": "email dev --dir ./src/features/emails --port 3001",
     "email:export": "email export",
-    "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=UPDATE_THIS_WITH_YOUR_STRIPE_PROJECT_NAME",
-    "generate-types": "npx supabase gen types typescript --project-id UPDATE_THIS_WITH_YOUR_SUPABASE_PROJECT_ID --schema public > src/libs/supabase/types.ts",
-    "supabase:link": "env-cmd -f ./.env.local supabase link --project-ref UPDATE_THIS_WITH_YOUR_SUPABASE_PROJECT_ID",
+    "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=Geolet",
+    "generate-types": "npx supabase gen types typescript --project-id hpmruicylmvmyrcebvkv --schema public > src/libs/supabase/types.ts",
+    "supabase:link": "env-cmd -f ./.env.local supabase link --project-ref hpmruicylmvmyrcebvkv",
     "migration:new": "supabase migration new",
     "migration:up": "supabase migration up --linked --debug && npm run generate-types",
     "migration:squash": "supabase migration squash --linked"
@@ -51,7 +51,7 @@
     "@types/react": "19.0.4",
     "@types/react-dom": "19.0.2",
     "autoprefixer": "^10.4.20",
-    "env-cmd": "^10.1.0",
+    "env-cmd": "^11.0.0",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.1.4",
     "eslint-config-prettier": "^8.10.0",
@@ -61,7 +61,7 @@
     "postcss": "^8.4.49",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "supabase": "^1.226.4",
+    "supabase": "^2.54.11",
     "typescript": "^5.7.3"
   },
   "overrides": {
