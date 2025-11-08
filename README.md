@@ -100,7 +100,7 @@ Now we're going to run the initial [Supabase Migration](https://supabase.com/doc
 ### 9. Check it out!
 
 You did it! You should be able to look in your Stripe dashboard and see your products, and you should also see the same data has been populated in your Supabase database. Now let's test everything.
-
+0
 1. Run `bun i`
 1. Run `bun run dev`.
 1. Go to the app and click `Get started for free` - this will take you to the login page
