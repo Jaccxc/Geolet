@@ -1,0 +1,307 @@
+i want to create a web app platform. Name: Geolet What it does: On this platform, we are packing different minigames for Geoguessr players to improve very certain knowledge very quickly. Currently in the market, we lack of this kind of games, or maybe lack of a central management of different kind. Like there is one time i want to learn indian language. and i could only do that by memorizing text on the plonk it or learnable meta. if using a flash card kind of game to learn them, it would be really fast. also for the european language. we are focusing on the stuff that is good to learn for fast tempo. so also the phone meta. but not car meta or any visual meta. for the platform to be more complete. TA: Geoguessr player at any rank now im designing the UX and how the platform should be presented. the original thought of building this app is very simple. that is that indian language learning problem. and for this, i would like to make a minigame, where i can 1. choose language (based on country and manually include or exclude lanugage) and choose choice mode or map mode 2.start the game, we sample a list of word and show them one by one. for each one, choice mode would display 6 choices of languages and user should choose one. for map mode, user should answer by clicking the section of map where this language would shows up and thats the first game same idea applies straight to the phone meta game. and now i also think of the third game, major cities of a country game. let this all called "Flash", so under the main page of the website, there should be a tab called "Flash". There should also be something called Insight.which is an analytic page for users to import their geoguessr data for us to calculate some statistics about their games. And that's about it. That's something I would thought of for this website. But the point is I want to make this website to be more capable of helping players getting better at geoguessr. The thing is we already got the guiding websites like Plunk it, Geohint, or Learnable Metas. Those are also very good pages for learning, and we are not doing that repeatedly. We just want to do something that they didn't do.
+
+so, above is the core idea of this project, 
+i grabbed a repo down and that is exactly this repo. it's got react+next+supabase+stripe integrated
+it would be a perfect solution for me.
+we just have to transfer this into the required one.
+
+and we have planned for a bit:
+
+here is the main plan, what you have to do is to read @README.md to know what this repo is about. and read through the project.
+and also read the provided main plan. and break all the tasks to make this a MVP product. down into a few plans to execute.
+each plan you write, you should store them in @docs and called them <step_index>_<short_desc>_<timedate>.md
+
+since we are going to integrade a few different dedicated 3rd party library like supabase for backend, shadcn for the look
+you should better make these parts a individual step. for better isolation of work.
+
+also include the frontend design in the plan, we are going to use shadcn for this.
+
+Here’s a focused PO plan for **Geolet** with **drop-a-pin anywhere (MapLibre + free vector tiles)** baked in. It’s scoped to ship fast, be cheap to run, and stay extensible.
+
+# North Star
+
+**Help GeoGuessr players fix precise knowledge gaps in <10 minutes/day.**
+Two loops:
+
+1. **Flash** — short, targeted drills with *choice* and *pin-drop* map modes.
+2. **Insight** — import past games, find weaknesses, and auto-prescribe tomorrow’s drills.
+
+---
+
+# Product surface
+
+## Flash (minigames)
+
+* **Language Zones**
+  Prompt with a word/glyph; answer via **choice** (script/language) or **pin-drop** on regions where it appears.
+* **Phone Meta**
+  Prompt with prefix/pattern (e.g., `097…`, `+91 11…`); answer via **choice** (country/region) or **pin-drop** on valid regions/cities.
+* **Major Cities**
+  Prompt “Where is X?” or “Click any tier-1 city in Country Y.” Pin-drop must land inside a valid city polygon (or within a tolerance of a centroid).
+
+### Answering modes
+
+* **Single-choice**: 1 correct + 5 distractors (generated from catalog & heuristics).
+* **Map (pin-drop)**: zoomable world map (MapLibre). A click `(lng,lat)` is correct if it falls in the **canonical answer geometry** set.
+
+### Shared mechanics
+
+* Adaptive queue (weak tags first), timers, streaks.
+* SM-2-lite spaced repetition per “fact” → durable learning.
+* Recap: accuracy, avg time, tag breakdown, quick review.
+
+## Insight (analytics → prescription)
+
+* **Import**: CSV/JSON of past rounds.
+* **Skill map**: strengths/weaknesses by tag family (script/phone/city) & country.
+* **Confusion matrix**: e.g., IN↔PK, ES↔PT.
+* **Prescriptions**: “Train these 3 tags” → one-click Flash session.
+
+---
+
+# What to add now vs later
+
+### MVP (now)
+
+* Flash: Language, Phone, Cities with **choice** + **MapLibre pin-drop**.
+* Insight: import + overview + “Drill my weaknesses”.
+* Minimal curated content (India + a few European scripts; +91/+44/+33; 4–5 cities for 5 countries).
+* Accounts (Supabase Auth), free plan + single paid plan gate.
+
+### V1.1
+
+* Spaced repetition (due cards), daily goal/streak UI.
+* Hard mode (free-type, partial phone numbers).
+* Better distractors powered by your confusion matrix.
+
+### V2+
+
+* Community sets + moderation.
+* Live “Rush” rounds vs friends.
+* Optional Google Maps/Street View mode behind a feature flag.
+
+---
+
+# Data & content (practical notes)
+
+* **Regions catalog** (countries, first-level regions, cities) with **GeoJSON** geometry + centroid + bbox.
+
+  * Start with country polygons; for cities, points + radius is fine, then upgrade to polygons where available.
+  * Store shapes as GeoJSON (no PostGIS needed initially).
+  * Client validates clicks with Turf.js `booleanPointInPolygon` or distance to centroid.
+* **Fact cards** are atomic prompts with a **canonical answer** (one or many regions or a tag → mapped to regions).
+* **Skill tags** label cards for adaptivity & analytics:
+
+  * `script:*` (e.g., `script:devanagari`)
+  * `phone:*` (e.g., `phone:+91`, `phone:IN:Delhi`)
+  * `city:*` (e.g., `city:IN:tier1`, `city:TW:Taipei`)
+* **Phone meta**: keep a small, distinctive subset (country codes, a few area code exemplars). This is a trainer, not a telecom DB.
+* **Seeding**: ship a tiny but high-quality set; breadth comes later.
+
+---
+
+# System design (concise but concrete)
+
+## Supabase schema (minimal but complete)
+
+```sql
+-- 1) Skill taxonomy
+create table skill_tags (
+  id uuid primary key default gen_random_uuid(),
+  key text unique not null,          -- 'script:devanagari','phone:+91','city:IN:tier1'
+  family text not null check (family in ('script','phone','city')),
+  country text,                      -- ISO2 when relevant
+  meta jsonb not null default '{}'   -- {display:'Devanagari', notes:'…', examples:[…]}
+);
+alter table skill_tags enable row level security;
+create policy "rt skill_tags" on skill_tags for select using (true);
+
+-- 2) Regions catalog (answerables + map geometries)
+create table regions (
+  id uuid primary key default gen_random_uuid(),
+  key text unique not null,          -- 'IN','IN-DL','TW:Taipei'
+  kind text not null check (kind in ('country','region','city')),
+  name text not null,                -- display name
+  country text,                      -- ISO2 for region/city
+  geometry jsonb,                    -- GeoJSON Polygon/MultiPolygon/Point (nullable for point-only cities initially)
+  centroid_lonlat double precision[] not null,  -- [lon,lat]
+  bbox double precision[] not null,            -- [minLon,minLat,maxLon,maxLat]
+  meta jsonb not null default '{}'             -- {tier:1, pop:…}
+);
+alter table regions enable row level security;
+create policy "rt regions" on regions for select using (true);
+create index regions_kind_idx on regions (kind);
+create index regions_country_idx on regions (country);
+
+-- 3) Immutable facts (prompts) with canonical answers
+create table fact_cards (
+  id uuid primary key default gen_random_uuid(),
+  type text not null check (type in ('language_snippet','phone_number','city_locate')),
+  payload jsonb not null,            -- minimal stimulus (e.g., {text:'होटल'}, {e164:'+91 11…'}, {city:'Delhi'})
+  primary_tags text[] not null,      -- array of skill_tags.key
+  difficulty int not null default 1,
+  answer jsonb not null              -- contract below
+  -- examples:
+  -- { "kind":"region", "select":{"by":"key","keys":["IN"]} }
+  -- { "kind":"region", "select":{"by":"key","keys":["TW:Taipei","TW:Hsinchu"]} }
+  -- { "kind":"tag",    "select":{"by":"skill_key","keys":["script:devanagari"]}, "map_equivalents":{"regions":["IN","NP"]} }
+);
+alter table fact_cards enable row level security;
+create policy "rt fact_cards" on fact_cards for select using (true);
+create index fact_cards_type_idx on fact_cards (type);
+create index fact_cards_tags_gin on fact_cards using gin (primary_tags);
+
+-- 4) Per-user spaced repetition state
+create table user_fact_stats (
+  user_id uuid not null references auth.users(id) on delete cascade,
+  fact_id uuid not null references fact_cards(id) on delete cascade,
+  seen int not null default 0,
+  correct int not null default 0,
+  ease real not null default 2.5,
+  last_seen_at timestamptz,
+  due_at timestamptz,
+  primary key (user_id, fact_id)
+);
+alter table user_fact_stats enable row level security;
+create policy "own ufs" on user_fact_stats
+  for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create index ufs_due_idx on user_fact_stats (user_id, due_at) where due_at is not null;
+
+-- 5) Sessions (recaps/telemetry)
+create table game_sessions (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  mode text not null,                -- 'language-choice'|'language-map'|'phone-choice'|'phone-map'|'city-map'
+  created_at timestamptz not null default now(),
+  summary jsonb not null default '{}' -- {accuracy:..., avg_ms:..., tag_breakdown:{...}}
+);
+alter table game_sessions enable row level security;
+create policy "own sessions" on game_sessions
+  for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create index game_sessions_user_time on game_sessions (user_id, created_at desc);
+
+-- 6) Insight: imported round history (raw, append-only)
+create table insight_rounds (
+  id bigserial primary key,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  played_at timestamptz,
+  country text,                      -- guessed ISO2
+  target_country text,               -- target ISO2
+  distance_m float,
+  time_ms int,
+  meta jsonb
+);
+alter table insight_rounds enable row level security;
+create policy "own insight" on insight_rounds
+  for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create index insight_user_time on insight_rounds (user_id, played_at);
+create index insight_user_target on insight_rounds (user_id, target_country);
+```
+
+> **Why nothing else?**
+> We intentionally avoid PostGIS, user profile tables, or “packs” tables for MVP. Content is read-only and seeded. All user data is owner-scoped via RLS. We can add content-authoring later.
+
+### Canonical `answer` contract (stored in `fact_cards.answer`)
+
+```jsonc
+// Region-based answer(s)
+{ "kind":"region", "select": { "by":"key", "keys": ["TW:Taipei","TW:Hsinchu"] } }
+
+// Tag answer with map equivalents for pin-drop
+{ "kind":"tag",
+  "select": { "by":"skill_key", "keys":["script:devanagari"] },
+  "map_equivalents": { "regions": ["IN","NP"] }
+}
+```
+
+* **Choice mode** renders labels from `regions.name` or a tag display.
+* **Map mode** validates `(lng,lat)` against `regions.geometry` (polygons) or `centroid_lonlat` with tolerance.
+
+### Optional integrity (add later if needed)
+
+* Trigger to ensure every `primary_tags[]` exists in `skill_tags`.
+* Trigger to ensure every `answer.select.keys[]` points to valid `regions.key` when `kind='region'`.
+
+## API surface (Next.js /api/)
+
+* `POST /api/flash/queue` → `{mode,targetTags,maxCards}` → returns normalized queue items (each contains fact metadata, renderer hints, and **either** choice options **or** `answerRegions` + `bbox` for prefetch).
+* `POST /api/flash/grade` → batch `{factId, correct|click|selectedKey, timeMs}` → updates SRS & returns per-item verdicts.
+* `POST /api/insight/import` → upload/parse rounds into `insight_rounds`.
+* `GET  /api/insight/overview` → aggregates for heatmap & confusions.
+* `POST /api/insight/prescribe` → computes target tags to feed `/flash/queue`.
+
+## SRS (SM-2-lite)
+
+* `quality`: 5 (correct & fast), 4 (correct), 2 (wrong).
+* `ease`: `max(1.3, ease + (0.1 - (5-quality)*(0.08 + (5-quality)*0.02)))`.
+* `interval`: 1, 6, then `round(prev * ease)` days; wrong → next day.
+* Next due → `user_fact_stats.due_at`.
+
+## Map mode (pin-drop)
+
+* **Renderer**: MapLibre GL JS with an OpenMapTiles-compatible free tile provider.
+* **Validation**:
+
+  * Fetch `regions.geometry` for the answer set (cache per session).
+  * If polygon present → Turf `booleanPointInPolygon`.
+  * Else use centroid radius check (configurable per `regions.meta.tolerance_km`).
+* **Viewport**: use union of `bbox` from all answer regions (server returns it with the card).
+* **Performance**: keep polygons simplified (zoom-appropriate), lazy-fetch large shapes.
+
+## Entitlements (Stripe → Supabase)
+
+* Use the starter’s pattern: plan metadata drives gates (daily sessions, content families).
+* Gate checks live in API routes (server-side) and are mirrored in UI hints.
+
+---
+
+# UX layout (first cut)
+
+```
+[ Geolet ]
+ ├─ Flash
+ │   ├─ Quick Start   (Resume 20-card session)
+ │   ├─ Build Session (Family, Country, Tags chips)
+ │   └─ Weak Spots    (from Insight → one-click start)
+ └─ Insight
+     ├─ Import data  (CSV/JSON)
+     ├─ Skill Map    (heatmap by family×country)
+     ├─ Confusions   (country↔country pairs)
+     └─ Prescriptions (auto queue builder)
+```
+
+### Flash session screen
+
+* Header: timer, progress (7/20), accuracy.
+* **Choice**: big buttons; feedback with micro-explanation from `skill_tags.meta.notes`.
+* **Map**: MapLibre canvas, pin cursor, zoom; submit on click; show correct region outline after answer (and nearest correct city if miss).
+* Recap: per-tag stats, “3 cards scheduled for tomorrow”, “Start review”.
+
+### Insight
+
+* Import wizard → preview rows → ingest.
+* Heatmap (hover to see accuracy/time); click cell → “Train this” button (feeds `/flash/queue`).
+
+---
+
+## What to build first (incremental)
+
+1. **Schema + seed** (`skill_tags`, `regions`, `fact_cards` with ~100 high-signal facts).
+2. **Queue + Grade** API with **choice** mode only (fastest path).
+3. Drop-a-pin renderer with MapLibre + Turf validation; server returns `answerRegions` + merged `bbox`.
+4. Insight import + minimal overview + “Drill my weaknesses”.
+
+**Acceptance for MVP**
+
+* User signs up → imports a small history → clicks “Drill my weaknesses” → plays a 20-card session with both **choice** and **pin-drop** cards → gets a recap with SRS scheduling.
+
+---
+
+## Notes & best practices
+
+* Keep `regions.geometry` light: simplify polygons and store at **one zoom level** for now; heavier shapes can be lazy-fetched on demand.
+* Cache region shapes client-side per session; don’t re-download the same GeoJSON for each card.
+* Use a **GIN** index on `fact_cards.primary_tags` for tag-based queues; it’s critical.
+* Only the server holds service keys; all user reads/writes honor RLS.
+* Aim for **<50ms** server time for queue/grade endpoints (pre-select candidates, keep payloads small).
+
