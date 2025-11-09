@@ -18,7 +18,7 @@ Clean up the starter template branding and prepare the project structure for Geo
 - [ ] Search and remove all `UPDATE_THIS` placeholders in code
 - [ ] Review and update comments that reference the starter template
 
-### 1.2 Update Branding & Metadata
+### 1.2   
 - [ ] Update `package.json`:
   - name: "geolet"
   - description: "GeoGuessr training platform with minigames and analytics"

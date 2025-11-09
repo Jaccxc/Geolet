@@ -29,6 +29,90 @@ export type Database = {
         }
         Relationships: []
       }
+      fact_cards: {
+        Row: {
+          answer: Json
+          difficulty: number
+          id: string
+          payload: Json
+          primary_tags: string[]
+          type: string
+        }
+        Insert: {
+          answer: Json
+          difficulty?: number
+          id?: string
+          payload: Json
+          primary_tags: string[]
+          type: string
+        }
+        Update: {
+          answer?: Json
+          difficulty?: number
+          id?: string
+          payload?: Json
+          primary_tags?: string[]
+          type?: string
+        }
+        Relationships: []
+      }
+      game_sessions: {
+        Row: {
+          created_at: string
+          id: string
+          mode: string
+          summary: Json
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          mode: string
+          summary?: Json
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          mode?: string
+          summary?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
+      insight_rounds: {
+        Row: {
+          country: string | null
+          distance_m: number | null
+          id: number
+          meta: Json | null
+          played_at: string | null
+          target_country: string | null
+          time_ms: number | null
+          user_id: string
+        }
+        Insert: {
+          country?: string | null
+          distance_m?: number | null
+          id?: number
+          meta?: Json | null
+          played_at?: string | null
+          target_country?: string | null
+          time_ms?: number | null
+          user_id: string
+        }
+        Update: {
+          country?: string | null
+          distance_m?: number | null
+          id?: number
+          meta?: Json | null
+          played_at?: string | null
+          target_country?: string | null
+          time_ms?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       prices: {
         Row: {
           active: boolean | null
@@ -106,6 +190,66 @@ export type Database = {
         }
         Relationships: []
       }
+      regions: {
+        Row: {
+          bbox: number[]
+          centroid_lonlat: number[]
+          country: string | null
+          geometry: Json | null
+          id: string
+          key: string
+          kind: string
+          meta: Json
+          name: string
+        }
+        Insert: {
+          bbox: number[]
+          centroid_lonlat: number[]
+          country?: string | null
+          geometry?: Json | null
+          id?: string
+          key: string
+          kind: string
+          meta?: Json
+          name: string
+        }
+        Update: {
+          bbox?: number[]
+          centroid_lonlat?: number[]
+          country?: string | null
+          geometry?: Json | null
+          id?: string
+          key?: string
+          kind?: string
+          meta?: Json
+          name?: string
+        }
+        Relationships: []
+      }
+      skill_tags: {
+        Row: {
+          country: string | null
+          family: string
+          id: string
+          key: string
+          meta: Json
+        }
+        Insert: {
+          country?: string | null
+          family: string
+          id?: string
+          key: string
+          meta?: Json
+        }
+        Update: {
+          country?: string | null
+          family?: string
+          id?: string
+          key?: string
+          meta?: Json
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           cancel_at: string | null
@@ -164,6 +308,44 @@ export type Database = {
             columns: ["price_id"]
             isOneToOne: false
             referencedRelation: "prices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_fact_stats: {
+        Row: {
+          correct: number
+          due_at: string | null
+          ease: number
+          fact_id: string
+          last_seen_at: string | null
+          seen: number
+          user_id: string
+        }
+        Insert: {
+          correct?: number
+          due_at?: string | null
+          ease?: number
+          fact_id: string
+          last_seen_at?: string | null
+          seen?: number
+          user_id: string
+        }
+        Update: {
+          correct?: number
+          due_at?: string | null
+          ease?: number
+          fact_id?: string
+          last_seen_at?: string | null
+          seen?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_fact_stats_fact_id_fkey"
+            columns: ["fact_id"]
+            isOneToOne: false
+            referencedRelation: "fact_cards"
             referencedColumns: ["id"]
           },
         ]

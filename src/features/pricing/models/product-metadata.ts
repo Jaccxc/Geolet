@@ -1,18 +1,18 @@
 import z from 'zod';
 
-export const priceCardVariantSchema = z.enum(['basic', 'pro', 'enterprise']);
+export const priceCardVariantSchema = z.enum(['free', 'pro']);
 
 export const productMetadataSchema = z
   .object({
     price_card_variant: priceCardVariantSchema,
-    generated_images: z.string().optional(),
-    image_editor: z.enum(['basic', 'pro']),
-    support_level: z.enum(['email', 'live']),
+    daily_sessions: z.string().optional(),
+    content_families: z.string().optional(),
+    support_level: z.enum(['community', 'email', 'priority']),
   })
   .transform((data) => ({
     priceCardVariant: data.price_card_variant,
-    generatedImages: data.generated_images ? parseInt(data.generated_images) : 'enterprise',
-    imageEditor: data.image_editor,
+    dailySessions: data.daily_sessions ? parseInt(data.daily_sessions) : Infinity,
+    contentFamilies: data.content_families ? data.content_families.split(',') : ['all'],
     supportLevel: data.support_level,
   }));
 
