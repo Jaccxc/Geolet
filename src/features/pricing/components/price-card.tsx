@@ -46,9 +46,8 @@ export function PricingCard({
   const isBillingIntervalYearly = billingInterval === 'year';
   const metadata = productMetadataSchema.parse(product.metadata);
   const buttonVariantMap = {
-    basic: 'default',
+    free: 'default',
     pro: 'sexy',
-    enterprise: 'orange',
   } as const;
 
   function handleBillingIntervalChange(billingInterval: BillingInterval) {
@@ -75,12 +74,9 @@ export function PricingCard({
         {!Boolean(price) && product.prices.length > 1 && <PricingSwitch onChange={handleBillingIntervalChange} />}
 
         <div className='m-auto flex w-fit flex-1 flex-col gap-2 px-8 py-4'>
-          {metadata.generatedImages === 'enterprise' && <CheckItem text={`Unlimited banner images`} />}
-          {metadata.generatedImages !== 'enterprise' && (
-            <CheckItem text={`Generate ${metadata.generatedImages} banner images`} />
-          )}
-          {<CheckItem text={`${metadata.imageEditor} image editing features`} />}
-          {<CheckItem text={`${metadata.supportLevel} support`} />}
+          <CheckItem text={metadata.dailySessions === Infinity ? 'Unlimited sessions' : `${metadata.dailySessions} sessions per day`} />
+          <CheckItem text={`All content: ${metadata.contentFamilies.join(', ')}`} />
+          <CheckItem text={`${metadata.supportLevel} support`} />
         </div>
 
         {createCheckoutAction && (

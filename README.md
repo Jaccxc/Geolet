@@ -1,204 +1,240 @@
-<p align="center">
-  <h1 align="center">next-supabase-stripe-starter</h1>
-  <p align="center">
-    <a href="https://twitter.com/KolbySisk"><img src="/delete-me/github-banner.png" /></a>
-  </p>
-</p>
+# Geolet
 
-<p align="center">
-  <a href="https://twitter.com/kolbysisk" rel="nofollow"><img src="https://img.shields.io/badge/created%20by-@kolbysisk-e57060.svg" alt="Created by Kolby Sisk"></a>
-  <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/github/license/kolbysisk/next-supabase-stripe-starter" alt="License"></a>
-</p>
+**GeoGuessr Training Platform** - Master GeoGuessr with focused minigames and personalized analytics.
 
-<p align="center">
-  <a href="https://next-supabase-stripe-starter-demo-mnqz.vercel.app" style="font-weight: bold; font-size: 20px; text-decoration: underline;">See the demo</a>
-</p>
+## Overview
 
-## Introduction
+Geolet helps GeoGuessr players improve specific skills through targeted training:
 
-Bootstrap your SaaS with a modern tech stack built to move quick. Follow the guide to get started.
+- **Flash Minigames**: Train languages, phone codes, and major cities with choice-based or map-based questions
+- **Dual Answer Modes**: Multiple choice or pin-drop on interactive maps
+- **Insight Analytics**: Import your game history to visualize strengths and weaknesses
+- **Smart Prescriptions**: AI-powered training recommendations based on your performance
+- **Spaced Repetition**: SM-2 algorithm for long-term knowledge retention
 
-### What's included
+## Features
 
-- Next.js 15
-- [Supabase](https://supabase.com) - Postgres database & user authentication
-- [Stripe](https://stripe.com) - [Checkout](https://stripe.com/docs/payments/checkout), [subscriptions](https://stripe.com/docs/billing/subscriptions/overview), and [customer portal](https://stripe.com/docs/customer-management)
-- [React Email](https://react.email/) - Easily build emails and send them with [Resend](https://resend.com)
-- [Tailwindcss](https://tailwindcss.com/) - CSS framework
-- [shadcn/ui](https://ui.shadcn.com) - Prebuilt accessible components
-- Webhooks to automatically synchronize Stripe with Supabase
-- Stripe fixture to bootstrap product data
-- Supabase migrations to bootstrap and manage your db schema
-- Responsive, performant, and accessible prebuilt pages
-- Animated button borders! Now you can look cool without nerds saying you shipped too late
+### Flash Training
+- **Language Scripts**: Identify writing systems (Devanagari, Cyrillic, Arabic, etc.)
+- **Phone Meta**: Recognize phone number patterns and country codes
+- **Major Cities**: Locate cities on a map by name or description
+- **Two Modes**: Multiple choice (6 options) or pin-drop on map
 
-## Getting started
+### Insight Analytics
+- Import CSV/JSON game history from GeoGuessr
+- Skill heatmap showing accuracy by country
+- Confusion matrix identifying common mistakes
+- Personalized prescriptions for focused training
+
+### Smart Features
+- Adaptive queue prioritizes weak spots and due cards
+- Real-time feedback with explanations
+- Session history and progress tracking
+- Mobile-responsive design
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Backend**: Supabase (PostgreSQL + Auth)
+- **Payments**: Stripe (subscriptions + customer portal)
+- **Maps**: MapLibre GL JS
+- **UI**: Shadcn/ui + Tailwind CSS
+- **Validation**: Turf.js (geospatial)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ or Bun
+- Supabase account
+- Stripe account (for payments)
+- Resend account (for emails)
 
 ### 1. Setup Supabase
 
-1. Go to [supabase.com](https://supabase.com) and create a project
-1. Go to Project Settings → Database → Database password and click reset database password then click generate a new password. (I know you already made one, but this fixes a [bug with their CLI where it doesn't like special characters in the password](https://github.com/supabase/supabase/issues/15184))
-1. Save this password somewhere, you can't see it after closing the box
+1. Create a project at [supabase.com](https://supabase.com)
+2. Reset database password (Settings → Database)
+3. Save the password (you'll need it later)
 
 ### 2. Setup Stripe
 
-1. Go to [stripe.com](https://stripe.com) and create a project
-1. Go to [Customer Portal Settings](https://dashboard.stripe.com/test/settings/billing/portal) and click the `Active test link` button
+1. Create an account at [stripe.com](https://stripe.com)
+2. Activate the [Customer Portal](https://dashboard.stripe.com/test/settings/billing/portal)
 
 ### 3. Setup Resend
 
-1. Go to [resend.com](https://resend.com) and create an account
-1. Go to the [API Keys page](https://resend.com/api-keys) and create an API Key
-1. Add the [Supabase Resend integration](https://supabase.com/partners/integrations/resend)
+1. Create an account at [resend.com](https://resend.com)
+2. Get your [API Key](https://resend.com/api-keys)
+3. Add the [Supabase integration](https://supabase.com/partners/integrations/resend)
 
-### 4. Deploy
+### 4. Clone and Install
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FKolbySisk%2Fnext-supabase-stripe-starter&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,SUPABASE_DB_PASSWORD,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,RESEND_API_KEY&demo-title=AI%20Twitter%20Banner%20Demo&demo-url=https%3A%2F%2Fai-twitter-banner.vercel.app&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6)
-
-1. Next click the deploy button ⬆️
-1. On the form create a new repo and add the Supabase integration
-1. Add the environment variables that you have available. For the stripe webhook secret just put any value - we will come back to update this after configuring the webhook
-1. Click Deploy
-1. While you wait, clone your new repo and open it in your code editor. Then create a file named `.env.local`. Copy and pase the contents of `.env.local.example` into this file and add the correct values. They should be the same values you added in above.
-
-![Vercel env config](/delete-me/deplyoment-env.png)
-
-### 5. Stripe Webhook
-
-1. After deploying go to your Vercel dashboard and find your Vercel URL
-1. Next go to your Stripe dashboard, click `Developers` in the top nav, and then the `Webhooks` tab
-1. Add an endpoint. Enter your Vercel URL followed by `/api/webhooks`
-1. Click `Select events`
-1. Check `Select all events`
-1. Scroll to the bottom of the page and click `Add endpoint`
-1. Click to `Reveal` signing secret and copy it
-1. Go to your `Vercel project settings` → `Environment Variables`
-1. Update the value of the `STRIPE_WEBHOOK_SECRET` env with your newly acquired webhook secret. Press `Save`
-
-### 6. Run Supabase Migration
-
-Now we're going to run the initial [Supabase Migration](https://supabase.com/docs/reference/cli/supabase-migration-new) to create your database tables.
-
-1. Run `bunx supabase login`
-1. Run `bunx supabase init`
-1. Open your `package.json` and update both `UPDATE_THIS_WITH_YOUR_SUPABASE_PROJECT_ID` strings with your supabase project id
-1. Run `bun run supabase:link`
-1. Run `bun run migration:up`
-
-### 7. Run Stripe Fixture
-
-[Stripe fixtures](https://stripe.com/docs/cli/fixtures) are an easy way to configure your product offering without messing around in the Stripe UI.
-
-1. Install the [Stripe CLI](https://stripe.com/docs/stripe-cli#install). For Macs run: `brew install stripe/stripe-cli/stripe`
-1. Run (make sure to update the command with your Stripe sk) `stripe fixtures ./stripe-fixtures.json --api-key UPDATE_THIS_WITH_YOUR_STRIPE_SK`
-
-### 8. Last steps
-
-1. Do a `Search All` in your code editor for `UPDATE_THIS` and update all instances with the relevant value (**except for .env.local.example!**)
-1. Delete the `delete-me` dir
-
-### 9. Check it out!
-
-You did it! You should be able to look in your Stripe dashboard and see your products, and you should also see the same data has been populated in your Supabase database. Now let's test everything.
-0
-1. Run `bun i`
-1. Run `bun run dev`.
-1. Go to the app and click `Get started for free` - this will take you to the login page
-1. We haven't configured auth providers, so for now click `Continue with Email` and submit your email address
-1. Click the link sent to your email and you should be redirected back to your app - authenticated
-1. Click `Get Started` on one of the plans. This will take you to a Stripe checkout page (In test mode)
-1. Enter `4242424242424242` as your credit card number. Fill out the rest of the form with any valid data and click Subscribe
-1. You should be redirect to the Account page where you can see your active subscription
-1. Click the `Manage your subscription` button
-
-**That's the end of the setup. The following are guides to help you code in your new codebase.**
-
----
-
-## Guides
-
-### Managing products
-
-Your products and prices are managed via the `stripe-fixtures.json` file. You can delete your test data in Stripe on the [Developers page](https://dashboard.stripe.com/test/developers), make the changes you'd like, and then run the fixture command from above. When changes are made in Stripe the webhook hits the api route at `src/app/api/webhooks`. The handler will synchronize the data sent from Stripe to your Supabase database.
-
-The `metadata` field in your fixture is where we can store info about the product that can be used in your app. For example, say you have a basic product, and one of the features of the product includes a max number of team invites. You can add a field to the metadata like `team_invites`. Then update the Zod schema in `src/features/pricing/models/product-metadata.ts`
-
-Then you can make use of it like this:
-
-```ts
-const products = await getProducts();
-const productMetadata = productMetadataSchema.parse(products[0].metadata); // Now it's typesafe 🙌!
-productMetadata.teamInvites; // The value you set in the fixture
+```bash
+git clone <your-repo-url>
+cd Geolet
+bun install
 ```
 
-### Managing your database schema
+### 5. Environment Variables
 
-[Migrations](https://supabase.com/docs/reference/cli/supabase-migration-new) are a powerful concept for managing your database schema. Any changes you make to your database schema should be done through migrations.
+Copy `.env.local.example` to `.env.local` and fill in your values:
 
-Say you want to add a table named `invites`.
+```bash
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+SUPABASE_DB_PASSWORD=your_db_password
 
-First run `npm run migration:new add-invites-table`
-Then edit your file to include:
+# Stripe
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_pk
+STRIPE_SECRET_KEY=your_stripe_sk
+STRIPE_WEBHOOK_SECRET=your_webhook_secret
 
-```sql
-create table invites (
-  id uuid not null primary key default gen_random_uuid(),
-  email text not null,
-);
-alter table invites enable row level security;
+# Resend
+RESEND_API_KEY=your_resend_key
 ```
 
-Then run `npm run migration:up` and your table will be added.
+### 6. Database Setup
 
-### Configuring auth providers
+```bash
+# Link to your Supabase project
+bun run supabase:link
 
-There are many auth providers you can choose from. [See the Supabase docs](https://supabase.com/docs/guides/auth#providers) for the full the list and their respective guides to configure them.
-
-### Styling
-
-- [Learn more about shadcn/ui components](https://ui.shadcn.com/docs)
-- [Learn more about theming with shadcn/ui](https://ui.shadcn.com/docs/theming)
-- [Learn more about the Tailwindcss theme config](https://tailwindcss.com/docs/theme)
-
-### Emails
-
-Your emails live in the `src/features/emails` dir. Emails are finicky and difficult to style correctly, so make sure to reference the [React Email docs](https://react.email/docs/introduction). After creating your email component, sending an email is as simple as:
-
-```ts
-import WelcomeEmail from '@/features/emails/welcome';
-import { resendClient } from '@/libs/resend/resend-client';
-
-resendClient.emails.send({
-  from: 'no-reply@your-domain.com',
-  to: userEmail,
-  subject: 'Welcome!',
-  react: <WelcomeEmail />,
-});
+# Run migrations
+bun run migration:up
 ```
 
-### File structure
+### 7. Stripe Setup
 
-The file structure uses the group by `feature` concept. This is where you will colocate code related to a specific feature, with the exception of UI code. Typically you want to keep your UI code in the `app` dir, with the exception of reusable components. Most of the time reusable components will be agnostic to a feature and should live in the `components` dir. The `components/ui` dir is where `shadcn/ui` components are generated to.
+Install Stripe CLI:
+```bash
+brew install stripe/stripe-cli/stripe
+```
 
-### Going live
+Load products:
+```bash
+stripe fixtures ./stripe-fixtures.json --api-key YOUR_STRIPE_SK
+```
 
-Follow these steps when you're ready to go live:
+### 8. Run Development Server
 
-1. Activate your Stripe account and set the dashboard to live mode
-1. Repeat the steps above to create a Stripe webhook in live mode, this time using your live url
-1. Update Vercel env variables with your live Stripe pk, sk, and whsec
-1. After Vercel has redeployed with your new env variables, run the fixture command using your Stripe sk
+```bash
+bun run dev
+```
 
----
+Open [http://localhost:3000](http://localhost:3000)
+
+## Development
+
+### File Structure
+
+```
+src/
+├── app/                 # Next.js app directory
+│   ├── (auth)/         # Auth pages (login, signup)
+│   ├── (account)/      # Protected pages (flash, insight, account)
+│   └── api/            # API routes
+├── features/           # Feature modules
+│   ├── flash/          # Flash game logic
+│   ├── insight/        # Analytics and import
+│   ├── srs/            # Spaced repetition system
+│   ├── pricing/        # Stripe integration
+│   └── account/        # User management
+├── components/         # Reusable UI components
+├── libs/              # Third-party integrations
+└── utils/             # Helper functions
+```
+
+### Database Migrations
+
+Create a new migration:
+```bash
+bun run migration:new your_migration_name
+```
+
+Apply migrations:
+```bash
+bun run migration:up
+```
+
+### Managing Products
+
+Products are defined in `stripe-fixtures.json`. To update:
+
+1. Delete test data in [Stripe Dashboard](https://dashboard.stripe.com/test/developers)
+2. Edit `stripe-fixtures.json`
+3. Run: `stripe fixtures ./stripe-fixtures.json --api-key YOUR_SK`
+
+Product metadata fields:
+- `price_card_variant`: "free" | "pro"
+- `daily_sessions`: Number of sessions per day
+- `content_families`: Comma-separated list ("script,phone,city")
+- `support_level`: "community" | "email" | "priority"
+
+## Deployment
+
+### Deploy to Vercel
+
+1. Push to GitHub
+2. Import project in [Vercel](https://vercel.com)
+3. Add environment variables
+4. Deploy
+
+### Setup Stripe Webhook
+
+1. Get your Vercel URL
+2. In Stripe Dashboard → Developers → Webhooks
+3. Add endpoint: `https://your-domain.vercel.app/api/webhooks`
+4. Select all events
+5. Copy webhook secret to Vercel environment variables
+
+### Going Live
+
+1. Switch Stripe to live mode
+2. Create live webhook
+3. Update Vercel env vars with live keys
+4. Redeploy
+5. Run fixtures with live Stripe key
+
+## Project Roadmap
+
+### MVP (Current)
+- [x] Flash minigames (choice + map modes)
+- [x] Insight import and analytics
+- [x] Prescription system
+- [x] Basic SRS implementation
+
+### V1.1 (Planned)
+- [ ] Daily streaks and goals
+- [ ] Full SRS with due cards
+- [ ] Hard mode (free-type answers)
+- [ ] Improved distractor generation
+
+### V2.0 (Future)
+- [ ] Community content submission
+- [ ] Live multiplayer "Rush" mode
+- [ ] Street View integration
+- [ ] Mobile app
+
+## Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
 ## Support
 
-If you need help with the setup, or developing in the codebase, feel free to reach out to me on Twitter [@kolbysisk](https://twitter.com/KolbySisk) - I'm always happy to help.
+- Documentation: See `/docs` directory for detailed development plans
+- Issues: [GitHub Issues](https://github.com/yourusername/geolet/issues)
 
-## Contribute
+## License
 
-PRs are always welcome.
+MIT License - see LICENSE file for details
 
 ---
 
-This project was inspired by Vercel's [nextjs-subscription-payments](https://github.com/vercel/nextjs-subscription-payments).
+Built with ❤️ for the GeoGuessr community
