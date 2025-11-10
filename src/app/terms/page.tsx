@@ -71,7 +71,7 @@ export default function TermsPage() {
           <p className='mb-3 leading-relaxed text-muted-foreground'>You agree NOT to:</p>
           <ul className='ml-6 list-disc space-y-2 text-muted-foreground'>
             <li>Use the Service for any illegal purpose or in violation of any laws</li>
-            <li>Attempt to gain unauthorized access to any part of the Service or other user's; accounts</li>
+            <li>Attempt to gain unauthorized access to any part of the Service or other user&apos;s; accounts</li>
             <li>Use automated scripts, bots, or scrapers to access the Service</li>
             <li>Reverse engineer, decompile, or disassemble any part of the Service</li>
             <li>Upload viruses, malware, or any malicious code</li>

@@ -130,7 +130,7 @@ export function AuthUI({
                       autoFocus
                       required
                     />
-                    <p className='text-xs text-muted-foreground'>We'll send you a magic link to sign in</p>
+                    <p className='text-xs text-muted-foreground'>We&apos;ll send you a magic link to sign in</p>
                   </div>
                   <div className='flex gap-3'>
                     <Button type='button' variant='outline' className='flex-1' onClick={() => setEmailFormOpen(false)}>
@@ -170,7 +170,7 @@ export function AuthUI({
               </p>
             ) : (
               <p className='text-muted-foreground'>
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link href='/signup' className='text-primary hover:underline'>
                   Sign up
                 </Link>

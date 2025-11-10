@@ -60,7 +60,7 @@ export function Dashboard() {
           <div>
             <h3 className='text-xl font-semibold'>Dashboard Coming Soon</h3>
             <p className='text-muted-foreground'>
-              We're building comprehensive analytics to track your progress, visualize your strengths and weaknesses,
+              We&apos;re building comprehensive analytics to track your progress, visualize your strengths and weaknesses,
               and provide personalized training recommendations.
             </p>
           </div>
