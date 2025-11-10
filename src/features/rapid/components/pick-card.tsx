@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -17,7 +17,18 @@ interface PickCardProps {
 export function PickCard({ payload, options, onAnswer }: PickCardProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [startTime] = useState(Date.now());
+  const [startTime, setStartTime] = useState(Date.now());
+  const payloadRef = useRef(payload);
+
+  // Reset state when card changes
+  useEffect(() => {
+    if (payloadRef.current !== payload) {
+      payloadRef.current = payload;
+      setSelected(null);
+      setShowFeedback(false);
+      setStartTime(Date.now());
+    }
+  }, [payload]);
 
   const handleSelect = (key: string) => {
     if (selected) return; // Already answered

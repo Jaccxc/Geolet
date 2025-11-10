@@ -48,16 +48,17 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
     setResults(newResults);
 
     // Move to next card or show recap
+    // Wait slightly longer than the feedback delay to ensure smooth transition
     if (currentIndex < queueItems.length - 1) {
       setTimeout(() => {
         setCurrentIndex(currentIndex + 1);
-      }, 100);
+      }, 200);
     } else {
       // Session complete
       setTimeout(() => {
         setIsComplete(true);
         onComplete(newResults);
-      }, 100);
+      }, 200);
     }
   };
 
