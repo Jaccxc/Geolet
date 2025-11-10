@@ -11,6 +11,20 @@ export const PICK_MODE_TOPICS: TopicCardConfig[] = [
     mode: 'language-pick',
     difficulty: 'intermediate',
     estimatedCards: 15,
+    targetTags: [
+      'script:devanagari:hindi',
+      'script:devanagari:marathi',
+      'script:gurmukhi:punjabi',
+      'script:gujarati',
+      'script:bengali',
+      'script:bengali:assamese',
+      'script:kannada',
+      'script:telugu',
+      'script:tamil',
+      'script:odia',
+      'script:malayalam',
+      'script:meitei:manipuri',
+    ],
   },
   {
     id: 'global-languages',
@@ -20,6 +34,7 @@ export const PICK_MODE_TOPICS: TopicCardConfig[] = [
     mode: 'language-pick',
     difficulty: 'advanced',
     estimatedCards: 20,
+    // No targetTags - will include all language scripts
   },
   {
     id: 'global-phone',

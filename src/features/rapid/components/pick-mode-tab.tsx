@@ -30,6 +30,7 @@ export function PickModeTab() {
         body: JSON.stringify({
           mode: topic.mode,
           maxCards: 10, // Start with 10 cards per session
+          targetTags: topic.targetTags, // Filter by specific tags if defined
         }),
       });
 

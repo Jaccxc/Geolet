@@ -2,10 +2,11 @@ import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Montserrat, Montserrat_Alternates } from 'next/font/google';
 import Link from 'next/link';
-import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter } from 'react-icons/io5';
 
 import { Logo } from '@/components/logo';
+import { PageTabs } from '@/components/page-tabs';
 import { Toaster } from '@/components/ui/toaster';
+import { getSession } from '@/features/account/controllers/get-session';
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -33,14 +34,17 @@ export const metadata: Metadata = {
   keywords: 'GeoGuessr, training, geoguessr practice, language scripts, phone codes, geography',
 };
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const session = await getSession();
+
   return (
     <html lang='en' className='dark'>
       <body className={cn('font-sans antialiased', montserrat.variable, montserratAlternates.variable)}>
-        <div className='m-auto flex h-full max-w-[1440px] flex-col px-4'>
+        <div className='flex min-h-screen flex-col'>
           <AppBar />
-          <main className='relative flex-1'>
-            <div className='relative h-full'>{children}</div>
+          {session && <PageTabs />}
+          <main className='flex-1'>
+            <div className='h-full'>{children}</div>
           </main>
           <Footer />
         </div>
@@ -53,65 +57,31 @@ export default function RootLayout({ children }: PropsWithChildren) {
 
 async function AppBar() {
   return (
-    <header className='flex items-center justify-between py-8'>
-      <Logo />
-      <Navigation />
+    <header className='border-white/8 h-[60px] min-h-[60px] flex-shrink-0 border-b'>
+      <div className='container mx-auto flex h-full items-center justify-between px-4'>
+        <Logo />
+        <Navigation />
+      </div>
     </header>
   );
 }
 
 function Footer() {
   return (
-    <footer className='mt-8 flex flex-col gap-8 text-neutral-400 lg:mt-32'>
-      <div className='flex flex-col justify-between gap-8 lg:flex-row'>
-        <div>
-          <Logo />
-        </div>
-        <div className='grid grid-cols-2 gap-8 sm:grid-cols-4 lg:grid-cols-4 lg:gap-16'>
-          <div className='flex flex-col gap-2 lg:gap-6'>
-            <div className='font-semibold text-neutral-100'>Product</div>
-            <nav className='flex flex-col gap-2 lg:gap-6'>
-              <Link href='/pricing'>Pricing</Link>
-            </nav>
-          </div>
-          <div className='flex flex-col gap-2 lg:gap-6'>
-            <div className='font-semibold text-neutral-100'>Company</div>
-            <nav className='flex flex-col gap-2 lg:gap-6'>
-              <Link href='/about-us'>About Us</Link>
-              <Link href='/privacy'>Privacy</Link>
-              <Link href='/terms'>Terms of Service</Link>
-            </nav>
-          </div>
-          <div className='flex flex-col gap-2 lg:gap-6'>
-            <div className='font-semibold text-neutral-100'>Support</div>
-            <nav className='flex flex-col gap-2 lg:gap-6'>
-              <Link href='/support'>Get Support</Link>
-            </nav>
-          </div>
-          <div className='flex flex-col gap-2 lg:gap-6'>
-            <div className='font-semibold text-neutral-100'>Follow us</div>
-            <nav className='flex flex-col gap-2 lg:gap-6'>
-              <Link href='#'>
-                <span className='flex items-center gap-2'>
-                  <IoLogoTwitter size={22} /> <span>Twitter</span>
-                </span>
-              </Link>
-              <Link href='#'>
-                <span className='flex items-center gap-2'>
-                  <IoLogoFacebook size={22} /> <span>Facebook</span>
-                </span>
-              </Link>
-              <Link href='#'>
-                <span className='flex items-center gap-2'>
-                  <IoLogoInstagram size={22} /> <span>Instagram</span>
-                </span>
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
-      <div className='border-t border-zinc-800 py-6 text-center'>
-        <span className='text-neutral4 text-xs'>Copyright {new Date().getFullYear()} © Geolet</span>
+    <footer className='h-[80px] min-h-[80px] flex-shrink-0 border-t border-zinc-800'>
+      <div className='container mx-auto flex h-full items-center justify-between px-4 text-sm text-neutral-400'>
+        <span className='text-xs'>Copyright {new Date().getFullYear()} © Geolet</span>
+        <nav className='flex gap-6'>
+          <Link href='/privacy' className='transition-colors hover:text-neutral-100'>
+            Privacy
+          </Link>
+          <Link href='/terms' className='transition-colors hover:text-neutral-100'>
+            Terms
+          </Link>
+          <Link href='/support' className='transition-colors hover:text-neutral-100'>
+            Support
+          </Link>
+        </nav>
       </div>
     </footer>
   );

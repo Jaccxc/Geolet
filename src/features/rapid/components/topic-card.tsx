@@ -13,6 +13,7 @@ export interface TopicCardConfig {
   mode: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   estimatedCards: number;
+  targetTags?: string[]; // Optional filter for specific skill tags
 }
 
 interface TopicCardProps {
