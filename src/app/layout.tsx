@@ -38,16 +38,29 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   const session = await getSession();
 
   return (
-    <html lang='en' className='dark'>
-      <body className={cn('font-sans antialiased', montserrat.variable, montserratAlternates.variable)}>
-        <div className='flex min-h-screen flex-col'>
+    <html lang="en" className="dark">
+      <body
+        className={cn(
+          'font-sans antialiased',
+          montserrat.variable,
+          montserratAlternates.variable
+        )}
+      >
+        <div className="flex min-h-screen flex-col">
+          {/* Header */}
           <AppBar />
+
+          {/* Tabs below header */}
           {session && <PageTabs />}
-          <main className='flex-1'>
-            <div className='h-full'>{children}</div>
+
+          {/* Main content fills the rest */}
+          <main className="flex-1 overflow-auto">
+            <div className="h-full">{children}</div>
           </main>
+
           <Footer />
         </div>
+
         <Toaster />
         <Analytics />
       </body>
@@ -55,16 +68,18 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   );
 }
 
+
 async function AppBar() {
   return (
-    <header className='border-white/8 h-[60px] min-h-[60px] flex-shrink-0 border-b'>
-      <div className='flex h-full items-center justify-between px-8 w-full'>
+    <header className="border-white/8 h-[65px] min-h-[65px] flex-shrink-0">
+      <div className="flex h-full items-center justify-between px-8 w-full">
         <Logo />
         <Navigation />
       </div>
     </header>
   );
 }
+
 
 function Footer() {
   return (

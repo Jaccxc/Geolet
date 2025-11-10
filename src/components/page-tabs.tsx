@@ -15,22 +15,21 @@ export function PageTabs() {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/';
-    }
+    if (href === '/') return pathname === '/';
     return pathname.startsWith(href);
   };
 
   return (
-    <div className='border-white/8 flex-shrink-0 border-b'>
-      <div className='w-full flex justify-start px-8'>
-        <nav className='flex gap-6'>
+    <div className="border-white/8 flex-shrink-0 border-b h-[35px] min-h-[35px]">
+      <div className="flex h-full items-center justify-start px-8">
+        <nav className="flex gap-6">
           {tabs.map((tab) => (
             <Link
               key={tab.href}
               href={tab.href}
               className={cn(
-                'relative border-b-2 py-4 text-sm font-medium transition-colors',
+                // ↓ Adjust vertical padding to fit 35 px total height
+                'relative border-b-2 text-sm font-medium transition-colors py-2',
                 isActive(tab.href)
                   ? 'border-blue-500 text-white'
                   : 'border-transparent text-gray-400 hover:text-gray-300'
