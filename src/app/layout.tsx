@@ -28,13 +28,14 @@ const montserratAlternates = Montserrat_Alternates({
 
 export const metadata: Metadata = {
   title: 'Geolet - GeoGuessr Training Platform',
-  description: 'Master GeoGuessr with focused minigames for languages, phone codes, and cities. Analyze your performance and train your weak spots.',
+  description:
+    'Master GeoGuessr with focused minigames for languages, phone codes, and cities. Analyze your performance and train your weak spots.',
   keywords: 'GeoGuessr, training, geoguessr practice, language scripts, phone codes, geography',
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang='en'>
+    <html lang='en' className='dark'>
       <body className={cn('font-sans antialiased', montserrat.variable, montserratAlternates.variable)}>
         <div className='m-auto flex h-full max-w-[1440px] flex-col px-4'>
           <AppBar />
@@ -109,9 +110,7 @@ function Footer() {
         </div>
       </div>
       <div className='border-t border-zinc-800 py-6 text-center'>
-        <span className='text-neutral4 text-xs'>
-          Copyright {new Date().getFullYear()} © Geolet
-        </span>
+        <span className='text-neutral4 text-xs'>Copyright {new Date().getFullYear()} © Geolet</span>
       </div>
     </footer>
   );

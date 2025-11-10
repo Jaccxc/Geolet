@@ -1,0 +1,17 @@
+good, now lets progress to @docs\06_flash_ui_choice_mode_20251109.md, notice there might be something that is changed during developing. a reminder for you:
+
+it's going to be 10~15 drills per session. we could set either pick mode or map mode. and with combination of language script to country, language script to
+city/region in certain country(like in different area of india has differernt language), phone meta to country(global phone code like +886 for taiwan), phone meta to
+ city/region in certain country(like we have 015 in south africa that represents northern parts), city name to country.city name to city (map mode only) during map
+mode, the web would prompt selected topic like tengulu text in indian text topic, or +886 919 848 548 in world phone topic. and user have to click on the map to
+select region/city/country as answer during pick mode, the web would also prompt that question, but we would also provide 6 different options for user to choose. 5
+of them would be incorrect answer.
+
+for the ux layout, the header of the website should be full window width. and we could choose Rapid mode there (Flash mode now called Rapid). under rapid, player
+could choose from body container (body container should not be full window width, like vercel web page) for either Pick Mode or Map Mode. we would dev Map Mode
+later, put a under constructioin... page there.
+
+under Pick Mode tab in the body, we would see several cards. like "India Languages", "Global Languages", "Global Phone Number", "Major City in X". click them to play
+
+also, for the theme of the website. we are going for this: the secondary background (the biggest background) of the page is going to be deep dark, like (0,0,0)
+we are using the shadcn for this project, and all the required packege, are already installed. if they provide predefined color palette or even scheme, just use them
