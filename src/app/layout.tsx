@@ -58,7 +58,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 async function AppBar() {
   return (
     <header className='border-white/8 h-[60px] min-h-[60px] flex-shrink-0 border-b'>
-      <div className='container mx-auto flex h-full items-center justify-between px-4'>
+      <div className='flex h-full items-center justify-between px-8 w-full'>
         <Logo />
         <Navigation />
       </div>

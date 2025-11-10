@@ -23,7 +23,7 @@ export function PageTabs() {
 
   return (
     <div className='border-white/8 flex-shrink-0 border-b'>
-      <div className='container mx-auto px-4'>
+      <div className='w-full flex justify-start px-8'>
         <nav className='flex gap-6'>
           {tabs.map((tab) => (
             <Link

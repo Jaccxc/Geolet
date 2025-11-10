@@ -95,7 +95,7 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
     <div className='mx-auto w-full max-w-5xl'>
       <ProgressHeader
         current={currentIndex + 1}
-        total={queueItems.length}
+        total={queueItems.length - 1}
         correct={correctCount}
         timeElapsed={timeElapsed}
       />
