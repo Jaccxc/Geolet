@@ -32,7 +32,8 @@ Create initial content for Geolet's minigames. Focus on high-quality, minimal da
 - `script:cyrillic` - Russia, Ukraine, Bulgaria, etc.
 - `script:latin` - Most of Europe, Americas
 - `script:arabic` - Middle East, North Africa
-- `script:chinese` - China, Taiwan
+- `script:chinese:simplified` - China
+- `script:chinese:traditional` - Taiwan
 - `script:japanese:hiragana`, `script:japanese:katakana`, `script:japanese:kanji`
 - `script:korean:hangul`
 - `script:greek`, `script:hebrew`, `script:thai`, etc.
