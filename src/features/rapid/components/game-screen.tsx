@@ -98,13 +98,14 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
 
       {isMapMode && 'regions' in currentItem ? (
         <MapCard
+          key={currentItem.fact_id}
           payload={currentItem.payload}
           answerRegions={currentItem.regions}
           bbox={currentItem.bbox}
           onAnswer={(pin, time) => handleAnswer(pin, time)}
         />
       ) : 'options' in currentItem ? (
-        <PickCard payload={currentItem.payload} options={currentItem.options} onAnswer={handleAnswer} />
+        <PickCard key={currentItem.fact_id} payload={currentItem.payload} options={currentItem.options} onAnswer={handleAnswer} />
       ) : null}
     </div>
   );

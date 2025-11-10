@@ -75,9 +75,12 @@ export function MapViewer({ regions, bbox, onPinDrop, disabled = false, showAnsw
 
   // Handle pin drop
   useEffect(() => {
-    if (!map.current || disabled) return;
+    if (!map.current) return;
 
     const handleClick = (e: maplibregl.MapMouseEvent) => {
+      // Don't allow new pins if disabled
+      if (disabled) return;
+
       const { lng, lat } = e.lngLat;
 
       // Remove existing user pin
