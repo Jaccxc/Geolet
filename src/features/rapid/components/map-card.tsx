@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CheckCircle2, MapPin, XCircle } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -16,7 +16,7 @@ interface MapCardProps {
   payload: FactPayload;
   answerRegions: Region[];
   bbox: [number, number, number, number];
-  onAnswer: (pinDrop: [number, number], timeMs: number) => void;
+  onAnswer: (pinDrop: [number, number], timeMs: number, correct: boolean) => void;
 }
 
 export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps) {
@@ -24,7 +24,6 @@ export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState<{ correct: boolean; distance?: number } | null>(null);
   const [startTime] = useState(Date.now());
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handlePinDrop = (lng: number, lat: number) => {
     if (submitted) return;
@@ -35,7 +34,6 @@ export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps
     if (!pinLocation || submitted) return;
 
     setSubmitted(true);
-    const timeMs = Date.now() - startTime;
 
     // Client-side validation (for immediate feedback)
     const validation = validateMapAnswer(
@@ -44,34 +42,14 @@ export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps
       answerRegions
     );
     setResult(validation);
-
-    // Auto-advance after delay, but allow immediate continue via button
-    timeoutRef.current = setTimeout(() => {
-      onAnswer(pinLocation, timeMs);
-    }, 2000);
   };
 
   const handleContinue = () => {
-    if (!pinLocation || !submitted) return;
-
-    // Clear auto-advance timeout
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
+    if (!pinLocation || !submitted || !result) return;
 
     const timeMs = Date.now() - startTime;
-    onAnswer(pinLocation, timeMs);
+    onAnswer(pinLocation, timeMs, result.correct);
   };
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
 
   // Keyboard shortcut for submit/continue
   useEffect(() => {
@@ -91,7 +69,7 @@ export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps
   }, [pinLocation, submitted]);
 
   return (
-    <Card className='mx-auto max-w-4xl'>
+    <Card className='mx-auto'>
       <CardHeader className='space-y-4 text-center'>
         {/* Prompt */}
         <div>

@@ -39,7 +39,11 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
     return () => clearInterval(interval);
   }, [startTime]);
 
-  const handleAnswer = (selectedKeyOrPin: string | [number, number], timeMs: number) => {
+  const handleAnswer = (
+    selectedKeyOrPin: string | [number, number],
+    timeMs: number,
+    correctOverride?: boolean
+  ) => {
     const item = queueItems[currentIndex];
 
     let newResult: any;
@@ -57,7 +61,7 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
         fact_id: item.fact_id,
         clicked_point: selectedKeyOrPin,
         time_ms: timeMs,
-        correct: false, // Will be validated server-side
+        correct: correctOverride ?? false, // Use validation from MapCard
       };
     }
 
@@ -102,7 +106,7 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
           payload={currentItem.payload}
           answerRegions={currentItem.regions}
           bbox={currentItem.bbox}
-          onAnswer={(pin, time) => handleAnswer(pin, time)}
+          onAnswer={(pin, time, correct) => handleAnswer(pin, time, correct)}
         />
       ) : 'options' in currentItem ? (
         <PickCard key={currentItem.fact_id} payload={currentItem.payload} options={currentItem.options} onAnswer={handleAnswer} />
