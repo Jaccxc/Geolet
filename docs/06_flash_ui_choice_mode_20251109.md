@@ -16,14 +16,14 @@ Build the Flash game UI using Shadcn components, focusing on choice mode first. 
 ### 6.1 Install Required Shadcn Components
 
 ```bash
-bunx shadcn-ui@latest add button
-bunx shadcn-ui@latest add card
-bunx shadcn-ui@latest add progress
-bunx shadcn-ui@latest add badge
-bunx shadcn-ui@latest add separator
-bunx shadcn-ui@latest add dialog
-bunx shadcn-ui@latest add tabs
-bunx shadcn-ui@latest add select
+bunx shadcn@latest add button
+bunx shadcn@latest add card
+bunx shadcn@latest add progress
+bunx shadcn@latest add badge
+bunx shadcn@latest add separator
+bunx shadcn@latest add dialog
+bunx shadcn@latest add tabs
+bunx shadcn@latest add select
 ```
 
 ### 6.2 Create Flash Feature Directory Structure
