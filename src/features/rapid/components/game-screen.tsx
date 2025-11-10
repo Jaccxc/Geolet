@@ -1,21 +1,23 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 
+import type { MapQueueItem, PickQueueItem } from '../types';
+
+import { MapLoading } from './map-loading';
 import { PickCard } from './pick-card';
 import { ProgressHeader } from './progress-header';
 import { SessionRecap } from './session-recap';
 
-interface QueueItem {
-  fact_id: string;
-  type: string;
-  payload: any;
-  difficulty: number;
-  options: any[];
-}
+// Lazy load MapCard to reduce initial bundle size
+const MapCard = dynamic(() => import('./map-card').then((mod) => ({ default: mod.MapCard })), {
+  loading: () => <MapLoading />,
+  ssr: false,
+});
 
 interface GameScreenProps {
-  queueItems: QueueItem[];
+  queueItems: (PickQueueItem | MapQueueItem)[];
   mode: string;
   onComplete: (results: any) => void;
 }
@@ -27,6 +29,8 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
+  const isMapMode = mode.endsWith('-map');
+
   // Timer
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,14 +39,27 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
     return () => clearInterval(interval);
   }, [startTime]);
 
-  const handleAnswer = (selectedKey: string, timeMs: number) => {
+  const handleAnswer = (selectedKeyOrPin: string | [number, number], timeMs: number) => {
     const item = queueItems[currentIndex];
-    const newResult = {
-      fact_id: item.fact_id,
-      selected_key: selectedKey,
-      time_ms: timeMs,
-      correct: item.options.find((o) => o.key === selectedKey)?.correct || false,
-    };
+
+    let newResult: any;
+    if (typeof selectedKeyOrPin === 'string') {
+      // Pick mode
+      newResult = {
+        fact_id: item.fact_id,
+        selected_key: selectedKeyOrPin,
+        time_ms: timeMs,
+        correct: 'options' in item ? item.options.find((o) => o.key === selectedKeyOrPin)?.correct || false : false,
+      };
+    } else {
+      // Map mode
+      newResult = {
+        fact_id: item.fact_id,
+        clicked_point: selectedKeyOrPin,
+        time_ms: timeMs,
+        correct: false, // Will be validated server-side
+      };
+    }
 
     const newResults = [...results, newResult];
     setResults(newResults);
@@ -79,7 +96,16 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
         timeElapsed={timeElapsed}
       />
 
-      <PickCard payload={currentItem.payload} options={currentItem.options} onAnswer={handleAnswer} />
+      {isMapMode && 'regions' in currentItem ? (
+        <MapCard
+          payload={currentItem.payload}
+          answerRegions={currentItem.regions}
+          bbox={currentItem.bbox}
+          onAnswer={(pin, time) => handleAnswer(pin, time)}
+        />
+      ) : 'options' in currentItem ? (
+        <PickCard payload={currentItem.payload} options={currentItem.options} onAnswer={handleAnswer} />
+      ) : null}
     </div>
   );
 }

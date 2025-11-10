@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { buildQueue } from '@/features/rapid/controllers/build-queue';
 import { generateMapRegions } from '@/features/rapid/controllers/generate-map-regions';
 import { generatePickOptions } from '@/features/rapid/controllers/generate-pick-options';
-import type { GameMode, MapQueueItem, PickQueueItem } from '@/features/rapid/types';
+import type { GameMode, MapQueueItem, PickQueueItem, Region } from '@/features/rapid/types';
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
 const requestSchema = z.object({
@@ -58,13 +58,19 @@ export async function POST(req: NextRequest) {
     } else {
       // Map Mode: Generate region data
       const queueItems: MapQueueItem[] = await Promise.all(
-        cards.map(async (card) => ({
-          fact_id: card.id,
-          type: card.type,
-          payload: card.payload,
-          difficulty: card.difficulty,
-          regions: await generateMapRegions(card),
-        }))
+        cards.map(async (card) => {
+          const regions = await generateMapRegions(card);
+          const bbox = calculateMergedBbox(regions);
+
+          return {
+            fact_id: card.id,
+            type: card.type,
+            payload: card.payload,
+            difficulty: card.difficulty,
+            regions,
+            bbox,
+          };
+        })
       );
 
       return NextResponse.json({
@@ -83,4 +89,31 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+/**
+ * Calculate a merged bounding box for multiple regions
+ */
+function calculateMergedBbox(regions: Region[]): [number, number, number, number] {
+  if (regions.length === 0) return [-180, -90, 180, 90];
+
+  let minLng = Infinity,
+    minLat = Infinity;
+  let maxLng = -Infinity,
+    maxLat = -Infinity;
+
+  for (const region of regions) {
+    if (region.bbox) {
+      const [bMinLng, bMinLat, bMaxLng, bMaxLat] = region.bbox;
+      minLng = Math.min(minLng, bMinLng);
+      minLat = Math.min(minLat, bMinLat);
+      maxLng = Math.max(maxLng, bMaxLng);
+      maxLat = Math.max(maxLat, bMaxLat);
+    }
+  }
+
+  // Fallback to world bbox if no valid bboxes found
+  if (minLng === Infinity) return [-180, -90, 180, 90];
+
+  return [minLng, minLat, maxLng, maxLat];
 }

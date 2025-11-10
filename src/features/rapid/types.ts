@@ -201,6 +201,7 @@ export interface MapQueueItem {
   payload: FactPayload;
   difficulty: number;
   regions: Region[]; // Regions user can pin on
+  bbox: [number, number, number, number]; // Merged bounding box [minLng, minLat, maxLng, maxLat]
 }
 
 export type QueueItem = PickQueueItem | MapQueueItem;
