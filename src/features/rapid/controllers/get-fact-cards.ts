@@ -1,13 +1,10 @@
-import { createClient } from '@/libs/supabase/supabase-server-client';
-import { factCardSchema } from '../types';
-import type { FactCard, FactType } from '../types';
+import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
-export async function getFactCards(
-  type?: FactType,
-  tags?: string[],
-  limit?: number
-): Promise<FactCard[]> {
-  const supabase = await createClient();
+import type { FactCard, FactType } from '../types';
+import { factCardSchema } from '../types';
+
+export async function getFactCards(type?: FactType, tags?: string[], limit?: number): Promise<FactCard[]> {
+  const supabase = await createSupabaseServerClient();
 
   let query = supabase.from('fact_cards').select('*');
 
@@ -31,13 +28,9 @@ export async function getFactCards(
 }
 
 export async function getFactCardById(id: string): Promise<FactCard | null> {
-  const supabase = await createClient();
+  const supabase = await createSupabaseServerClient();
 
-  const { data, error } = await supabase
-    .from('fact_cards')
-    .select('*')
-    .eq('id', id)
-    .single();
+  const { data, error } = await supabase.from('fact_cards').select('*').eq('id', id).single();
 
   if (error) return null;
 

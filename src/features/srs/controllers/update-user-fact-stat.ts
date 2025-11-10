@@ -1,12 +1,11 @@
-import { createClient } from '@/libs/supabase/supabase-server-client';
-import { calculateNextInterval, addDays } from './calculate-next-interval';
+import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
+
 import type { SRSUpdateInput, SRSUpdateResult } from '../types';
 
-export async function updateUserFactStat(
-  userId: string,
-  input: SRSUpdateInput
-): Promise<SRSUpdateResult> {
-  const supabase = await createClient();
+import { addDays, calculateNextInterval } from './calculate-next-interval';
+
+export async function updateUserFactStat(userId: string, input: SRSUpdateInput): Promise<SRSUpdateResult> {
+  const supabase = await createSupabaseServerClient();
 
   // Determine if answer was correct and calculate quality
   const correct = input.quality >= 3;
@@ -27,12 +26,7 @@ export async function updateUserFactStat(
   const correctCount = (current?.correct ?? 0) + (correct ? 1 : 0);
 
   // Calculate new SRS state
-  const { ease: newEase, interval_days } = calculateNextInterval(
-    currentEase,
-    currentInterval,
-    seen,
-    quality
-  );
+  const { ease: newEase, interval_days } = calculateNextInterval(currentEase, currentInterval, seen, quality);
 
   const now = new Date();
   const dueAt = addDays(now, interval_days);

@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/libs/supabase/supabase-server-client';
-import { updateUserFactStat } from '@/features/srs/controllers/update-user-fact-stat';
-import { getFactCardById } from '@/features/rapid/controllers/get-fact-cards';
-import { generateMapRegions } from '@/features/rapid/controllers/generate-map-regions';
-import { validatePickAnswer, validateMapAnswer } from '@/features/rapid/models/answer-validator';
 import { z } from 'zod';
-import type { PickGradeItem, MapGradeItem, GradeResult, GradeSummary } from '@/features/rapid/types';
+
+import { generateMapRegions } from '@/features/rapid/controllers/generate-map-regions';
+import { getFactCardById } from '@/features/rapid/controllers/get-fact-cards';
+import { validateMapAnswer, validatePickAnswer } from '@/features/rapid/models/answer-validator';
+import type { GradeResult, GradeSummary, MapGradeItem, PickGradeItem } from '@/features/rapid/types';
+import { updateUserFactStat } from '@/features/srs/controllers/update-user-fact-stat';
+import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
 const pickGradeItemSchema = z.object({
   fact_id: z.string().uuid(),
@@ -26,7 +27,7 @@ const requestSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient();
+    const supabase = await createSupabaseServerClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -60,11 +61,7 @@ export async function POST(req: NextRequest) {
         } else {
           const mapItem = item as MapGradeItem;
           const regions = await generateMapRegions(card);
-          const result = validateMapAnswer(
-            card.answer,
-            mapItem.clicked_point,
-            regions
-          );
+          const result = validateMapAnswer(card.answer, mapItem.clicked_point, regions);
           correct = result.correct;
           distance = result.distance;
         }
@@ -97,14 +94,8 @@ export async function POST(req: NextRequest) {
     const summary: GradeSummary = {
       total: results.length,
       correct: results.filter((r) => r.correct).length,
-      accuracy:
-        results.length > 0
-          ? results.filter((r) => r.correct).length / results.length
-          : 0,
-      avg_time_ms:
-        results.length > 0
-          ? results.reduce((sum, r) => sum + r.time_ms, 0) / results.length
-          : 0,
+      accuracy: results.length > 0 ? results.filter((r) => r.correct).length / results.length : 0,
+      avg_time_ms: results.length > 0 ? results.reduce((sum, r) => sum + r.time_ms, 0) / results.length : 0,
     };
 
     // Save session

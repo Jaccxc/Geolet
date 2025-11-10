@@ -1,5 +1,6 @@
-import { getRegionsByKeys } from './get-regions';
 import type { FactCard, Region } from '../types';
+
+import { getRegionsByKeys } from './get-regions';
 
 /**
  * Generate region data for Map mode

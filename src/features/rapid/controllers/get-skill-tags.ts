@@ -1,9 +1,10 @@
-import { createClient } from '@/libs/supabase/supabase-server-client';
+import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
+
+import type { SkillFamily, SkillTag } from '../types';
 import { skillTagSchema } from '../types';
-import type { SkillTag, SkillFamily } from '../types';
 
 export async function getSkillTags(family?: SkillFamily): Promise<SkillTag[]> {
-  const supabase = await createClient();
+  const supabase = await createSupabaseServerClient();
 
   let query = supabase.from('skill_tags').select('*');
 
@@ -19,13 +20,9 @@ export async function getSkillTags(family?: SkillFamily): Promise<SkillTag[]> {
 }
 
 export async function getSkillTagByKey(key: string): Promise<SkillTag | null> {
-  const supabase = await createClient();
+  const supabase = await createSupabaseServerClient();
 
-  const { data, error } = await supabase
-    .from('skill_tags')
-    .select('*')
-    .eq('key', key)
-    .single();
+  const { data, error } = await supabase.from('skill_tags').select('*').eq('key', key).single();
 
   if (error) return null;
 
@@ -33,12 +30,9 @@ export async function getSkillTagByKey(key: string): Promise<SkillTag | null> {
 }
 
 export async function getSkillTagsByKeys(keys: string[]): Promise<SkillTag[]> {
-  const supabase = await createClient();
+  const supabase = await createSupabaseServerClient();
 
-  const { data, error } = await supabase
-    .from('skill_tags')
-    .select('*')
-    .in('key', keys);
+  const { data, error } = await supabase.from('skill_tags').select('*').in('key', keys);
 
   if (error) throw error;
 

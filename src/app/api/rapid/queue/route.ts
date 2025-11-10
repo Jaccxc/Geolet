@@ -1,27 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/libs/supabase/supabase-server-client';
-import { buildQueue } from '@/features/rapid/controllers/build-queue';
-import { generatePickOptions } from '@/features/rapid/controllers/generate-pick-options';
-import { generateMapRegions } from '@/features/rapid/controllers/generate-map-regions';
 import { z } from 'zod';
-import type { GameMode, PickQueueItem, MapQueueItem } from '@/features/rapid/types';
+
+import { buildQueue } from '@/features/rapid/controllers/build-queue';
+import { generateMapRegions } from '@/features/rapid/controllers/generate-map-regions';
+import { generatePickOptions } from '@/features/rapid/controllers/generate-pick-options';
+import type { GameMode, MapQueueItem, PickQueueItem } from '@/features/rapid/types';
+import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
 const requestSchema = z.object({
-  mode: z.enum([
-    'language-pick',
-    'language-map',
-    'phone-pick',
-    'phone-map',
-    'city-pick',
-    'city-map',
-  ]),
+  mode: z.enum(['language-pick', 'language-map', 'phone-pick', 'phone-map', 'city-pick', 'city-map']),
   targetTags: z.array(z.string()).optional(),
   maxCards: z.number().int().min(1).max(50).optional(),
 });
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient();
+    const supabase = await createSupabaseServerClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();

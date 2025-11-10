@@ -1,11 +1,9 @@
-import { createClient } from '@/libs/supabase/supabase-server-client';
+import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
+
 import type { FactCard, GameMode, QueueOptions } from '../types';
 
-export async function buildQueue(
-  userId: string,
-  options: QueueOptions
-): Promise<FactCard[]> {
-  const supabase = await createClient();
+export async function buildQueue(userId: string, options: QueueOptions): Promise<FactCard[]> {
+  const supabase = await createSupabaseServerClient();
   const maxCards = options.maxCards ?? 20;
 
   // Determine fact type from mode
