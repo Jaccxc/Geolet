@@ -13,16 +13,11 @@ interface MapViewerProps {
   showAnswer?: boolean;
 }
 
-export function MapViewer({
-  regions,
-  bbox,
-  onPinDrop,
-  disabled = false,
-  showAnswer = false,
-}: MapViewerProps) {
+export function MapViewer({ regions, bbox, onPinDrop, disabled = false, showAnswer = false }: MapViewerProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const [userPin, setUserPin] = useState<maplibregl.Marker | null>(null);
+  const answerMarkersRef = useRef<maplibregl.Marker[]>([]);
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
@@ -35,9 +30,7 @@ export function MapViewer({
         sources: {
           'raster-tiles': {
             type: 'raster',
-            tiles: [
-              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            ],
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
             tileSize: 256,
             attribution: '© OpenStreetMap contributors',
           },
@@ -63,7 +56,7 @@ export function MapViewer({
           [bbox[0], bbox[1]], // SW
           [bbox[2], bbox[3]], // NE
         ],
-        { padding: 50, maxZoom: 10 }
+        { padding: 50, maxZoom: 10, duration: 0 }
       );
     }
 
@@ -71,6 +64,10 @@ export function MapViewer({
     map.current.addControl(new maplibregl.NavigationControl(), 'top-right');
 
     return () => {
+      // Cleanup markers
+      if (userPin) userPin.remove();
+      answerMarkersRef.current.forEach((marker) => marker.remove());
+
       map.current?.remove();
       map.current = null;
     };
@@ -89,9 +86,7 @@ export function MapViewer({
       }
 
       // Add new pin
-      const pin = new maplibregl.Marker({ color: '#3b82f6' })
-        .setLngLat([lng, lat])
-        .addTo(map.current!);
+      const pin = new maplibregl.Marker({ color: '#3b82f6' }).setLngLat([lng, lat]).addTo(map.current!);
 
       setUserPin(pin);
 
@@ -106,72 +101,139 @@ export function MapViewer({
     return () => {
       map.current?.off('click', handleClick);
     };
-  }, [disabled, onPinDrop, userPin]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [disabled, onPinDrop]);
 
   // Show answer regions
   useEffect(() => {
     if (!map.current || !showAnswer) return;
 
     const sourceId = 'answer-regions';
+    const outlineId = `${sourceId}-outline`;
 
-    // Remove existing layer/source if present
+    // Remove existing layers/sources
     if (map.current.getLayer(sourceId)) {
       map.current.removeLayer(sourceId);
     }
-    if (map.current.getLayer(`${sourceId}-outline`)) {
-      map.current.removeLayer(`${sourceId}-outline`);
+    if (map.current.getLayer(outlineId)) {
+      map.current.removeLayer(outlineId);
     }
     if (map.current.getSource(sourceId)) {
       map.current.removeSource(sourceId);
     }
 
-    // Build GeoJSON FeatureCollection
-    const features = regions
-      .filter(r => r.geometry)
-      .map(r => ({
-        type: 'Feature' as const,
-        properties: { name: r.name },
-        geometry: r.geometry!,
-      }));
+    // Clear existing answer markers
+    answerMarkersRef.current.forEach((marker) => marker.remove());
+    answerMarkersRef.current = [];
 
-    if (features.length === 0) return;
+    // Build GeoJSON FeatureCollection from regions with geometry
+    const features = regions.filter((r) => r.geometry).map((r) => ({
+      type: 'Feature' as const,
+      properties: { name: r.name },
+      geometry: r.geometry!,
+    }));
 
-    // Add source
-    map.current.addSource(sourceId, {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features,
-      },
+    // If we have geometry features, add them to the map
+    if (features.length > 0) {
+      // Add source
+      map.current.addSource(sourceId, {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features,
+        },
+      });
+
+      // Add fill layer
+      map.current.addLayer({
+        id: sourceId,
+        type: 'fill',
+        source: sourceId,
+        paint: {
+          'fill-color': '#10b981',
+          'fill-opacity': 0.4,
+        },
+      });
+
+      // Add outline layer
+      map.current.addLayer({
+        id: outlineId,
+        type: 'line',
+        source: sourceId,
+        paint: {
+          'line-color': '#059669',
+          'line-width': 3,
+        },
+      });
+    }
+
+    // For regions without geometry, add markers at centroids
+    const regionsWithoutGeometry = regions.filter((r) => !r.geometry && r.centroid_lonlat);
+    regionsWithoutGeometry.forEach((region) => {
+      if (!region.centroid_lonlat) return;
+
+      const [lng, lat] = region.centroid_lonlat;
+
+      // Create marker element with custom styling
+      const el = document.createElement('div');
+      el.className = 'answer-marker';
+      el.style.width = '30px';
+      el.style.height = '30px';
+      el.style.borderRadius = '50%';
+      el.style.backgroundColor = '#10b981';
+      el.style.border = '3px solid #059669';
+      el.style.opacity = '0.8';
+      el.style.cursor = 'pointer';
+
+      // Add popup with region name
+      const popup = new maplibregl.Popup({ offset: 25 }).setHTML(`<strong>${region.name}</strong>`);
+
+      const marker = new maplibregl.Marker({ element: el })
+        .setLngLat([lng, lat])
+        .setPopup(popup)
+        .addTo(map.current!);
+
+      answerMarkersRef.current.push(marker);
     });
 
-    // Add fill layer
-    map.current.addLayer({
-      id: sourceId,
-      type: 'fill',
-      source: sourceId,
-      paint: {
-        'fill-color': '#10b981',
-        'fill-opacity': 0.3,
-      },
-    });
+    // Zoom to answer regions
+    if (regions.length > 0) {
+      const validBboxes = regions.filter((r) => r.bbox).map((r) => r.bbox!);
 
-    // Add outline layer
-    map.current.addLayer({
-      id: `${sourceId}-outline`,
-      type: 'line',
-      source: sourceId,
-      paint: {
-        'line-color': '#059669',
-        'line-width': 2,
-      },
-    });
+      if (validBboxes.length > 0) {
+        // Calculate merged bbox
+        let minLng = Infinity, minLat = Infinity;
+        let maxLng = -Infinity, maxLat = -Infinity;
+
+        validBboxes.forEach(([bMinLng, bMinLat, bMaxLng, bMaxLat]) => {
+          minLng = Math.min(minLng, bMinLng);
+          minLat = Math.min(minLat, bMinLat);
+          maxLng = Math.max(maxLng, bMaxLng);
+          maxLat = Math.max(maxLat, bMaxLat);
+        });
+
+        // Fit to answer bbox with animation
+        map.current.fitBounds(
+          [
+            [minLng, minLat],
+            [maxLng, maxLat],
+          ],
+          { padding: 60, maxZoom: 8, duration: 1000 }
+        );
+      } else {
+        // Fallback: zoom to first centroid if no bbox available
+        const firstRegionWithCentroid = regions.find((r) => r.centroid_lonlat);
+        if (firstRegionWithCentroid && firstRegionWithCentroid.centroid_lonlat) {
+          const [lng, lat] = firstRegionWithCentroid.centroid_lonlat;
+          map.current.flyTo({
+            center: [lng, lat],
+            zoom: 5,
+            duration: 1000,
+          });
+        }
+      }
+    }
   }, [showAnswer, regions]);
 
-  return (
-    <div
-      ref={mapContainer}
-      className={`map-container ${!disabled ? 'map-pin-cursor' : ''}`}
-    />
-  );
+  return <div ref={mapContainer} className={`map-container ${!disabled ? 'map-pin-cursor' : ''}`} />;
 }
