@@ -11,7 +11,7 @@ interface ProgressHeaderProps {
 }
 
 export function ProgressHeader({ current, total, correct, timeElapsed }: ProgressHeaderProps) {
-  const accuracy = current > 0 ? Math.round((correct / current) * 100) : 0;
+  const accuracy = current > 0 ? Math.round((correct / (current - 1)) * 100) : 0;
   const minutes = Math.floor(timeElapsed / 60);
   const seconds = timeElapsed % 60;
 
