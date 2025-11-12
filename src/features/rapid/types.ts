@@ -1,37 +1,48 @@
 import { z } from 'zod';
 
 // ============================================================================
-// Skill Tag Types
+// NEW: Card Groups
 // ============================================================================
 
-export const skillFamilySchema = z.enum(['script', 'phone', 'city']);
-export type SkillFamily = z.infer<typeof skillFamilySchema>;
-
-export const skillTagMetaSchema = z.object({
-  display: z.string(),
-  notes: z.string().optional(),
-  examples: z.array(z.string()).optional(),
-  regions: z.array(z.string()).optional(),
-  coverage: z.array(z.string()).optional(),
-  region: z.string().optional(),
+export const cardGroupSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string(),
+  created_at: z.string(),
 });
 
-export const skillTagSchema = z.object({
+export type CardGroup = z.infer<typeof cardGroupSchema>;
+
+// ============================================================================
+// NEW: Topics
+// ============================================================================
+
+export const topicDifficultySchema = z.enum(['beginner', 'intermediate', 'advanced']);
+export type TopicDifficulty = z.infer<typeof topicDifficultySchema>;
+
+export const topicSchema = z.object({
   id: z.string().uuid(),
   key: z.string(),
-  family: skillFamilySchema,
-  country: z.string().nullable(),
-  meta: skillTagMetaSchema,
+  title: z.string(),
+  description: z.string().nullable(),
+  icon: z.string().nullable(),
+  pick_mode_active: z.boolean(),
+  map_mode_active: z.boolean(),
+  difficulty: topicDifficultySchema.nullable(),
+  target_card_group_ids: z.array(z.string().uuid()),
+  created_at: z.string(),
 });
 
-export type SkillTag = z.infer<typeof skillTagSchema>;
+export type Topic = z.infer<typeof topicSchema>;
 
 // ============================================================================
-// Region Types
+// UPDATED: Regions
 // ============================================================================
 
-export const regionKindSchema = z.enum(['country', 'region', 'city']);
-export type RegionKind = z.infer<typeof regionKindSchema>;
+export const regionLevelSchema = z.enum(['country', 'province', 'city']);
+export type RegionLevel = z.infer<typeof regionLevelSchema>;
+
+export const locationTypeSchema = z.enum(['pin', 'polygon']);
+export type LocationType = z.infer<typeof locationTypeSchema>;
 
 export const geoJsonGeometrySchema = z.object({
   type: z.enum(['Point', 'Polygon', 'MultiPolygon']),
@@ -41,103 +52,69 @@ export const geoJsonGeometrySchema = z.object({
 export const regionSchema = z.object({
   id: z.string().uuid(),
   key: z.string(),
-  kind: regionKindSchema,
+  level: regionLevelSchema,
   name: z.string(),
   country: z.string().nullable(),
-  geometry: geoJsonGeometrySchema.nullable(),
+  location_type: locationTypeSchema,
   centroid_lonlat: z.tuple([z.number(), z.number()]).nullable(),
-  bbox: z.tuple([z.number(), z.number(), z.number(), z.number()]).nullable(),
-  geojson_file: z.string().nullable(),
-  geojson_id_property: z.string().nullable(),
-  geojson_feature_id: z.string().nullable(),
-  meta: z.record(z.any()),
+  geometry: geoJsonGeometrySchema.nullable(),
+  note: z.string().nullable(),
+  created_at: z.string(),
 });
 
 export type Region = z.infer<typeof regionSchema>;
 
 // ============================================================================
-// Fact Card Types
+// UPDATED: Skill Tags
 // ============================================================================
 
-export const factTypeSchema = z.enum(['language_snippet', 'phone_number', 'city_locate']);
-export type FactType = z.infer<typeof factTypeSchema>;
+export const skillFamilySchema = z.enum(['script', 'phone', 'city']);
+export type SkillFamily = z.infer<typeof skillFamilySchema>;
 
-export const languagePayloadSchema = z.object({
-  text: z.string(),
-  romanization: z.string().optional(),
+export const skillTagSchema = z.object({
+  id: z.string().uuid(),
+  key: z.string(),
+  family: skillFamilySchema,
+  country: z.string().nullable(),
+  display: z.string(),
+  note: z.string().nullable(),
+  examples: z.array(z.string()),
+  created_at: z.string(),
 });
 
-export const phonePayloadSchema = z.object({
-  number: z.string(),
-  masked: z.string().optional(),
-});
+export type SkillTag = z.infer<typeof skillTagSchema>;
 
-export const cityPayloadSchema = z.object({
-  city: z.string(),
-  country_hint: z.string().optional(),
-});
+// ============================================================================
+// UPDATED: Fact Cards
+// ============================================================================
 
-export const factPayloadSchema = z.union([
-  languagePayloadSchema,
-  phonePayloadSchema,
-  cityPayloadSchema,
-]);
-
-export type FactPayload = z.infer<typeof factPayloadSchema>;
-
-// Answer Contract Types
-export const regionAnswerSchema = z.object({
-  kind: z.literal('region'),
-  select: z.object({
-    by: z.literal('key'),
-    keys: z.array(z.string()),
-  }),
-});
-
-export const tagAnswerSchema = z.object({
-  kind: z.literal('tag'),
-  select: z.object({
-    by: z.literal('skill_key'),
-    keys: z.array(z.string()),
-  }),
-  map_equivalents: z.object({
-    regions: z.array(z.string()),
-  }),
-});
-
-export const answerContractSchema = z.union([regionAnswerSchema, tagAnswerSchema]);
-export type AnswerContract = z.infer<typeof answerContractSchema>;
+export const factDifficultySchema = z.enum(['1', '2', '3']);
+export type FactDifficulty = z.infer<typeof factDifficultySchema>;
 
 export const factCardSchema = z.object({
   id: z.string().uuid(),
-  type: factTypeSchema,
-  payload: factPayloadSchema,
-  primary_tags: z.array(z.string()),
-  difficulty: z.number().int().min(1).max(5),
-  answer: answerContractSchema,
+  card_group_id: z.string().uuid(),
+  prompt: z.string(),
+  hint: z.string().nullable(),
+  primary_skill_tags: z.array(z.string()),
+  difficulty: factDifficultySchema,
+  answer_region_id: z.string().uuid(),
+  created_at: z.string(),
 });
 
 export type FactCard = z.infer<typeof factCardSchema>;
+
+// Extended fact card with populated answer region
+export type FactCardWithAnswer = FactCard & {
+  answer_region: Region;
+};
 
 // ============================================================================
 // Game Mode Types
 // ============================================================================
 
-// Mode format: {content}-{interaction}
-// content: language, phone, city
-// interaction: pick, map
-export const gameModeSchema = z.enum([
-  'language-pick',
-  'language-map',
-  'phone-pick',
-  'phone-map',
-  'city-pick',
-  'city-map',
-]);
+export const gameModeSchema = z.enum(['pick', 'map']);
 export type GameMode = z.infer<typeof gameModeSchema>;
-
-export const rapidModeSchema = z.enum(['pick', 'map']);
-export type RapidMode = z.infer<typeof rapidModeSchema>;
 
 // ============================================================================
 // Session Types
@@ -173,35 +150,37 @@ export type GameSession = z.infer<typeof gameSessionSchema>;
 // ============================================================================
 
 export interface QueueOptions {
-  mode: GameMode;
-  targetTags?: string[];
+  topicKey?: string;
+  cardGroupIds?: string[];
   maxCards?: number;
   prioritizeDue?: boolean;
 }
 
-// Pick Mode - Choice options
+// Pick Mode options
 export interface PickOption {
-  key: string;
+  region_id: string;
   label: string;
   correct: boolean;
 }
 
 export interface PickQueueItem {
   fact_id: string;
-  type: FactType;
-  payload: FactPayload;
-  difficulty: number;
+  card_group_id: string;
+  prompt: string;
+  hint: string | null;
+  difficulty: FactDifficulty;
   options: PickOption[];
 }
 
-// Map Mode - Region data for map interaction
+// Map Mode
 export interface MapQueueItem {
   fact_id: string;
-  type: FactType;
-  payload: FactPayload;
-  difficulty: number;
-  regions: Region[]; // Regions user can pin on
-  bbox: [number, number, number, number]; // Merged bounding box [minLng, minLat, maxLng, maxLat]
+  card_group_id: string;
+  prompt: string;
+  hint: string | null;
+  difficulty: FactDifficulty;
+  answer_region: Region;
+  bbox: [number, number, number, number];
 }
 
 export type QueueItem = PickQueueItem | MapQueueItem;
@@ -212,7 +191,7 @@ export type QueueItem = PickQueueItem | MapQueueItem;
 
 export interface PickGradeItem {
   fact_id: string;
-  selected_key: string;
+  selected_region_id: string;
   time_ms: number;
 }
 
@@ -226,7 +205,7 @@ export interface GradeResult {
   fact_id: string;
   correct: boolean;
   time_ms: number;
-  distance?: number; // For map mode
+  distance?: number;
   srs: {
     new_ease: number;
     due_at: string;

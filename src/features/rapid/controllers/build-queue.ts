@@ -1,40 +1,45 @@
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
-import type { FactCard, GameMode, QueueOptions } from '../types';
+import type { FactCard, QueueOptions } from '../types';
+import { getFactCards, getFactCardsByTopic } from './get-fact-cards';
 
 export async function buildQueue(userId: string, options: QueueOptions): Promise<FactCard[]> {
   const supabase = await createSupabaseServerClient();
   const maxCards = options.maxCards ?? 20;
 
-  // Determine fact type from mode
-  const factType = modeToFactType(options.mode);
+  let cards: FactCard[];
 
-  // Build query with left join to get user stats
-  let query = supabase
-    .from('fact_cards')
-    .select(
-      `
-      *,
-      user_fact_stats!left (
-        seen,
-        correct,
-        due_at
-      )
-    `
-    )
-    .eq('type', factType);
-
-  // Filter by tags if specified
-  if (options.targetTags && options.targetTags.length > 0) {
-    query = query.overlaps('primary_tags', options.targetTags);
+  // Strategy 1: Build queue from topic
+  if (options.topicKey) {
+    cards = await getFactCardsByTopic(options.topicKey);
+  }
+  // Strategy 2: Build queue from card group IDs
+  else if (options.cardGroupIds && options.cardGroupIds.length > 0) {
+    cards = await getFactCards({ cardGroupIds: options.cardGroupIds });
+  }
+  // Strategy 3: Get all cards (fallback)
+  else {
+    cards = await getFactCards();
   }
 
-  const { data, error } = await query;
-  if (error) throw error;
+  // Join with user_fact_stats
+  const cardIds = cards.map((c) => c.id);
+
+  if (cardIds.length === 0) {
+    return [];
+  }
+
+  const { data: stats } = await supabase
+    .from('user_fact_stats')
+    .select('*')
+    .eq('user_id', userId)
+    .in('fact_id', cardIds);
+
+  const statsMap = new Map(stats?.map((s) => [s.fact_id, s]) || []);
 
   // Score and prioritize cards
-  const scored = data.map((card) => {
-    const stat = card.user_fact_stats?.[0];
+  const scored = cards.map((card) => {
+    const stat = statsMap.get(card.id);
     let score = 0;
 
     // Prioritize due cards (highest priority)
@@ -62,16 +67,5 @@ export async function buildQueue(userId: string, options: QueueOptions): Promise
   // Sort by score (descending) and take maxCards
   scored.sort((a, b) => b.score - a.score);
 
-  return scored.slice(0, maxCards).map(({ card }) => {
-    // Remove user_fact_stats from result to avoid leaking answers
-    const { user_fact_stats, ...factCard } = card;
-    return factCard as FactCard;
-  });
-}
-
-function modeToFactType(mode: GameMode): string {
-  if (mode.startsWith('language')) return 'language_snippet';
-  if (mode.startsWith('phone')) return 'phone_number';
-  if (mode.startsWith('city')) return 'city_locate';
-  throw new Error(`Unknown mode: ${mode}`);
+  return scored.slice(0, maxCards).map(({ card }) => card);
 }

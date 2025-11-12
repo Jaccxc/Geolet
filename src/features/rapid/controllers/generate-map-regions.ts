@@ -1,43 +1,49 @@
+import * as turf from '@turf/turf';
+
+import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
+
 import type { FactCard, Region } from '../types';
 
-import { getRegionsByKeys } from './get-regions';
-
 /**
- * Generate region data for Map mode
- * Returns regions that the user can pin on
+ * Get the answer region for Map mode
+ * NEW: Simply fetches the answer_region by FK
  */
-export async function generateMapRegions(card: FactCard): Promise<Region[]> {
-  const answer = card.answer;
-  let regionKeys: string[] = [];
+export async function getAnswerRegion(card: FactCard): Promise<Region> {
+  const supabase = await createSupabaseServerClient();
 
-  if (answer.kind === 'tag') {
-    // For tag-based answers, use map_equivalents
-    regionKeys = answer.map_equivalents?.regions || [];
-  } else if (answer.kind === 'region') {
-    // For region-based answers, use select.keys directly
-    regionKeys = answer.select.keys;
+  const { data: region, error } = await supabase
+    .from('regions')
+    .select('*')
+    .eq('id', card.answer_region_id)
+    .single();
+
+  if (error || !region) {
+    throw new Error(`Answer region not found: ${card.answer_region_id}`);
   }
 
-  if (regionKeys.length === 0) {
-    throw new Error(`No regions found for card ${card.id}`);
-  }
-
-  // Fetch region data with GeoJSON references
-  const regions = await getRegionsByKeys(regionKeys);
-
-  if (regions.length === 0) {
-    throw new Error(`Regions not found in database: ${regionKeys.join(', ')}`);
-  }
-
-  return regions;
+  return region as Region;
 }
 
 /**
- * Helper to extract region keys from a fact card's answer
+ * Calculate bounding box from region geometry
  */
-export function getAnswerRegionKeys(card: FactCard): string[] {
-  if (card.answer.kind === 'tag') {
-    return card.answer.map_equivalents?.regions || [];
+export function calculateBbox(region: Region): [number, number, number, number] {
+  if (region.location_type === 'pin' && region.centroid_lonlat) {
+    const [lng, lat] = region.centroid_lonlat;
+    // Add small buffer around pin (0.5 degrees)
+    return [lng - 0.5, lat - 0.5, lng + 0.5, lat + 0.5];
   }
-  return card.answer.select.keys;
+
+  if (region.location_type === 'polygon' && region.geometry) {
+    try {
+      // Use turf.js to calculate bbox from geometry
+      const bbox = turf.bbox(region.geometry as any);
+      return bbox as [number, number, number, number];
+    } catch (error) {
+      console.error('Error calculating bbox:', error);
+    }
+  }
+
+  // Fallback: world bbox
+  return [-180, -90, 180, 90];
 }
