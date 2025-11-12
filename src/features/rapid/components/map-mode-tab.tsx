@@ -54,6 +54,13 @@ export function MapModeTab() {
       }
 
       const data = await response.json();
+
+      // Check if queue is empty
+      if (!data.items || data.items.length === 0) {
+        setError('No cards available for this topic. Please ensure the topic has card groups and fact cards in the database.');
+        return;
+      }
+
       setQueueItems(data.items);
       setSessionState('playing');
     } catch (err) {

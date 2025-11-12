@@ -91,6 +91,15 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
 
   const currentItem = queueItems[currentIndex];
 
+  // Safety check: if no items or current item is undefined
+  if (!currentItem) {
+    return (
+      <div className='mx-auto w-full max-w-5xl py-20 text-center'>
+        <p className='text-destructive'>No cards available. Please try a different topic.</p>
+      </div>
+    );
+  }
+
   return (
     <div className='mx-auto w-full max-w-5xl'>
       <ProgressHeader
