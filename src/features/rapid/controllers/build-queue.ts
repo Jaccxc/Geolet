@@ -1,6 +1,7 @@
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
 import type { FactCard, QueueOptions } from '../types';
+
 import { getFactCards, getFactCardsByTopic } from './get-fact-cards';
 
 export async function buildQueue(userId: string, options: QueueOptions): Promise<FactCard[]> {

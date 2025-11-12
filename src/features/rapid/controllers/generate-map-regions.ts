@@ -1,6 +1,5 @@
-import * as turf from '@turf/turf';
-
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
+import * as turf from '@turf/turf';
 
 import type { FactCard, Region } from '../types';
 

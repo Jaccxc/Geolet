@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
+
 import * as turf from '@turf/turf';
 
 import type { Region } from '../types';
