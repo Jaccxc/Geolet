@@ -1,15 +1,15 @@
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
-import type { Region, RegionKind } from '../types';
+import type { Region, RegionLevel } from '../types';
 import { regionSchema } from '../types';
 
-export async function getRegions(kind?: RegionKind): Promise<Region[]> {
+export async function getRegions(level?: RegionLevel): Promise<Region[]> {
   const supabase = await createSupabaseServerClient();
 
   let query = supabase.from('regions').select('*');
 
-  if (kind) {
-    query = query.eq('kind', kind);
+  if (level) {
+    query = query.eq('level', level);
   }
 
   const { data, error } = await query;
