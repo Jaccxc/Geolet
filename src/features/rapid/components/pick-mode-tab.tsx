@@ -45,7 +45,7 @@ export function PickModeTab() {
         body: JSON.stringify({
           mode: 'pick',
           topicKey: topicKey,
-          maxCards: 20,
+          maxCards: 8,
         }),
       });
 

@@ -45,7 +45,7 @@ export function MapModeTab() {
         body: JSON.stringify({
           mode: 'map',
           topicKey: topicKey,
-          maxCards: 20,
+          maxCards: 8,
         }),
       });
 
