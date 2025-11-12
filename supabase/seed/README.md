@@ -1,147 +1,207 @@
-# Geolet Seed Data
+# Seed Data Generation
 
-This directory contains seed data for the Geolet MVP Flash gamemode.
+This directory contains scripts to generate seed data for the fresh database migration.
 
-## 📁 Structure
+## Structure
 
 ```
 supabase/seed/
-├── skill_tags.json          # 49 skill tags (scripts, phone codes, city tiers)
-├── regions.json             # 44 regions (22 countries, 22 cities)
-├── fact_cards.json          # 66 fact cards (26 language, 20 phone, 20 city)
 ├── scripts/
-│   ├── generate-seed-sql.cjs    # CommonJS generator (use this)
-│   └── generate-seed-sql.ts     # TypeScript version (for reference)
-└── README.md                # This file
+│   ├── generate-seeds-fresh.ts   # Main generation script
+│   ├── package.json               # Node dependencies
+│   └── tsconfig.json              # TypeScript config
+├── 01_skill_tags.sql              # Generated: skill tags
+├── 02_countries.sql               # Generated: all countries with GeoJSON
+├── 03_india_states.sql            # Generated: Indian states/UTs
+├── skill_tags.json.deprecated     # Source data (old format)
+└── README.md                      # This file
 ```
 
-## 📊 Data Summary
+## Quick Start
 
-### Skill Tags (49 total)
-- **17 Language Scripts**: Devanagari, Bengali, Tamil, Gujarati, Kannada, Telugu, Cyrillic, Arabic, Simplified Chinese, Traditional Chinese, Hiragana, Katakana, Hangul, Greek, Hebrew, Thai, Latin
-- **25 Phone Codes**: Global codes (+1, +91, +886, etc.) and regional area codes (+91:11 for Delhi, +886:2 for Taipei, +27:15 for Northern South Africa, etc.)
-- **7 City Tiers**: Grouped by country (IN, FR, US, TW, CN, JP) and global tier 1
+### 1. Generate Seed SQL Files
 
-### Regions (44 total)
-- **22 Countries**: IN, US, FR, DE, GB, IT, ES, CN, JP, KR, TW, RU, BR, AU, CA, MX, NP, BD, GR, IL, TH, ZA
-- **22 Cities** with coordinates:
-  - India: Delhi, Mumbai, Bangalore, Chennai, Kolkata
-  - France: Paris, Lyon, Marseille
-  - US: NYC, LA, Chicago, Houston, Phoenix
-  - Taiwan: Taipei, Kaohsiung, Taichung
-  - China: Beijing, Shanghai, Guangzhou
-  - Japan: Tokyo, Osaka, Kyoto
+```bash
+# From project root
+cd supabase/seed/scripts
 
-### Fact Cards (66 total)
-- **26 Language Snippet Cards**: Teaching script recognition
-  - Examples: "होटल" (Devanagari), "ホテル" (Katakana), "餐廳" (Traditional Chinese)
-- **20 Phone Number Cards**: Teaching country/region by phone code
-  - Examples: "+91 22 ..." (Mumbai), "+886 2 ..." (Taipei), "+27 15 ..." (Northern South Africa)
-- **20 City Locate Cards**: Teaching city geography
-  - Examples: "Delhi → IN:Delhi", "Paris → FR:Paris", "Taipei → TW:Taipei"
+# Install dependencies
+npm install
 
-## 🎮 Game Mode Coverage
+# Generate all seed files
+npm run generate
+```
 
-All Flash gamemode combinations are supported:
+This will create three SQL files in `supabase/seed/`:
+- `01_skill_tags.sql` (~40 skill tags)
+- `02_countries.sql` (~195 countries with GeoJSON polygons)
+- `03_india_states.sql` (~36 Indian states/UTs with GeoJSON polygons)
 
-| Mode Type | Content Type | Choice Mode | Map Mode | Example |
-|-----------|--------------|-------------|----------|---------|
-| Language → Country | language_snippet | ✅ | ✅ | "होटल" → India |
-| Language → Region | language_snippet | ✅ | ✅ | "ஹோட்டல்" → Tamil Nadu |
-| Phone → Country | phone_number | ✅ | ✅ | "+886 ..." → Taiwan |
-| Phone → Region | phone_number | ✅ | ✅ | "+91 22 ..." → Mumbai |
-| City → Country | city_locate | ✅ | ✅ | "Taipei" → Taiwan |
-| City → City | city_locate | ❌ | ✅ | "Taipei" → (pin on map) |
+### 2. Apply Migration & Seeds
 
-## 🚀 How to Use
+```bash
+# From project root
 
-### First Time Setup
+# 1. Apply fresh schema migration
+supabase db reset
+# OR manually:
+# psql $DATABASE_URL -f supabase/migrations/20251112180204_fresh_schema.sql
 
-1. **Run the geometry fix migration** (makes centroid/bbox nullable):
-   ```bash
-   # Apply to your Supabase instance
-   # Method depends on your setup (local, cloud, etc.)
-   supabase migration up
+# 2. Apply seed data in order
+psql $DATABASE_URL -f supabase/seed/01_skill_tags.sql
+psql $DATABASE_URL -f supabase/seed/02_countries.sql
+psql $DATABASE_URL -f supabase/seed/03_india_states.sql
+```
+
+### 3. Verify
+
+```bash
+# Check counts
+psql $DATABASE_URL -c "select count(*) from skill_tags;"
+psql $DATABASE_URL -c "select count(*) from regions where level = 'country';"
+psql $DATABASE_URL -c "select count(*) from regions where level = 'province' and country = 'IN';"
+
+# Sample data
+psql $DATABASE_URL -c "select key, name, level, location_type from regions limit 10;"
+```
+
+## Data Sources
+
+### skill_tags
+- **Source:** `supabase/seed/skill_tags.json.deprecated`
+- **Transform:** Extract `display`, `note`, `examples` from `meta` JSON → plain columns
+- **Count:** ~40 skill tags
+- **Families:** `script`, `phone`, `city`
+
+### Countries
+- **Source:** `public/geojson/countries.json`
+- **Extract:** ISO country codes + GeoJSON polygons
+- **Count:** ~195 countries
+- **Format:** All use `location_type='polygon'` (NO centroid_lonlat)
+- **Key format:** ISO 3166-1 alpha-2 (e.g., "IN", "US", "TW")
+
+### India States/UTs
+- **Source:** `public/geojson/regions/IN.json`
+- **Extract:** Indian states/union territories + GeoJSON polygons
+- **Count:** ~36 states/UTs
+- **Format:** All use `location_type='polygon'` (NO centroid_lonlat)
+- **Key format:** `IN:State_Name` (e.g., "IN:Maharashtra", "IN:Kerala")
+
+## Important Notes
+
+### Location Type Logic
+
+**Polygon regions (countries, states):**
+- `location_type = 'polygon'`
+- `geometry` contains GeoJSON polygon
+- `centroid_lonlat` is NULL (not needed for polygon validation)
+
+**Pin regions (future cities):**
+- `location_type = 'pin'`
+- `centroid_lonlat` contains [lng, lat]
+- `geometry` is NULL
+
+**Current seed data:** All regions are polygon type (no centroids).
+
+### Key Naming Convention
+
+- **Countries:** ISO 3166-1 alpha-2 code (e.g., `IN`, `US`, `CN`)
+- **Provinces/States:** `CountryCode:State_Name` (e.g., `IN:Andhra_Pradesh`)
+- **Cities (future):** `CountryCode:City_Name` (e.g., `IN:Mumbai`, `TW:Taipei`)
+
+Examples of India state keys:
+```
+Andaman and Nicobar    → IN:Andaman_and_Nicobar
+Andhra Pradesh         → IN:Andhra_Pradesh
+NCT of Delhi           → IN:NCT_of_Delhi
+Jammu and Kashmir      → IN:Jammu_and_Kashmir
+```
+
+## Schema Overview
+
+### Enums Created
+
+```sql
+region_level_enum      → 'country', 'province', 'city'
+location_type_enum     → 'pin', 'polygon'
+skill_family_enum      → 'script', 'phone', 'city'
+difficulty_enum        → 'beginner', 'intermediate', 'advanced'
+fact_difficulty_enum   → '1', '2', '3'
+```
+
+### Tables Created
+
+1. **card_groups** - Logical groupings (e.g., "India Scripts")
+2. **topics** - Game topics with mode flags
+3. **regions** - Geographic regions with GeoJSON
+4. **skill_tags** - Skills/tags for fact cards
+5. **fact_cards** - Quiz/game cards
+6. **user_fact_stats** - User progress (SRS system)
+7. **game_sessions** - Game session history
+8. **insight_rounds** - GeoGuessr-style rounds
+
+### Populated Tables
+
+After running seeds, these tables will have data:
+- ✅ **skill_tags** (~40 rows)
+- ✅ **regions** (~231 rows: 195 countries + 36 India states)
+
+These tables are empty (defer manual population):
+- ⏸️ **card_groups**
+- ⏸️ **topics**
+- ⏸️ **fact_cards**
+
+## Troubleshooting
+
+### "File not found" error
+- Make sure you're running from `supabase/seed/scripts/` directory
+- Check that source files exist:
+  - `../skill_tags.json.deprecated`
+  - `../../../public/geojson/countries.json`
+  - `../../../public/geojson/regions/IN.json`
+
+### TypeScript errors
+```bash
+cd supabase/seed/scripts
+rm -rf node_modules package-lock.json
+npm install
+npm run generate
+```
+
+### PostgreSQL errors
+- Ensure migration ran successfully first
+- Check enum types exist: `\dT` in psql
+- Check table exists: `\dt` in psql
+
+## Next Steps
+
+After populating skill_tags and regions:
+
+1. **Create card_groups** (manual)
+   ```sql
+   insert into card_groups (name) values
+     ('India Scripts'),
+     ('East Asian Scripts'),
+     ('Global Phone Codes');
    ```
 
-2. **Run the seed data migration**:
-   ```bash
-   # The file is: supabase/migrations/20251110034449_seed_initial_data.sql
-   # Apply it after the geometry fix
-   supabase migration up
+2. **Create topics** (manual)
+   ```sql
+   insert into topics (key, title, description, icon, difficulty, target_card_group_ids)
+   values (
+     'india-languages',
+     'India Languages',
+     'Identify regional scripts across Indian states',
+     'Languages',
+     'intermediate',
+     array[(select id from card_groups where name = 'India Scripts')]
+   );
    ```
 
-### Updating Seed Data
+3. **Create fact_cards** (manual, careful curation needed)
 
-If you need to modify the seed data:
+## References
 
-1. **Edit the JSON files** (skill_tags.json, regions.json, or fact_cards.json)
-2. **Regenerate the SQL migration**:
-   ```bash
-   node supabase/seed/scripts/generate-seed-sql.cjs
-   ```
-3. **Delete the old seed migration** (if already applied, roll it back first)
-4. **Apply the new migration**
-
-## 📝 Notes
-
-### GeoJSON Status
-- **Country geometries**: NOT included yet (set to null)
-- **Country centroids/bbox**: NOT included yet (set to null)
-- **City geometries**: NOT included (not needed for MVP)
-- **City centroids**: ✅ Included for all 22 cities
-- **City bbox**: NOT included (set to null, can add later)
-
-### What You Need to Prepare (Optional)
-
-If you want to add full GeoJSON support for map mode (polygons for countries):
-
-1. **Download country boundaries** from [Natural Earth Data](https://www.naturalearthdata.com/)
-   - Get the "Admin 0 - Countries" shapefile
-   - Convert to GeoJSON using [mapshaper.org](https://mapshaper.org)
-   - Simplify to reduce file size (< 1000 points per country)
-
-2. **Update regions.json** with geometry data:
-   ```json
-   {
-     "key": "IN",
-     "geometry": {
-       "type": "MultiPolygon",
-       "coordinates": [[[...]]]
-     },
-     "centroid_lonlat": [78.9629, 20.5937],
-     "bbox": [68.1766, 7.9668, 97.4025, 35.4940]
-   }
-   ```
-
-3. **Regenerate the migration** and apply it
-
-### For MVP Launch
-
-The current seed data is **sufficient for MVP** because:
-- ✅ City centroids are available for map mode city drills
-- ✅ Country keys work for choice mode (no geometry needed)
-- ✅ All game modes can be tested end-to-end
-- 🔄 Country polygons can be added later for advanced map validation
-
-## 🔍 Data Quality
-
-All data has been verified for:
-- ✅ Accuracy (coordinates from official sources)
-- ✅ Script examples (common words correctly written)
-- ✅ Phone codes (verified against ITU-T E.164)
-- ✅ Distinctive examples (easy to recognize)
-
-## 🎯 Next Steps
-
-After seeding:
-1. Test querying the data in Supabase dashboard
-2. Verify RLS policies work correctly
-3. Proceed to Step 4: Core Data Models & Types
-4. Build the Flash API (Step 5)
-
----
-
-**Generated**: 2025-11-10
-**Total Records**: 159 (49 skill_tags + 44 regions + 66 fact_cards)
-**Ready for Production**: ✅ (with or without GeoJSON)
+- Migration file: `supabase/migrations/20251112180204_fresh_schema.sql`
+- Documentation: `docs/15_database_fresh_migration_plan_20251112_174624.md`
+- GeoJSON sources: `public/geojson/`

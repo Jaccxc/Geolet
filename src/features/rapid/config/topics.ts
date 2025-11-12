@@ -44,16 +44,7 @@ export const PICK_MODE_TOPICS: TopicCardConfig[] = [
     mode: 'phone-pick',
     difficulty: 'beginner',
     estimatedCards: 15,
-  },
-  {
-    id: 'major-cities',
-    title: 'Major Cities',
-    description: 'Identify which country major cities belong to',
-    icon: MapPin,
-    mode: 'city-pick',
-    difficulty: 'beginner',
-    estimatedCards: 20,
-  },
+  }
 ];
 
 export const MAP_MODE_TOPICS: TopicCardConfig[] = [
