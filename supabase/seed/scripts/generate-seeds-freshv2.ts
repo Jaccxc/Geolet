@@ -254,9 +254,11 @@ function main() {
   }
 }
 
-// Run if called directly
-if (require.main === module) {
+const __filename = 'generate-seeds-freshv2.ts';
+
+if (process.argv[1] === __filename) {
   main();
 }
+
 
 export { generateSkillTagsSQL, generateCountriesSQL, generateIndiaStatesSQL };

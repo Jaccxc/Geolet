@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      card_groups: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       customers: {
         Row: {
           id: string
@@ -31,30 +49,51 @@ export type Database = {
       }
       fact_cards: {
         Row: {
-          answer: Json
-          difficulty: number
+          answer_region_id: string
+          card_group_id: string
+          created_at: string
+          difficulty: Database["public"]["Enums"]["fact_difficulty_enum"]
+          hint: string | null
           id: string
-          payload: Json
-          primary_tags: string[]
-          type: string
+          primary_skill_tags: string[]
+          prompt: string
         }
         Insert: {
-          answer: Json
-          difficulty?: number
+          answer_region_id: string
+          card_group_id: string
+          created_at?: string
+          difficulty?: Database["public"]["Enums"]["fact_difficulty_enum"]
+          hint?: string | null
           id?: string
-          payload: Json
-          primary_tags: string[]
-          type: string
+          primary_skill_tags: string[]
+          prompt: string
         }
         Update: {
-          answer?: Json
-          difficulty?: number
+          answer_region_id?: string
+          card_group_id?: string
+          created_at?: string
+          difficulty?: Database["public"]["Enums"]["fact_difficulty_enum"]
+          hint?: string | null
           id?: string
-          payload?: Json
-          primary_tags?: string[]
-          type?: string
+          primary_skill_tags?: string[]
+          prompt?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "fact_cards_answer_region_id_fkey"
+            columns: ["answer_region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fact_cards_card_group_id_fkey"
+            columns: ["card_group_id"]
+            isOneToOne: false
+            referencedRelation: "card_groups"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       game_sessions: {
         Row: {
@@ -192,70 +231,73 @@ export type Database = {
       }
       regions: {
         Row: {
-          bbox: number[] | null
           centroid_lonlat: number[] | null
           country: string | null
-          geojson_feature_id: string | null
-          geojson_file: string | null
-          geojson_id_property: string | null
+          created_at: string
           geometry: Json | null
           id: string
           key: string
-          kind: string
-          meta: Json
+          level: Database["public"]["Enums"]["region_level_enum"]
+          location_type: Database["public"]["Enums"]["location_type_enum"]
           name: string
+          note: string | null
         }
         Insert: {
-          bbox?: number[] | null
           centroid_lonlat?: number[] | null
           country?: string | null
-          geojson_feature_id?: string | null
-          geojson_file?: string | null
-          geojson_id_property?: string | null
+          created_at?: string
           geometry?: Json | null
           id?: string
           key: string
-          kind: string
-          meta?: Json
+          level: Database["public"]["Enums"]["region_level_enum"]
+          location_type: Database["public"]["Enums"]["location_type_enum"]
           name: string
+          note?: string | null
         }
         Update: {
-          bbox?: number[] | null
           centroid_lonlat?: number[] | null
           country?: string | null
-          geojson_feature_id?: string | null
-          geojson_file?: string | null
-          geojson_id_property?: string | null
+          created_at?: string
           geometry?: Json | null
           id?: string
           key?: string
-          kind?: string
-          meta?: Json
+          level?: Database["public"]["Enums"]["region_level_enum"]
+          location_type?: Database["public"]["Enums"]["location_type_enum"]
           name?: string
+          note?: string | null
         }
         Relationships: []
       }
       skill_tags: {
         Row: {
           country: string | null
-          family: string
+          created_at: string
+          display: string
+          examples: string[] | null
+          family: Database["public"]["Enums"]["skill_family_enum"]
           id: string
           key: string
-          meta: Json
+          note: string | null
         }
         Insert: {
           country?: string | null
-          family: string
+          created_at?: string
+          display: string
+          examples?: string[] | null
+          family: Database["public"]["Enums"]["skill_family_enum"]
           id?: string
           key: string
-          meta?: Json
+          note?: string | null
         }
         Update: {
           country?: string | null
-          family?: string
+          created_at?: string
+          display?: string
+          examples?: string[] | null
+          family?: Database["public"]["Enums"]["skill_family_enum"]
           id?: string
           key?: string
-          meta?: Json
+          note?: string | null
         }
         Relationships: []
       }
@@ -320,6 +362,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      topics: {
+        Row: {
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["difficulty_enum"] | null
+          icon: string | null
+          id: string
+          key: string
+          map_mode_active: boolean
+          pick_mode_active: boolean
+          target_card_group_ids: string[] | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["difficulty_enum"] | null
+          icon?: string | null
+          id?: string
+          key: string
+          map_mode_active?: boolean
+          pick_mode_active?: boolean
+          target_card_group_ids?: string[] | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["difficulty_enum"] | null
+          icon?: string | null
+          id?: string
+          key?: string
+          map_mode_active?: boolean
+          pick_mode_active?: boolean
+          target_card_group_ids?: string[] | null
+          title?: string
+        }
+        Relationships: []
       }
       user_fact_stats: {
         Row: {
@@ -391,8 +472,13 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      difficulty_enum: "beginner" | "intermediate" | "advanced"
+      fact_difficulty_enum: "1" | "2" | "3"
+      location_type_enum: "pin" | "polygon"
       pricing_plan_interval: "day" | "week" | "month" | "year"
       pricing_type: "one_time" | "recurring"
+      region_level_enum: "country" | "province" | "city"
+      skill_family_enum: "script" | "phone" | "city"
       subscription_status:
         | "trialing"
         | "active"
@@ -529,8 +615,13 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      difficulty_enum: ["beginner", "intermediate", "advanced"],
+      fact_difficulty_enum: ["1", "2", "3"],
+      location_type_enum: ["pin", "polygon"],
       pricing_plan_interval: ["day", "week", "month", "year"],
       pricing_type: ["one_time", "recurring"],
+      region_level_enum: ["country", "province", "city"],
+      skill_family_enum: ["script", "phone", "city"],
       subscription_status: [
         "trialing",
         "active",
