@@ -9,79 +9,63 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import type { PickOption } from '../types';
 
 interface PickCardProps {
-  payload: any;
+  prompt: string;
+  hint: string | null;
   options: PickOption[];
-  onAnswer: (selectedKey: string, timeMs: number) => void;
+  onAnswer: (selectedRegionId: string, timeMs: number) => void;
 }
 
-export function PickCard({ payload, options, onAnswer }: PickCardProps) {
+export function PickCard({ prompt, hint, options, onAnswer }: PickCardProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [startTime, setStartTime] = useState(Date.now());
-  const payloadRef = useRef(payload);
+  const promptRef = useRef(prompt);
 
   // Reset state when card changes
   useEffect(() => {
-    if (payloadRef.current !== payload) {
-      payloadRef.current = payload;
+    if (promptRef.current !== prompt) {
+      promptRef.current = prompt;
       setSelected(null);
       setShowFeedback(false);
       setStartTime(Date.now());
     }
-  }, [payload]);
+  }, [prompt]);
 
-  const handleSelect = (key: string) => {
+  const handleSelect = (regionId: string) => {
     if (selected) return; // Already answered
 
-    setSelected(key);
+    setSelected(regionId);
     setShowFeedback(true);
 
     const timeMs = Date.now() - startTime;
 
     // Wait 1.5s for feedback, then submit
     setTimeout(() => {
-      onAnswer(key, timeMs);
+      onAnswer(regionId, timeMs);
     }, 1500);
-  };
-
-  // Display the prompt based on payload type
-  const renderPrompt = () => {
-    if (payload.text) {
-      // Language snippet
-      return (
-        <>
-          <div className='mb-4 font-sans text-6xl font-bold'>{payload.text}</div>
-          {payload.romanization && <div className='text-sm text-muted-foreground'>{payload.romanization}</div>}
-        </>
-      );
-    } else if (payload.number) {
-      // Phone number
-      return <div className='font-mono text-5xl font-bold'>{payload.number}</div>;
-    } else if (payload.city) {
-      // City name
-      return <div className='text-5xl font-bold'>{payload.city}</div>;
-    }
-    return null;
   };
 
   return (
     <Card className='mx-auto max-w-3xl border-border bg-card'>
-      <CardHeader className='pb-8 text-center'>{renderPrompt()}</CardHeader>
+      <CardHeader className='pb-8 text-center'>
+        <div className='mb-4 font-sans text-6xl font-bold'>{prompt}</div>
+        {hint && <div className='text-sm text-muted-foreground'>{hint}</div>}
+      </CardHeader>
       <CardContent>
         <div className='grid grid-cols-2 gap-3'>
           {options.map((option) => {
-            const isSelected = selected === option.key;
+            const isSelected = selected === option.region_id;
             const isCorrect = option.correct;
             const showCorrect = showFeedback && isCorrect;
             const showWrong = showFeedback && isSelected && !isCorrect;
 
             return (
               <Button
-                key={option.key}
+                key={option.region_id}
                 variant={showCorrect ? 'default' : showWrong ? 'destructive' : isSelected ? 'secondary' : 'outline'}
                 size='lg'
                 className='relative h-20 text-base font-medium'
-                onClick={() => handleSelect(option.key)}
+                onClick={() => handleSelect(option.region_id)}
                 disabled={!!selected}
               >
                 {option.label}

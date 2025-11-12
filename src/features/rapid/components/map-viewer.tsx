@@ -2,18 +2,18 @@
 
 import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
+import * as turf from '@turf/turf';
 
 import type { Region } from '../types';
 
 interface MapViewerProps {
   regions: Region[];
-  bbox?: [number, number, number, number];
   onPinDrop?: (lng: number, lat: number) => void;
   disabled?: boolean;
   showAnswer?: boolean;
 }
 
-export function MapViewer({ regions, bbox, onPinDrop, disabled = false, showAnswer = false }: MapViewerProps) {
+export function MapViewer({ regions, onPinDrop, disabled = false, showAnswer = false }: MapViewerProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const [userPin, setUserPin] = useState<maplibregl.Marker | null>(null);
@@ -49,17 +49,6 @@ export function MapViewer({ regions, bbox, onPinDrop, disabled = false, showAnsw
       zoom: 1.5,
     });
 
-    // Fit to bbox if provided
-    if (bbox) {
-      map.current.fitBounds(
-        [
-          [bbox[0], bbox[1]], // SW
-          [bbox[2], bbox[3]], // NE
-        ],
-        { padding: 50, maxZoom: 10, duration: 0 }
-      );
-    }
-
     // Add navigation controls
     map.current.addControl(new maplibregl.NavigationControl(), 'top-right');
 
@@ -71,7 +60,7 @@ export function MapViewer({ regions, bbox, onPinDrop, disabled = false, showAnsw
       map.current?.remove();
       map.current = null;
     };
-  }, [bbox]);
+  }, []);
 
   // Handle pin drop
   useEffect(() => {
@@ -201,21 +190,26 @@ export function MapViewer({ regions, bbox, onPinDrop, disabled = false, showAnsw
 
     // Zoom to answer regions
     if (regions.length > 0) {
-      const validBboxes = regions.filter((r) => r.bbox).map((r) => r.bbox!);
+      // Calculate bbox from geometry or use centroids
+      const regionsWithGeometry = regions.filter((r) => r.geometry);
 
-      if (validBboxes.length > 0) {
-        // Calculate merged bbox
+      if (regionsWithGeometry.length > 0) {
+        // Calculate bbox from all geometries
         let minLng = Infinity, minLat = Infinity;
         let maxLng = -Infinity, maxLat = -Infinity;
 
-        validBboxes.forEach(([bMinLng, bMinLat, bMaxLng, bMaxLat]) => {
-          minLng = Math.min(minLng, bMinLng);
-          minLat = Math.min(minLat, bMinLat);
-          maxLng = Math.max(maxLng, bMaxLng);
-          maxLat = Math.max(maxLat, bMaxLat);
+        regionsWithGeometry.forEach((region) => {
+          if (region.geometry) {
+            const bbox = turf.bbox(region.geometry as any);
+            const [bMinLng, bMinLat, bMaxLng, bMaxLat] = bbox;
+            minLng = Math.min(minLng, bMinLng);
+            minLat = Math.min(minLat, bMinLat);
+            maxLng = Math.max(maxLng, bMaxLng);
+            maxLat = Math.max(maxLat, bMaxLat);
+          }
         });
 
-        // Fit to answer bbox with animation
+        // Fit to calculated bbox with animation
         map.current.fitBounds(
           [
             [minLng, minLat],
@@ -224,7 +218,7 @@ export function MapViewer({ regions, bbox, onPinDrop, disabled = false, showAnsw
           { padding: 60, maxZoom: 8, duration: 1000 }
         );
       } else {
-        // Fallback: zoom to first centroid if no bbox available
+        // Fallback: zoom to first centroid if no geometry available
         const firstRegionWithCentroid = regions.find((r) => r.centroid_lonlat);
         if (firstRegionWithCentroid && firstRegionWithCentroid.centroid_lonlat) {
           const [lng, lat] = firstRegionWithCentroid.centroid_lonlat;

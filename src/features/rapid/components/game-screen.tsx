@@ -18,7 +18,7 @@ const MapCard = dynamic(() => import('./map-card').then((mod) => ({ default: mod
 
 interface GameScreenProps {
   queueItems: (PickQueueItem | MapQueueItem)[];
-  mode: string;
+  mode: 'pick' | 'map';
   onComplete: (results: any) => void;
 }
 
@@ -29,7 +29,7 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
-  const isMapMode = mode.endsWith('-map');
+  const isMapMode = mode === 'map';
 
   // Timer
   useEffect(() => {
@@ -40,26 +40,27 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
   }, [startTime]);
 
   const handleAnswer = (
-    selectedKeyOrPin: string | [number, number],
+    selectedRegionIdOrPin: string | [number, number],
     timeMs: number,
     correctOverride?: boolean
   ) => {
     const item = queueItems[currentIndex];
 
     let newResult: any;
-    if (typeof selectedKeyOrPin === 'string') {
-      // Pick mode
+    if (typeof selectedRegionIdOrPin === 'string') {
+      // Pick mode - NEW: using region_id instead of key
       newResult = {
         fact_id: item.fact_id,
-        selected_key: selectedKeyOrPin,
+        selected_region_id: selectedRegionIdOrPin,
         time_ms: timeMs,
-        correct: 'options' in item ? item.options.find((o) => o.key === selectedKeyOrPin)?.correct || false : false,
+        correct:
+          'options' in item ? item.options.find((o) => o.region_id === selectedRegionIdOrPin)?.correct || false : false,
       };
     } else {
       // Map mode
       newResult = {
         fact_id: item.fact_id,
-        clicked_point: selectedKeyOrPin,
+        clicked_point: selectedRegionIdOrPin,
         time_ms: timeMs,
         correct: correctOverride ?? false, // Use validation from MapCard
       };
@@ -69,7 +70,6 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
     setResults(newResults);
 
     // Move to next card or show recap
-    // Wait slightly longer than the feedback delay to ensure smooth transition
     if (currentIndex < queueItems.length - 1) {
       setTimeout(() => {
         setCurrentIndex(currentIndex + 1);
@@ -100,16 +100,22 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
         timeElapsed={timeElapsed}
       />
 
-      {isMapMode && 'regions' in currentItem ? (
+      {isMapMode && 'answer_region' in currentItem ? (
         <MapCard
           key={currentItem.fact_id}
-          payload={currentItem.payload}
-          answerRegions={currentItem.regions}
-          bbox={currentItem.bbox}
+          prompt={currentItem.prompt}
+          hint={currentItem.hint}
+          answerRegion={currentItem.answer_region}
           onAnswer={(pin, time, correct) => handleAnswer(pin, time, correct)}
         />
       ) : 'options' in currentItem ? (
-        <PickCard key={currentItem.fact_id} payload={currentItem.payload} options={currentItem.options} onAnswer={handleAnswer} />
+        <PickCard
+          key={currentItem.fact_id}
+          prompt={currentItem.prompt}
+          hint={currentItem.hint}
+          options={currentItem.options}
+          onAnswer={handleAnswer}
+        />
       ) : null}
     </div>
   );

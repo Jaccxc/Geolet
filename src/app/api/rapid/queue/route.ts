@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
 import { buildQueue } from '@/features/rapid/controllers/build-queue';
-import { calculateBbox, getAnswerRegion } from '@/features/rapid/controllers/generate-map-regions';
+import { getAnswerRegion } from '@/features/rapid/controllers/generate-map-regions';
 import { generatePickOptions } from '@/features/rapid/controllers/generate-pick-options';
 import type { MapQueueItem, PickQueueItem } from '@/features/rapid/types';
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
@@ -59,7 +59,6 @@ export async function POST(req: NextRequest) {
       const queueItems: MapQueueItem[] = await Promise.all(
         cards.map(async (card) => {
           const answerRegion = await getAnswerRegion(card);
-          const bbox = calculateBbox(answerRegion);
 
           return {
             fact_id: card.id,
@@ -68,7 +67,6 @@ export async function POST(req: NextRequest) {
             hint: card.hint,
             difficulty: card.difficulty,
             answer_region: answerRegion,
-            bbox,
           };
         })
       );

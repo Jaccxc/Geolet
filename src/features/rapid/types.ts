@@ -180,7 +180,6 @@ export interface MapQueueItem {
   hint: string | null;
   difficulty: FactDifficulty;
   answer_region: Region;
-  bbox: [number, number, number, number];
 }
 
 export type QueueItem = PickQueueItem | MapQueueItem;

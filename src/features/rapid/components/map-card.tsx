@@ -8,18 +8,18 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 import { validateMapAnswer } from '../models/answer-validator';
-import type { FactPayload, Region } from '../types';
+import type { Region } from '../types';
 
 import { MapViewer } from './map-viewer';
 
 interface MapCardProps {
-  payload: FactPayload;
-  answerRegions: Region[];
-  bbox: [number, number, number, number];
+  prompt: string;
+  hint: string | null;
+  answerRegion: Region;
   onAnswer: (pinDrop: [number, number], timeMs: number, correct: boolean) => void;
 }
 
-export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps) {
+export function MapCard({ prompt, hint, answerRegion, onAnswer }: MapCardProps) {
   const [pinLocation, setPinLocation] = useState<[number, number] | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState<{ correct: boolean; distance?: number } | null>(null);
@@ -36,11 +36,7 @@ export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps
     setSubmitted(true);
 
     // Client-side validation (for immediate feedback)
-    const validation = validateMapAnswer(
-      { kind: 'region', select: { by: 'key', keys: answerRegions.map((r) => r.key) } },
-      pinLocation,
-      answerRegions
-    );
+    const validation = validateMapAnswer(answerRegion, pinLocation);
     setResult(validation);
   };
 
@@ -73,13 +69,9 @@ export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps
       <CardHeader className='space-y-4 text-center'>
         {/* Prompt */}
         <div>
-          <div className='mb-2 text-lg font-medium text-muted-foreground'>{getPromptLabel(payload)}</div>
-          <div className='text-4xl font-bold'>
-            {'text' in payload ? payload.text : 'number' in payload ? payload.number : 'city' in payload ? payload.city : ''}
-          </div>
-          {'romanization' in payload && payload.romanization && (
-            <div className='mt-1 text-sm text-muted-foreground'>{payload.romanization}</div>
-          )}
+          <div className='mb-2 text-lg font-medium text-muted-foreground'>Where is this located?</div>
+          <div className='text-4xl font-bold'>{prompt}</div>
+          {hint && <div className='mt-1 text-sm text-muted-foreground'>{hint}</div>}
         </div>
 
         {/* Instructions */}
@@ -119,8 +111,7 @@ export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps
       <CardContent className='space-y-4'>
         {/* Map */}
         <MapViewer
-          regions={answerRegions}
-          bbox={bbox}
+          regions={[answerRegion]}
           onPinDrop={handlePinDrop}
           disabled={submitted}
           showAnswer={submitted}
@@ -139,11 +130,4 @@ export function MapCard({ payload, answerRegions, bbox, onAnswer }: MapCardProps
       </CardContent>
     </Card>
   );
-}
-
-function getPromptLabel(payload: FactPayload): string {
-  if ('text' in payload) return 'Where is this script used?';
-  if ('number' in payload) return 'Where is this phone number from?';
-  if ('city' in payload) return 'Where is this city located?';
-  return 'Click on the map';
 }

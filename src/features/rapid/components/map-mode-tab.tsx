@@ -1,36 +1,51 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 
-import { MAP_MODE_TOPICS } from '../config/topics';
+import type { Topic } from '../types';
 
 import { GameScreen } from './game-screen';
-import { TopicCard } from './topic-card';
+import { TopicSelector } from './topic-selector';
 
 export function MapModeTab() {
   const [sessionState, setSessionState] = useState<'topics' | 'playing'>('topics');
   const [queueItems, setQueueItems] = useState<any[]>([]);
-  const [mode, setMode] = useState<string>('');
+  const [topics, setTopics] = useState<Topic[]>([]);
+  const [selectedTopic, setSelectedTopic] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleTopicSelect = async (topicId: string) => {
-    const topic = MAP_MODE_TOPICS.find((t) => t.id === topicId);
-    if (!topic) return;
+  // Fetch topics on mount
+  useEffect(() => {
+    async function fetchTopics() {
+      try {
+        const response = await fetch('/api/rapid/topics?mode=map');
+        if (!response.ok) throw new Error('Failed to fetch topics');
+        const data = await response.json();
+        setTopics(data.topics);
+      } catch (err) {
+        console.error('Failed to fetch topics:', err);
+        setError('Failed to load topics');
+      }
+    }
+    fetchTopics();
+  }, []);
 
+  const handleTopicSelect = async (topicKey: string) => {
+    setSelectedTopic(topicKey);
     setLoading(true);
     setError(null);
 
     try {
-      // Call queue API
+      // Call queue API with topicKey
       const response = await fetch('/api/rapid/queue', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          mode: topic.mode,
-          maxCards: 10, // Start with 10 cards per session
-          targetTags: topic.targetTags, // Filter by specific tags if defined
+          mode: 'map',
+          topicKey: topicKey,
+          maxCards: 20,
         }),
       });
 
@@ -40,7 +55,6 @@ export function MapModeTab() {
 
       const data = await response.json();
       setQueueItems(data.items);
-      setMode(topic.mode);
       setSessionState('playing');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to start session');
@@ -56,7 +70,7 @@ export function MapModeTab() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          mode,
+          mode: 'map',
           items: results,
         }),
       });
@@ -85,7 +99,7 @@ export function MapModeTab() {
   }
 
   if (sessionState === 'playing') {
-    return <GameScreen queueItems={queueItems} mode={mode} onComplete={handleSessionComplete} />;
+    return <GameScreen queueItems={queueItems} mode="map" onComplete={handleSessionComplete} />;
   }
 
   return (
@@ -95,11 +109,7 @@ export function MapModeTab() {
         <p className='text-muted-foreground'>Click on a map to identify regions based on scripts and phone codes</p>
       </div>
 
-      <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-        {MAP_MODE_TOPICS.map((topic) => (
-          <TopicCard key={topic.id} topic={topic} onClick={() => handleTopicSelect(topic.id)} />
-        ))}
-      </div>
+      <TopicSelector mode="map" onSelect={handleTopicSelect} selectedTopic={selectedTopic} />
     </div>
   );
 }
