@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { LucideIcon } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -24,9 +26,7 @@ export function TopicSelector({ mode, onSelect, selectedTopic }: TopicSelectorPr
         setError(null);
         const res = await fetch(`/api/rapid/topics?mode=${mode}`);
 
-        if (!res.ok) {
-          throw new Error('Failed to fetch topics');
-        }
+        if (!res.ok) throw new Error('Failed to fetch topics');
 
         const data = await res.json();
         setTopics(data.topics);
@@ -74,43 +74,49 @@ export function TopicSelector({ mode, onSelect, selectedTopic }: TopicSelectorPr
 
   return (
     <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-      {topics.map((topic) => (
-        <Card
-          key={topic.key}
-          className={`cursor-pointer transition-all hover:shadow-md ${
-            selectedTopic === topic.key
-              ? 'border-primary bg-primary/5 ring-2 ring-primary'
-              : 'hover:border-primary/50'
-          }`}
-          onClick={() => onSelect(topic.key)}
-        >
-          <CardHeader>
-            <CardTitle className='flex items-center gap-2'>
-              {topic.icon && <span className='text-2xl'>{topic.icon}</span>}
-              <span>{topic.title}</span>
-            </CardTitle>
-            {topic.description && <CardDescription>{topic.description}</CardDescription>}
-          </CardHeader>
-          {topic.difficulty && (
-            <CardContent>
-              <div className='flex items-center gap-2'>
-                <span className='text-xs font-medium text-muted-foreground'>Difficulty:</span>
-                <span
-                  className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
-                    topic.difficulty === 'beginner'
-                      ? 'bg-green-100 text-green-800'
-                      : topic.difficulty === 'intermediate'
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : 'bg-red-100 text-red-800'
-                  }`}
-                >
-                  {topic.difficulty}
-                </span>
-              </div>
-            </CardContent>
-          )}
-        </Card>
-      ))}
+      {topics.map((topic) => {
+        const maybeIcon = LucideIcons[topic.icon as keyof typeof LucideIcons];
+        const Icon = (typeof maybeIcon === 'function' ? maybeIcon : LucideIcons.HelpCircle) as LucideIcon;
+
+        return (
+          <Card
+            key={topic.key}
+            className={`cursor-pointer transition-all hover:shadow-md ${
+              selectedTopic === topic.key
+                ? 'border-primary bg-primary/5 ring-2 ring-primary'
+                : 'hover:border-primary/50'
+            }`}
+            onClick={() => onSelect(topic.key)}
+          >
+            <CardHeader>
+              <CardTitle className='flex items-center gap-2'>
+                <Icon className='h-5 w-5 text-primary' />
+                <span>{topic.title}</span>
+              </CardTitle>
+              {topic.description && <CardDescription>{topic.description}</CardDescription>}
+            </CardHeader>
+
+            {topic.difficulty && (
+              <CardContent>
+                <div className='flex items-center gap-2'>
+                  <span className='text-xs font-medium text-muted-foreground'>Difficulty:</span>
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
+                      topic.difficulty === 'beginner'
+                        ? 'bg-green-100 text-green-800'
+                        : topic.difficulty === 'intermediate'
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-red-100 text-red-800'
+                    }`}
+                  >
+                    {topic.difficulty}
+                  </span>
+                </div>
+              </CardContent>
+            )}
+          </Card>
+        );
+      })}
     </div>
   );
 }
