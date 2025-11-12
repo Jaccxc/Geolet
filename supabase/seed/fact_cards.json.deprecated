@@ -1,0 +1,1250 @@
+[
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "होटल",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:devanagari:hindi"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:devanagari:hindi"]
+      },
+      "map_equivalents": {
+        "regions": ["IN", "IN-DL", "IN-UP", "IN-MP", "IN-RJ", "IN-HR"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "रेस्तरां",
+      "romanization": "restaurant"
+    },
+    "primary_tags": ["script:devanagari:hindi"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:devanagari:hindi"]
+      },
+      "map_equivalents": {
+        "regions": ["IN", "IN-DL", "IN-UP", "IN-MP", "IN-RJ", "IN-HR"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "हॉटेल ळ",
+      "romanization": "hotel with ळ"
+    },
+    "primary_tags": ["script:devanagari:marathi"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:devanagari:marathi"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-MH"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "ਹੋਟਲ",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:gurmukhi:punjabi"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:gurmukhi:punjabi"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-PB"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "ਸਕੂਲ ਨਲਅ",
+      "romanization": "school with distinctive characters"
+    },
+    "primary_tags": ["script:gurmukhi:punjabi"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:gurmukhi:punjabi"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-PB"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "হোটেল",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:bengali"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:bengali"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-WB", "BD"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "হোটেল ৰৱ",
+      "romanization": "hotel with ৰৱ"
+    },
+    "primary_tags": ["script:bengali:assamese"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:bengali:assamese"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-AS"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "ஹோட்டல்",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:tamil"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:tamil"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-TN", "LK"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "உணவகம்",
+      "romanization": "restaurant"
+    },
+    "primary_tags": ["script:tamil"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:tamil"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-TN", "LK"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "હોટલ",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:gujarati"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:gujarati"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-GJ"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "ಹೋಟೆಲ್",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:kannada"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:kannada"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-KA"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "రెస్టోరెంట్",
+      "romanization": "restaurant"
+    },
+    "primary_tags": ["script:kannada"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:kannada"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-KA"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "హోటల్",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:telugu"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:telugu"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-TG", "IN-AP"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "ହୋଟେଲ",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:odia"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:odia"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-OR"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "ഹോട്ടല്‍",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:malayalam"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:malayalam"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-KL"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "ꯍꯣꯇꯦꯜ",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:meitei:manipuri"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:meitei:manipuri"]
+      },
+      "map_equivalents": {
+        "regions": ["IN-MN"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "Гостиница",
+      "romanization": "gostinitsa"
+    },
+    "primary_tags": ["script:cyrillic"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:cyrillic"]
+      },
+      "map_equivalents": {
+        "regions": ["RU"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "Ресторан",
+      "romanization": "restoran"
+    },
+    "primary_tags": ["script:cyrillic"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:cyrillic"]
+      },
+      "map_equivalents": {
+        "regions": ["RU"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "فندق",
+      "romanization": "funduq"
+    },
+    "primary_tags": ["script:arabic"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:arabic"]
+      },
+      "map_equivalents": {
+        "regions": []
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "مطعم",
+      "romanization": "mataam"
+    },
+    "primary_tags": ["script:arabic"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:arabic"]
+      },
+      "map_equivalents": {
+        "regions": []
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "酒店",
+      "romanization": "jiǔdiàn"
+    },
+    "primary_tags": ["script:chinese:simplified"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:chinese:simplified"]
+      },
+      "map_equivalents": {
+        "regions": ["CN"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "餐厅",
+      "romanization": "cāntīng"
+    },
+    "primary_tags": ["script:chinese:simplified"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:chinese:simplified"]
+      },
+      "map_equivalents": {
+        "regions": ["CN"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "餐廳",
+      "romanization": "cāntīng"
+    },
+    "primary_tags": ["script:chinese:traditional"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:chinese:traditional"]
+      },
+      "map_equivalents": {
+        "regions": ["TW"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "學校",
+      "romanization": "xuéxiào"
+    },
+    "primary_tags": ["script:chinese:traditional"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:chinese:traditional"]
+      },
+      "map_equivalents": {
+        "regions": ["TW"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "ホテル",
+      "romanization": "hoteru"
+    },
+    "primary_tags": ["script:japanese:katakana"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:japanese:katakana"]
+      },
+      "map_equivalents": {
+        "regions": ["JP"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "レストラン",
+      "romanization": "resutoran"
+    },
+    "primary_tags": ["script:japanese:katakana"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:japanese:katakana"]
+      },
+      "map_equivalents": {
+        "regions": ["JP"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "がっこう",
+      "romanization": "gakkou"
+    },
+    "primary_tags": ["script:japanese:hiragana"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:japanese:hiragana"]
+      },
+      "map_equivalents": {
+        "regions": ["JP"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "호텔",
+      "romanization": "hotel"
+    },
+    "primary_tags": ["script:korean:hangul"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:korean:hangul"]
+      },
+      "map_equivalents": {
+        "regions": ["KR"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "레스토랑",
+      "romanization": "restaurant"
+    },
+    "primary_tags": ["script:korean:hangul"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:korean:hangul"]
+      },
+      "map_equivalents": {
+        "regions": ["KR"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "Ξενοδοχείο",
+      "romanization": "xenodocheio"
+    },
+    "primary_tags": ["script:greek"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:greek"]
+      },
+      "map_equivalents": {
+        "regions": ["GR"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "מלון",
+      "romanization": "malon"
+    },
+    "primary_tags": ["script:hebrew"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:hebrew"]
+      },
+      "map_equivalents": {
+        "regions": ["IL"]
+      }
+    }
+  },
+  {
+    "type": "language_snippet",
+    "payload": {
+      "text": "โรงแรม",
+      "romanization": "rong raem"
+    },
+    "primary_tags": ["script:thai"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "tag",
+      "select": {
+        "by": "skill_key",
+        "keys": ["script:thai"]
+      },
+      "map_equivalents": {
+        "regions": ["TH"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+1 212 555 0123",
+      "masked": "+1 212..."
+    },
+    "primary_tags": ["phone:+1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["US", "CA"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+1 416 555 0198",
+      "masked": "+1 416..."
+    },
+    "primary_tags": ["phone:+1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["US", "CA"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+44 20 7946 0958",
+      "masked": "+44 20..."
+    },
+    "primary_tags": ["phone:+44"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["GB"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+33 1 42 96 12 34",
+      "masked": "+33 1..."
+    },
+    "primary_tags": ["phone:+33"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["FR"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+49 30 1234567",
+      "masked": "+49 30..."
+    },
+    "primary_tags": ["phone:+49"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["DE"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+39 06 1234 5678",
+      "masked": "+39 06..."
+    },
+    "primary_tags": ["phone:+39"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IT"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+81 3 1234 5678",
+      "masked": "+81 3..."
+    },
+    "primary_tags": ["phone:+81"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["JP"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+82 2 1234 5678",
+      "masked": "+82 2..."
+    },
+    "primary_tags": ["phone:+82"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["KR"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+86 10 1234 5678",
+      "masked": "+86 10..."
+    },
+    "primary_tags": ["phone:+86"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["CN"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+91 11 2345 6789",
+      "masked": "+91 11..."
+    },
+    "primary_tags": ["phone:+91", "phone:+91:11"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+91 22 2345 6789",
+      "masked": "+91 22..."
+    },
+    "primary_tags": ["phone:+91", "phone:+91:22"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN:Mumbai"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+91 33 2345 6789",
+      "masked": "+91 33..."
+    },
+    "primary_tags": ["phone:+91", "phone:+91:33"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN:Kolkata"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+91 44 2345 6789",
+      "masked": "+91 44..."
+    },
+    "primary_tags": ["phone:+91", "phone:+91:44"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN:Chennai"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+91 80 2345 6789",
+      "masked": "+91 80..."
+    },
+    "primary_tags": ["phone:+91", "phone:+91:80"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN:Bangalore"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+886 2 2345 6789",
+      "masked": "+886 2..."
+    },
+    "primary_tags": ["phone:+886", "phone:+886:2"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["TW:Taipei"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+886 7 1234 5678",
+      "masked": "+886 7..."
+    },
+    "primary_tags": ["phone:+886", "phone:+886:7"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["TW:Kaohsiung"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+27 21 123 4567",
+      "masked": "+27 21..."
+    },
+    "primary_tags": ["phone:+27", "phone:+27:21"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["ZA"]
+      }
+    }
+  },
+  {
+    "type": "phone_number",
+    "payload": {
+      "number": "+27 15 123 4567",
+      "masked": "+27 15..."
+    },
+    "primary_tags": ["phone:+27", "phone:+27:15"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["ZA"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Delhi",
+      "country_hint": "IN"
+    },
+    "primary_tags": ["city:IN:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN:Delhi"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Mumbai",
+      "country_hint": "IN"
+    },
+    "primary_tags": ["city:IN:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN:Mumbai"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Bangalore",
+      "country_hint": "IN"
+    },
+    "primary_tags": ["city:IN:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN:Bangalore"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Chennai",
+      "country_hint": "IN"
+    },
+    "primary_tags": ["city:IN:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN:Chennai"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Kolkata",
+      "country_hint": "IN"
+    },
+    "primary_tags": ["city:IN:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["IN:Kolkata"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Paris",
+      "country_hint": "FR"
+    },
+    "primary_tags": ["city:FR:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["FR:Paris"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Lyon",
+      "country_hint": "FR"
+    },
+    "primary_tags": ["city:FR:tier1"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["FR:Lyon"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Marseille",
+      "country_hint": "FR"
+    },
+    "primary_tags": ["city:FR:tier1"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["FR:Marseille"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "New York City",
+      "country_hint": "US"
+    },
+    "primary_tags": ["city:US:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["US:NewYork"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Los Angeles",
+      "country_hint": "US"
+    },
+    "primary_tags": ["city:US:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["US:LosAngeles"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Chicago",
+      "country_hint": "US"
+    },
+    "primary_tags": ["city:US:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["US:Chicago"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Houston",
+      "country_hint": "US"
+    },
+    "primary_tags": ["city:US:tier1"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["US:Houston"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Phoenix",
+      "country_hint": "US"
+    },
+    "primary_tags": ["city:US:tier1"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["US:Phoenix"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Taipei",
+      "country_hint": "TW"
+    },
+    "primary_tags": ["city:TW:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["TW:Taipei"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Kaohsiung",
+      "country_hint": "TW"
+    },
+    "primary_tags": ["city:TW:tier1"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["TW:Kaohsiung"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Taichung",
+      "country_hint": "TW"
+    },
+    "primary_tags": ["city:TW:tier1"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["TW:Taichung"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Beijing",
+      "country_hint": "CN"
+    },
+    "primary_tags": ["city:CN:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["CN:Beijing"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Shanghai",
+      "country_hint": "CN"
+    },
+    "primary_tags": ["city:CN:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["CN:Shanghai"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Guangzhou",
+      "country_hint": "CN"
+    },
+    "primary_tags": ["city:CN:tier1"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["CN:Guangzhou"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Tokyo",
+      "country_hint": "JP"
+    },
+    "primary_tags": ["city:JP:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["JP:Tokyo"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Osaka",
+      "country_hint": "JP"
+    },
+    "primary_tags": ["city:JP:tier1", "city:global:tier1"],
+    "difficulty": 1,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["JP:Osaka"]
+      }
+    }
+  },
+  {
+    "type": "city_locate",
+    "payload": {
+      "city": "Kyoto",
+      "country_hint": "JP"
+    },
+    "primary_tags": ["city:JP:tier1"],
+    "difficulty": 2,
+    "answer": {
+      "kind": "region",
+      "select": {
+        "by": "key",
+        "keys": ["JP:Kyoto"]
+      }
+    }
+  }
+]

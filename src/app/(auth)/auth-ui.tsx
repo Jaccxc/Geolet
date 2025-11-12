@@ -3,17 +3,24 @@
 import { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoLogoGithub, IoLogoGoogle } from 'react-icons/io5';
+import { IoLogoGoogle, IoMail } from 'react-icons/io5';
 
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 import { toast } from '@/components/ui/use-toast';
 import { ActionResponse } from '@/types/action-response';
 
 const titleMap = {
-  login: 'Login to Geolet',
-  signup: 'Join Geolet and start practicing your skills',
+  login: 'Welcome back',
+  signup: 'Create your account',
+} as const;
+
+const descriptionMap = {
+  login: 'Sign in to continue your GeoGuessr training',
+  signup: 'Start your journey to mastering GeoGuessr',
 } as const;
 
 export function AuthUI({
@@ -64,74 +71,114 @@ export function AuthUI({
   }
 
   return (
-    <section className='mt-16 flex w-full flex-col gap-16 rounded-lg bg-black p-10 px-4 text-center'>
-      <div className='flex flex-col gap-4'>
-        <Image src='/logo.png' width={80} height={80} alt='' className='m-auto' />
-        <h1 className='text-lg'>{titleMap[mode]}</h1>
-      </div>
-      <div className='flex flex-col gap-4'>
-        <button
-          className='flex items-center justify-center gap-2 rounded-md bg-cyan-500 py-4 font-medium text-black transition-all hover:bg-cyan-400 disabled:bg-neutral-700'
-          onClick={() => handleOAuthClick('google')}
-          disabled={pending}
-        >
-          <IoLogoGoogle size={20} />
-          Continue with Google
-        </button>
-        <button
-          className='flex items-center justify-center gap-2 rounded-md bg-fuchsia-500 py-4 font-medium text-black transition-all hover:bg-fuchsia-400 disabled:bg-neutral-700'
-          onClick={() => handleOAuthClick('github')}
-          disabled={pending}
-        >
-          <IoLogoGithub size={20} />
-          Continue with GitHub
-        </button>
+    <div className='flex min-h-[calc(100vh-140px)] items-center justify-center py-12'>
+      <Card className='w-full max-w-md border-border bg-card'>
+        <CardHeader className='space-y-1 text-center'>
+          <div className='mb-4 flex justify-center'>
+            <Image src='/logo.png' width={64} height={64} alt='Geolet Logo' className='rounded-lg' />
+          </div>
+          <CardTitle className='text-2xl font-bold'>{titleMap[mode]}</CardTitle>
+          <CardDescription className='text-base'>{descriptionMap[mode]}</CardDescription>
+        </CardHeader>
+        <CardContent className='space-y-4'>
+          {/* Google OAuth */}
+          <Button
+            variant='outline'
+            className='h-12 w-full border-white/10 text-base font-medium hover:bg-white/5'
+            onClick={() => handleOAuthClick('google')}
+            disabled={pending}
+          >
+            <IoLogoGoogle className='mr-2 h-5 w-5' />
+            Continue with Google
+          </Button>
 
-        <Collapsible open={emailFormOpen} onOpenChange={setEmailFormOpen}>
-          <CollapsibleTrigger asChild>
-            <button
-              className='text-neutral6 flex w-full items-center justify-center gap-2 rounded-md bg-zinc-900 py-4 font-medium transition-all hover:bg-zinc-800 disabled:bg-neutral-700 disabled:text-black'
-              disabled={pending}
-            >
-              Continue with Email
-            </button>
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <div className='mt-[-2px] w-full rounded-b-md bg-zinc-900 p-8'>
-              <form onSubmit={handleEmailSubmit}>
-                <Input
-                  type='email'
-                  name='email'
-                  placeholder='Enter your email'
-                  aria-label='Enter your email'
-                  autoFocus
-                />
-                <div className='mt-4 flex justify-end gap-2'>
-                  <Button type='button' onClick={() => setEmailFormOpen(false)}>
-                    Cancel
-                  </Button>
-                  <Button variant='secondary' type='submit'>
-                    Submit
-                  </Button>
-                </div>
-              </form>
+          {/* Divider */}
+          <div className='relative'>
+            <div className='absolute inset-0 flex items-center'>
+              <Separator className='w-full' />
             </div>
-          </CollapsibleContent>
-        </Collapsible>
-      </div>
-      {mode === 'signup' && (
-        <span className='text-neutral5 m-auto max-w-sm text-sm'>
-          By clicking continue, you agree to our{' '}
-          <Link href='/terms' className='underline'>
-            Terms of Service
-          </Link>{' '}
-          and{' '}
-          <Link href='/privacy' className='underline'>
-            Privacy Policy
-          </Link>
-          .
-        </span>
-      )}
-    </section>
+            <div className='relative flex justify-center text-xs uppercase'>
+              <span className='bg-card px-2 text-muted-foreground'>Or</span>
+            </div>
+          </div>
+
+          {/* Email Form */}
+          <Collapsible open={emailFormOpen} onOpenChange={setEmailFormOpen}>
+            <CollapsibleTrigger asChild>
+              <Button
+                variant='outline'
+                className='h-12 w-full border-white/10 text-base font-medium hover:bg-white/5'
+                disabled={pending}
+              >
+                <IoMail className='mr-2 h-5 w-5' />
+                Continue with Email
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <div className='mt-4 rounded-lg border border-white/10 bg-white/5 p-6'>
+                <form onSubmit={handleEmailSubmit} className='space-y-4'>
+                  <div className='space-y-2'>
+                    <label htmlFor='email' className='text-sm font-medium'>
+                      Email address
+                    </label>
+                    <Input
+                      type='email'
+                      id='email'
+                      name='email'
+                      placeholder='your@email.com'
+                      className='h-11'
+                      autoFocus
+                      required
+                    />
+                    <p className='text-xs text-muted-foreground'>We&apos;ll send you a magic link to sign in</p>
+                  </div>
+                  <div className='flex gap-3'>
+                    <Button type='button' variant='outline' className='flex-1' onClick={() => setEmailFormOpen(false)}>
+                      Cancel
+                    </Button>
+                    <Button type='submit' className='flex-1' disabled={pending}>
+                      Send Link
+                    </Button>
+                  </div>
+                </form>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+
+          {/* Terms and Privacy */}
+          {mode === 'signup' && (
+            <p className='px-4 text-center text-xs text-muted-foreground'>
+              By continuing, you agree to our{' '}
+              <Link href='/terms' className='underline hover:text-foreground'>
+                Terms of Service
+              </Link>{' '}
+              and{' '}
+              <Link href='/privacy' className='underline hover:text-foreground'>
+                Privacy Policy
+              </Link>
+            </p>
+          )}
+
+          {/* Switch between login/signup */}
+          <div className='text-center text-sm'>
+            {mode === 'signup' ? (
+              <p className='text-muted-foreground'>
+                Already have an account?{' '}
+                <Link href='/login' className='text-primary hover:underline'>
+                  Sign in
+                </Link>
+              </p>
+            ) : (
+              <p className='text-muted-foreground'>
+                Don&apos;t have an account?{' '}
+                <Link href='/signup' className='text-primary hover:underline'>
+                  Sign up
+                </Link>
+              </p>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

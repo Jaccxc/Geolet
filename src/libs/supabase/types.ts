@@ -192,9 +192,12 @@ export type Database = {
       }
       regions: {
         Row: {
-          bbox: number[]
-          centroid_lonlat: number[]
+          bbox: number[] | null
+          centroid_lonlat: number[] | null
           country: string | null
+          geojson_feature_id: string | null
+          geojson_file: string | null
+          geojson_id_property: string | null
           geometry: Json | null
           id: string
           key: string
@@ -203,9 +206,12 @@ export type Database = {
           name: string
         }
         Insert: {
-          bbox: number[]
-          centroid_lonlat: number[]
+          bbox?: number[] | null
+          centroid_lonlat?: number[] | null
           country?: string | null
+          geojson_feature_id?: string | null
+          geojson_file?: string | null
+          geojson_id_property?: string | null
           geometry?: Json | null
           id?: string
           key: string
@@ -214,9 +220,12 @@ export type Database = {
           name: string
         }
         Update: {
-          bbox?: number[]
-          centroid_lonlat?: number[]
+          bbox?: number[] | null
+          centroid_lonlat?: number[] | null
           country?: string | null
+          geojson_feature_id?: string | null
+          geojson_file?: string | null
+          geojson_id_property?: string | null
           geometry?: Json | null
           id?: string
           key?: string

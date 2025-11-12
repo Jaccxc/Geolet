@@ -25,15 +25,6 @@ export async function PricingSection({ isPricingPage }: { isPricingPage?: boolea
           })}
         </div>
       </div>
-      <Image
-        src='/section-bg.png'
-        width={1440}
-        height={462}
-        alt=''
-        className='absolute left-0 top-0 rounded-t-lg'
-        priority={isPricingPage}
-        quality={100}
-      />
     </section>
   );
 }

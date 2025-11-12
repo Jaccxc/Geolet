@@ -1,0 +1,767 @@
+[
+  {
+    "key": "IN",
+    "kind": "country",
+    "name": "India",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {
+      "note": "Geometry to be populated later with GeoJSON data"
+    }
+  },
+  {
+    "key": "US",
+    "kind": "country",
+    "name": "United States",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "FR",
+    "kind": "country",
+    "name": "France",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "DE",
+    "kind": "country",
+    "name": "Germany",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "GB",
+    "kind": "country",
+    "name": "United Kingdom",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "IT",
+    "kind": "country",
+    "name": "Italy",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "ES",
+    "kind": "country",
+    "name": "Spain",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "CN",
+    "kind": "country",
+    "name": "China",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "JP",
+    "kind": "country",
+    "name": "Japan",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "KR",
+    "kind": "country",
+    "name": "South Korea",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "TW",
+    "kind": "country",
+    "name": "Taiwan",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "RU",
+    "kind": "country",
+    "name": "Russia",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "BR",
+    "kind": "country",
+    "name": "Brazil",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "AU",
+    "kind": "country",
+    "name": "Australia",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "CA",
+    "kind": "country",
+    "name": "Canada",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "MX",
+    "kind": "country",
+    "name": "Mexico",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "NP",
+    "kind": "country",
+    "name": "Nepal",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "BD",
+    "kind": "country",
+    "name": "Bangladesh",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "GR",
+    "kind": "country",
+    "name": "Greece",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "IL",
+    "kind": "country",
+    "name": "Israel",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "TH",
+    "kind": "country",
+    "name": "Thailand",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "ZA",
+    "kind": "country",
+    "name": "South Africa",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "LK",
+    "kind": "country",
+    "name": "Sri Lanka",
+    "country": null,
+    "geometry": null,
+    "centroid_lonlat": null,
+    "bbox": null,
+    "meta": {}
+  },
+  {
+    "key": "IN-DL",
+    "kind": "region",
+    "name": "Delhi",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [77.2090, 28.6139],
+    "bbox": null,
+    "meta": {
+      "state_code": "DL",
+      "languages": ["Hindi", "Punjabi", "Urdu"]
+    }
+  },
+  {
+    "key": "IN-UP",
+    "kind": "region",
+    "name": "Uttar Pradesh",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [80.9462, 26.8467],
+    "bbox": null,
+    "meta": {
+      "state_code": "UP",
+      "languages": ["Hindi", "Urdu"]
+    }
+  },
+  {
+    "key": "IN-MP",
+    "kind": "region",
+    "name": "Madhya Pradesh",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [78.6569, 22.9734],
+    "bbox": null,
+    "meta": {
+      "state_code": "MP",
+      "languages": ["Hindi"]
+    }
+  },
+  {
+    "key": "IN-RJ",
+    "kind": "region",
+    "name": "Rajasthan",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [74.2179, 27.0238],
+    "bbox": null,
+    "meta": {
+      "state_code": "RJ",
+      "languages": ["Hindi", "Rajasthani"]
+    }
+  },
+  {
+    "key": "IN-HR",
+    "kind": "region",
+    "name": "Haryana",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [76.0856, 29.0588],
+    "bbox": null,
+    "meta": {
+      "state_code": "HR",
+      "languages": ["Hindi", "Punjabi"]
+    }
+  },
+  {
+    "key": "IN-MH",
+    "kind": "region",
+    "name": "Maharashtra",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [75.7139, 19.7515],
+    "bbox": null,
+    "meta": {
+      "state_code": "MH",
+      "languages": ["Marathi", "Hindi"]
+    }
+  },
+  {
+    "key": "IN-PB",
+    "kind": "region",
+    "name": "Punjab",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [75.3412, 31.1471],
+    "bbox": null,
+    "meta": {
+      "state_code": "PB",
+      "languages": ["Punjabi", "Hindi"]
+    }
+  },
+  {
+    "key": "IN-GJ",
+    "kind": "region",
+    "name": "Gujarat",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [71.1924, 22.2587],
+    "bbox": null,
+    "meta": {
+      "state_code": "GJ",
+      "languages": ["Gujarati", "Hindi"]
+    }
+  },
+  {
+    "key": "IN-WB",
+    "kind": "region",
+    "name": "West Bengal",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [87.8550, 22.9868],
+    "bbox": null,
+    "meta": {
+      "state_code": "WB",
+      "languages": ["Bengali", "Hindi"]
+    }
+  },
+  {
+    "key": "IN-AS",
+    "kind": "region",
+    "name": "Assam",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [92.9376, 26.2006],
+    "bbox": null,
+    "meta": {
+      "state_code": "AS",
+      "languages": ["Assamese", "Bengali"]
+    }
+  },
+  {
+    "key": "IN-KA",
+    "kind": "region",
+    "name": "Karnataka",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [75.7139, 15.3173],
+    "bbox": null,
+    "meta": {
+      "state_code": "KA",
+      "languages": ["Kannada"]
+    }
+  },
+  {
+    "key": "IN-TG",
+    "kind": "region",
+    "name": "Telangana",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [79.0193, 18.1124],
+    "bbox": null,
+    "meta": {
+      "state_code": "TG",
+      "languages": ["Telugu", "Urdu"]
+    }
+  },
+  {
+    "key": "IN-AP",
+    "kind": "region",
+    "name": "Andhra Pradesh",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [80.1863, 15.9129],
+    "bbox": null,
+    "meta": {
+      "state_code": "AP",
+      "languages": ["Telugu"]
+    }
+  },
+  {
+    "key": "IN-TN",
+    "kind": "region",
+    "name": "Tamil Nadu",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [78.6569, 11.1271],
+    "bbox": null,
+    "meta": {
+      "state_code": "TN",
+      "languages": ["Tamil"]
+    }
+  },
+  {
+    "key": "IN-OR",
+    "kind": "region",
+    "name": "Odisha",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [85.0985, 20.9517],
+    "bbox": null,
+    "meta": {
+      "state_code": "OR",
+      "languages": ["Odia"]
+    }
+  },
+  {
+    "key": "IN-KL",
+    "kind": "region",
+    "name": "Kerala",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [76.2711, 10.8505],
+    "bbox": null,
+    "meta": {
+      "state_code": "KL",
+      "languages": ["Malayalam"]
+    }
+  },
+  {
+    "key": "IN-MN",
+    "kind": "region",
+    "name": "Manipur",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [93.9063, 24.6637],
+    "bbox": null,
+    "meta": {
+      "state_code": "MN",
+      "languages": ["Manipuri", "Meitei"]
+    }
+  },
+  {
+    "key": "IN-MZ",
+    "kind": "region",
+    "name": "Mizoram",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [92.9376, 23.1645],
+    "bbox": null,
+    "meta": {
+      "state_code": "MZ",
+      "languages": ["Mizo", "English"]
+    }
+  },
+  {
+    "key": "IN-ML",
+    "kind": "region",
+    "name": "Meghalaya",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [91.3662, 25.4670],
+    "bbox": null,
+    "meta": {
+      "state_code": "ML",
+      "languages": ["English", "Khasi", "Garo"]
+    }
+  },
+  {
+    "key": "IN:Delhi",
+    "kind": "city",
+    "name": "Delhi",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [77.2090, 28.6139],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 32900000
+    }
+  },
+  {
+    "key": "IN:Mumbai",
+    "kind": "city",
+    "name": "Mumbai",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [72.8777, 19.0760],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 20961000
+    }
+  },
+  {
+    "key": "IN:Bangalore",
+    "kind": "city",
+    "name": "Bangalore",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [77.5946, 12.9716],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 12765000
+    }
+  },
+  {
+    "key": "IN:Chennai",
+    "kind": "city",
+    "name": "Chennai",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [80.2707, 13.0827],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 10971000
+    }
+  },
+  {
+    "key": "IN:Kolkata",
+    "kind": "city",
+    "name": "Kolkata",
+    "country": "IN",
+    "geometry": null,
+    "centroid_lonlat": [88.3639, 22.5726],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 15134000
+    }
+  },
+  {
+    "key": "FR:Paris",
+    "kind": "city",
+    "name": "Paris",
+    "country": "FR",
+    "geometry": null,
+    "centroid_lonlat": [2.3522, 48.8566],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 11020000
+    }
+  },
+  {
+    "key": "FR:Lyon",
+    "kind": "city",
+    "name": "Lyon",
+    "country": "FR",
+    "geometry": null,
+    "centroid_lonlat": [4.8357, 45.7640],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 2323000
+    }
+  },
+  {
+    "key": "FR:Marseille",
+    "kind": "city",
+    "name": "Marseille",
+    "country": "FR",
+    "geometry": null,
+    "centroid_lonlat": [5.3698, 43.2965],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 1873000
+    }
+  },
+  {
+    "key": "US:NewYork",
+    "kind": "city",
+    "name": "New York City",
+    "country": "US",
+    "geometry": null,
+    "centroid_lonlat": [-74.0060, 40.7128],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 19200000
+    }
+  },
+  {
+    "key": "US:LosAngeles",
+    "kind": "city",
+    "name": "Los Angeles",
+    "country": "US",
+    "geometry": null,
+    "centroid_lonlat": [-118.2437, 34.0522],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 12488000
+    }
+  },
+  {
+    "key": "US:Chicago",
+    "kind": "city",
+    "name": "Chicago",
+    "country": "US",
+    "geometry": null,
+    "centroid_lonlat": [-87.6298, 41.8781],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 8901000
+    }
+  },
+  {
+    "key": "US:Houston",
+    "kind": "city",
+    "name": "Houston",
+    "country": "US",
+    "geometry": null,
+    "centroid_lonlat": [-95.3698, 29.7604],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 6603000
+    }
+  },
+  {
+    "key": "US:Phoenix",
+    "kind": "city",
+    "name": "Phoenix",
+    "country": "US",
+    "geometry": null,
+    "centroid_lonlat": [-112.0740, 33.4484],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 4845000
+    }
+  },
+  {
+    "key": "TW:Taipei",
+    "kind": "city",
+    "name": "Taipei",
+    "country": "TW",
+    "geometry": null,
+    "centroid_lonlat": [121.5654, 25.0330],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 7047000
+    }
+  },
+  {
+    "key": "TW:Kaohsiung",
+    "kind": "city",
+    "name": "Kaohsiung",
+    "country": "TW",
+    "geometry": null,
+    "centroid_lonlat": [120.3014, 22.6273],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 2765000
+    }
+  },
+  {
+    "key": "TW:Taichung",
+    "kind": "city",
+    "name": "Taichung",
+    "country": "TW",
+    "geometry": null,
+    "centroid_lonlat": [120.6736, 24.1477],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 2820000
+    }
+  },
+  {
+    "key": "CN:Beijing",
+    "kind": "city",
+    "name": "Beijing",
+    "country": "CN",
+    "geometry": null,
+    "centroid_lonlat": [116.4074, 39.9042],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 21540000
+    }
+  },
+  {
+    "key": "CN:Shanghai",
+    "kind": "city",
+    "name": "Shanghai",
+    "country": "CN",
+    "geometry": null,
+    "centroid_lonlat": [121.4737, 31.2304],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 27058000
+    }
+  },
+  {
+    "key": "CN:Guangzhou",
+    "kind": "city",
+    "name": "Guangzhou",
+    "country": "CN",
+    "geometry": null,
+    "centroid_lonlat": [113.2644, 23.1291],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 15300000
+    }
+  },
+  {
+    "key": "JP:Tokyo",
+    "kind": "city",
+    "name": "Tokyo",
+    "country": "JP",
+    "geometry": null,
+    "centroid_lonlat": [139.6917, 35.6762],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 37393000
+    }
+  },
+  {
+    "key": "JP:Osaka",
+    "kind": "city",
+    "name": "Osaka",
+    "country": "JP",
+    "geometry": null,
+    "centroid_lonlat": [135.5022, 34.6937],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 19110000
+    }
+  },
+  {
+    "key": "JP:Kyoto",
+    "kind": "city",
+    "name": "Kyoto",
+    "country": "JP",
+    "geometry": null,
+    "centroid_lonlat": [135.7681, 35.0116],
+    "bbox": null,
+    "meta": {
+      "tier": 1,
+      "population": 1464000
+    }
+  }
+]

@@ -1,0 +1,13 @@
+> good but i want to point out something to be corrected
+
+  1. we should now create a new table called card_groups, for each card_group, it's got id, unique name
+
+  2. for each fact card, now they should have not topic_id, but card_group_id fk link. we also dont need flattened payload for each mode, we just make it "prompt" for the actual script/phone number/city name, and a "hint" for like "romanization"
+  for script, so it would be just another relative info for educational or any purpose, displayed under the prompt. for primary_tags, we rename it to primary_skill_tags, and for answer, we dont need answer_kind, answer_keys, answer_region_keys.
+  we just need a answer_region_id fk to link to "region" table.
+
+  3. for topic table, we now have not mode_type but instead of 2 individual column called "pick_mode_active", "map_mode_active" boolean. no more target_tags, but instead target_card_group_ids array to link to them.
+
+  4. no more meta column in both topic table and regions table, we dont need the info
+
+  5. in regions table, also remove bbox besides from meta, that's not needed. better if location_type is changed to enum 

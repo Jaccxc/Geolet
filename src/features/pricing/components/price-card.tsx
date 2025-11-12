@@ -47,7 +47,7 @@ export function PricingCard({
   const metadata = productMetadataSchema.parse(product.metadata);
   const buttonVariantMap = {
     free: 'default',
-    pro: 'sexy',
+    pro: 'default',
   } as const;
 
   function handleBillingIntervalChange(billingInterval: BillingInterval) {
@@ -74,7 +74,11 @@ export function PricingCard({
         {!Boolean(price) && product.prices.length > 1 && <PricingSwitch onChange={handleBillingIntervalChange} />}
 
         <div className='m-auto flex w-fit flex-1 flex-col gap-2 px-8 py-4'>
-          <CheckItem text={metadata.dailySessions === Infinity ? 'Unlimited sessions' : `${metadata.dailySessions} sessions per day`} />
+          <CheckItem
+            text={
+              metadata.dailySessions === Infinity ? 'Unlimited sessions' : `${metadata.dailySessions} sessions per day`
+            }
+          />
           <CheckItem text={`All content: ${metadata.contentFamilies.join(', ')}`} />
           <CheckItem text={`${metadata.supportLevel} support`} />
         </div>

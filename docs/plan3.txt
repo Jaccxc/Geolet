@@ -1,0 +1,29 @@
+now investigate this: how does the /rapid gamemode work in terms of the data fetch and upload. how do we get and categorize different topics, and deal with fact card, region (db table), skill_tags?
+
+  in previous session you have already found some idea, but i still dont know how the map mode is working. we have centroid_lonlat and geometry and bbox in regions table, fact cards are boundled with lot of different json blob instead of just
+  plain column
+
+  also some problematic data like {
+    "text": "ഹോട്ടല്‍",
+    "romanization": "hotel"
+  }
+  this shouldnt be romanize, but instead of translation
+
+  and also we shouldnt even have to keep a city_locate or any "type" in fact card, we could just even dont name it. just keep a foreign key to a topic(every fact_card belongs to a topic) and a foreign key to region.
+
+  for the region table, i want consistency in naming. it's always <CountryCode> or <CountryCode>:<RegionName>. region name could be city or province or county or any. like we would have TW:Taipei, IN:Kerala instead of IN-KL. we also have a column
+  called "type", we would rename this to level. so it might be "country", "city", "province" or such. we would also have a location_type for either pin or geojson. for pin, it would have central_lonlat, for geojson, it would have geojson. for
+  current seed data, we would only have geojson format
+
+  for the skill_tags, we would remove the meta field and add a new column "note", and we take the "note" that was originally inside the meta jsonblob out and put it to that field. other than that , there is no need to modify.
+
+  you could see the seed data in @supabase/seed/
+
+  what my final goal is to optimize/cleanup this structure.
+
+  i would also want a new topic table to save all current topics. flatten all the unecesasary json column to plain column. remove unneeded column or even tables (or make new ones).
+
+  we use supabase for this 
+
+  write a documentation for me under @docs/ and in the file name note the datetime for me.
+
