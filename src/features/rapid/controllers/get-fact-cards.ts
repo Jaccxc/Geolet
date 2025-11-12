@@ -1,23 +1,31 @@
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
-import type { FactCard, FactType } from '../types';
+import type { FactCard, FactCardWithAnswer, Region } from '../types';
 import { factCardSchema } from '../types';
 
-export async function getFactCards(type?: FactType, tags?: string[], limit?: number): Promise<FactCard[]> {
+/**
+ * Get fact cards with optional filters
+ * NEW: Supports filtering by card_group_ids and topics
+ */
+export async function getFactCards(options?: {
+  cardGroupIds?: string[];
+  skillTags?: string[];
+  limit?: number;
+}): Promise<FactCard[]> {
   const supabase = await createSupabaseServerClient();
 
   let query = supabase.from('fact_cards').select('*');
 
-  if (type) {
-    query = query.eq('type', type);
+  if (options?.cardGroupIds && options.cardGroupIds.length > 0) {
+    query = query.in('card_group_id', options.cardGroupIds);
   }
 
-  if (tags && tags.length > 0) {
-    query = query.overlaps('primary_tags', tags);
+  if (options?.skillTags && options.skillTags.length > 0) {
+    query = query.overlaps('primary_skill_tags', options.skillTags);
   }
 
-  if (limit) {
-    query = query.limit(limit);
+  if (options?.limit) {
+    query = query.limit(options.limit);
   }
 
   const { data, error } = await query;
@@ -27,12 +35,52 @@ export async function getFactCards(type?: FactType, tags?: string[], limit?: num
   return data.map((row) => factCardSchema.parse(row));
 }
 
-export async function getFactCardById(id: string): Promise<FactCard | null> {
+/**
+ * Get fact card by ID with answer region populated
+ */
+export async function getFactCardById(id: string): Promise<FactCardWithAnswer | null> {
   const supabase = await createSupabaseServerClient();
 
-  const { data, error } = await supabase.from('fact_cards').select('*').eq('id', id).single();
+  const { data, error } = await supabase
+    .from('fact_cards')
+    .select(
+      `
+      *,
+      answer_region:regions!answer_region_id (*)
+    `
+    )
+    .eq('id', id)
+    .single();
 
   if (error) return null;
 
-  return factCardSchema.parse(data);
+  return {
+    ...factCardSchema.parse(data),
+    answer_region: data.answer_region as Region,
+  };
+}
+
+/**
+ * Get fact cards by topic key
+ * NEW: Fetches cards from all card groups associated with a topic
+ */
+export async function getFactCardsByTopic(topicKey: string, limit?: number): Promise<FactCard[]> {
+  const supabase = await createSupabaseServerClient();
+
+  // First, get the topic
+  const { data: topic, error: topicError } = await supabase
+    .from('topics')
+    .select('target_card_group_ids')
+    .eq('key', topicKey)
+    .single();
+
+  if (topicError || !topic?.target_card_group_ids) {
+    throw new Error(`Topic not found: ${topicKey}`);
+  }
+
+  // Then, get fact cards from those card groups
+  return getFactCards({
+    cardGroupIds: topic.target_card_group_ids,
+    limit,
+  });
 }

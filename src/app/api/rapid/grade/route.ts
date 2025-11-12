@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
-import { generateMapRegions } from '@/features/rapid/controllers/generate-map-regions';
+import { getAnswerRegion } from '@/features/rapid/controllers/generate-map-regions';
 import { getFactCardById } from '@/features/rapid/controllers/get-fact-cards';
 import { validateMapAnswer, validatePickAnswer } from '@/features/rapid/models/answer-validator';
 import type { GradeResult, GradeSummary, MapGradeItem, PickGradeItem } from '@/features/rapid/types';
@@ -10,18 +10,18 @@ import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-clie
 
 const pickGradeItemSchema = z.object({
   fact_id: z.string().uuid(),
-  selected_key: z.string(),
+  selected_region_id: z.string().uuid(),
   time_ms: z.number().int(),
 });
 
 const mapGradeItemSchema = z.object({
   fact_id: z.string().uuid(),
-  clicked_point: z.tuple([z.number(), z.number()]), // [lng, lat]
+  clicked_point: z.tuple([z.number(), z.number()]),
   time_ms: z.number().int(),
 });
 
 const requestSchema = z.object({
-  mode: z.string(),
+  mode: z.enum(['pick', 'map']),
   items: z.array(z.union([pickGradeItemSchema, mapGradeItemSchema])),
 });
 
@@ -39,12 +39,10 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { mode, items } = requestSchema.parse(body);
 
-    const isPickMode = mode.endsWith('-pick');
-
     // Grade each item and update SRS
     const results: GradeResult[] = await Promise.all(
       items.map(async (item) => {
-        // Get fact card to check answer
+        // Get fact card with answer region
         const card = await getFactCardById(item.fact_id);
 
         if (!card) {
@@ -55,13 +53,13 @@ export async function POST(req: NextRequest) {
         let correct: boolean;
         let distance: number | undefined;
 
-        if (isPickMode) {
+        if (mode === 'pick') {
           const pickItem = item as PickGradeItem;
-          correct = validatePickAnswer(card.answer, pickItem.selected_key);
+          correct = validatePickAnswer(card.answer_region_id, pickItem.selected_region_id);
         } else {
           const mapItem = item as MapGradeItem;
-          const regions = await generateMapRegions(card);
-          const result = validateMapAnswer(card.answer, mapItem.clicked_point, regions);
+          const answerRegion = await getAnswerRegion(card);
+          const result = validateMapAnswer(answerRegion, mapItem.clicked_point);
           correct = result.correct;
           distance = result.distance;
         }
