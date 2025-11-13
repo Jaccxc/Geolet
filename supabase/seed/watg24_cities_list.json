@@ -1,0 +1,4022 @@
+[
+  {
+    "name": "London",
+    "tier": "Alpha++",
+    "skillKey": "city:london",
+    "regionKey": "TODO:london",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about London"
+  },
+  {
+    "name": "Hong Kong",
+    "tier": "Alpha+",
+    "skillKey": "city:hong_kong",
+    "regionKey": "TODO:hong_kong",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hong Kong"
+  },
+  {
+    "name": "Seoul",
+    "tier": "Alpha",
+    "skillKey": "city:seoul",
+    "regionKey": "TODO:seoul",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Seoul"
+  },
+  {
+    "name": "Luxembourg",
+    "tier": "Alpha-",
+    "skillKey": "city:luxembourg",
+    "regionKey": "TODO:luxembourg",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Luxembourg"
+  },
+  {
+    "name": "Bogota",
+    "tier": "Beta+",
+    "skillKey": "city:bogota",
+    "regionKey": "TODO:bogota",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bogota"
+  },
+  {
+    "name": "Chongqing",
+    "tier": "Beta",
+    "skillKey": "city:chongqing",
+    "regionKey": "TODO:chongqing",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Chongqing"
+  },
+  {
+    "name": "Qingdao",
+    "tier": "Beta-",
+    "skillKey": "city:qingdao",
+    "regionKey": "TODO:qingdao",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Qingdao"
+  },
+  {
+    "name": "Tunis",
+    "tier": "Gamma+",
+    "skillKey": "city:tunis",
+    "regionKey": "TODO:tunis",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tunis"
+  },
+  {
+    "name": "Monterrey",
+    "tier": "Gamma",
+    "skillKey": "city:monterrey",
+    "regionKey": "TODO:monterrey",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Monterrey"
+  },
+  {
+    "name": "Poznan",
+    "tier": "Gamma-",
+    "skillKey": "city:poznan",
+    "regionKey": "TODO:poznan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Poznan"
+  },
+  {
+    "name": "Izmir",
+    "tier": "High sufficiency",
+    "skillKey": "city:izmir",
+    "regionKey": "TODO:izmir",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Izmir"
+  },
+  {
+    "name": "Strasbourg",
+    "tier": "Sufficiency",
+    "skillKey": "city:strasbourg",
+    "regionKey": "TODO:strasbourg",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Strasbourg"
+  },
+  {
+    "name": "New York",
+    "tier": "Alpha++",
+    "skillKey": "city:new_york",
+    "regionKey": "TODO:new_york",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about New York"
+  },
+  {
+    "name": "Beijing",
+    "tier": "Alpha+",
+    "skillKey": "city:beijing",
+    "regionKey": "TODO:beijing",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Beijing"
+  },
+  {
+    "name": "Milan",
+    "tier": "Alpha",
+    "skillKey": "city:milan",
+    "regionKey": "TODO:milan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Milan"
+  },
+  {
+    "name": "Taipei",
+    "tier": "Alpha-",
+    "skillKey": "city:taipei",
+    "regionKey": "TODO:taipei",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Taipei"
+  },
+  {
+    "name": "Ho Chi Minh City",
+    "tier": "Beta+",
+    "skillKey": "city:ho_chi_minh_city",
+    "regionKey": "TODO:ho_chi_minh_city",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Ho Chi Minh City"
+  },
+  {
+    "name": "Tel Aviv",
+    "tier": "Beta",
+    "skillKey": "city:tel_aviv",
+    "regionKey": "TODO:tel_aviv",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tel Aviv"
+  },
+  {
+    "name": "Casablanca",
+    "tier": "Beta-",
+    "skillKey": "city:casablanca",
+    "regionKey": "TODO:casablanca",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Casablanca"
+  },
+  {
+    "name": "Fuzhou",
+    "tier": "Gamma+",
+    "skillKey": "city:fuzhou",
+    "regionKey": "TODO:fuzhou",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Fuzhou"
+  },
+  {
+    "name": "Osaka",
+    "tier": "Gamma",
+    "skillKey": "city:osaka",
+    "regionKey": "TODO:osaka",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Osaka"
+  },
+  {
+    "name": "Labuan",
+    "tier": "Gamma-",
+    "skillKey": "city:labuan",
+    "regionKey": "TODO:labuan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Labuan"
+  },
+  {
+    "name": "Harare",
+    "tier": "High sufficiency",
+    "skillKey": "city:harare",
+    "regionKey": "TODO:harare",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Harare"
+  },
+  {
+    "name": "Columbus",
+    "tier": "Sufficiency",
+    "skillKey": "city:columbus",
+    "regionKey": "TODO:columbus",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Columbus"
+  },
+  {
+    "name": "Singapore",
+    "tier": "Alpha+",
+    "skillKey": "city:singapore",
+    "regionKey": "TODO:singapore",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Singapore"
+  },
+  {
+    "name": "Toronto",
+    "tier": "Alpha",
+    "skillKey": "city:toronto",
+    "regionKey": "TODO:toronto",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Toronto"
+  },
+  {
+    "name": "Shenzhen",
+    "tier": "Alpha-",
+    "skillKey": "city:shenzhen",
+    "regionKey": "TODO:shenzhen",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Shenzhen"
+  },
+  {
+    "name": "Rome",
+    "tier": "Beta+",
+    "skillKey": "city:rome",
+    "regionKey": "TODO:rome",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Rome"
+  },
+  {
+    "name": "Brisbane",
+    "tier": "Beta",
+    "skillKey": "city:brisbane",
+    "regionKey": "TODO:brisbane",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Brisbane"
+  },
+  {
+    "name": "Changsha",
+    "tier": "Beta-",
+    "skillKey": "city:changsha",
+    "regionKey": "TODO:changsha",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Changsha"
+  },
+  {
+    "name": "Guatemala City",
+    "tier": "Gamma+",
+    "skillKey": "city:guatemala_city",
+    "regionKey": "TODO:guatemala_city",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Guatemala City"
+  },
+  {
+    "name": "Haikou",
+    "tier": "Gamma",
+    "skillKey": "city:haikou",
+    "regionKey": "TODO:haikou",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Haikou"
+  },
+  {
+    "name": "Charlotte",
+    "tier": "Gamma-",
+    "skillKey": "city:charlotte",
+    "regionKey": "TODO:charlotte",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Charlotte"
+  },
+  {
+    "name": "Maputo",
+    "tier": "High sufficiency",
+    "skillKey": "city:maputo",
+    "regionKey": "TODO:maputo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Maputo"
+  },
+  {
+    "name": "Ankara",
+    "tier": "Sufficiency",
+    "skillKey": "city:ankara",
+    "regionKey": "TODO:ankara",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Ankara"
+  },
+  {
+    "name": "Shanghai",
+    "tier": "Alpha+",
+    "skillKey": "city:shanghai",
+    "regionKey": "TODO:shanghai",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Shanghai"
+  },
+  {
+    "name": "Frankfurt",
+    "tier": "Alpha",
+    "skillKey": "city:frankfurt",
+    "regionKey": "TODO:frankfurt",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Frankfurt"
+  },
+  {
+    "name": "Brussels",
+    "tier": "Alpha-",
+    "skillKey": "city:brussels",
+    "regionKey": "TODO:brussels",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Brussels"
+  },
+  {
+    "name": "Bangalore",
+    "tier": "Beta+",
+    "skillKey": "city:bangalore",
+    "regionKey": "TODO:bangalore",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bangalore"
+  },
+  {
+    "name": "Cairo",
+    "tier": "Beta",
+    "skillKey": "city:cairo",
+    "regionKey": "TODO:cairo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Cairo"
+  },
+  {
+    "name": "Beirut",
+    "tier": "Beta-",
+    "skillKey": "city:beirut",
+    "regionKey": "TODO:beirut",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Beirut"
+  },
+  {
+    "name": "Hyderabad",
+    "tier": "Gamma+",
+    "skillKey": "city:hyderabad",
+    "regionKey": "TODO:hyderabad",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hyderabad"
+  },
+  {
+    "name": "Tbilisi",
+    "tier": "Gamma",
+    "skillKey": "city:tbilisi",
+    "regionKey": "TODO:tbilisi",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tbilisi"
+  },
+  {
+    "name": "Pittsburgh",
+    "tier": "Gamma-",
+    "skillKey": "city:pittsburgh",
+    "regionKey": "TODO:pittsburgh",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Pittsburgh"
+  },
+  {
+    "name": "Vilnius",
+    "tier": "High sufficiency",
+    "skillKey": "city:vilnius",
+    "regionKey": "TODO:vilnius",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Vilnius"
+  },
+  {
+    "name": "Johor Bahru",
+    "tier": "Sufficiency",
+    "skillKey": "city:johor_bahru",
+    "regionKey": "TODO:johor_bahru",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Johor Bahru"
+  },
+  {
+    "name": "Paris",
+    "tier": "Alpha+",
+    "skillKey": "city:paris",
+    "regionKey": "TODO:paris",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Paris"
+  },
+  {
+    "name": "Chicago",
+    "tier": "Alpha",
+    "skillKey": "city:chicago",
+    "regionKey": "TODO:chicago",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Chicago"
+  },
+  {
+    "name": "Zurich",
+    "tier": "Alpha-",
+    "skillKey": "city:zurich",
+    "regionKey": "TODO:zurich",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Zurich"
+  },
+  {
+    "name": "Budapest",
+    "tier": "Beta+",
+    "skillKey": "city:budapest",
+    "regionKey": "TODO:budapest",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Budapest"
+  },
+  {
+    "name": "Hanoi",
+    "tier": "Beta",
+    "skillKey": "city:hanoi",
+    "regionKey": "TODO:hanoi",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hanoi"
+  },
+  {
+    "name": "Port Louis",
+    "tier": "Beta-",
+    "skillKey": "city:port_louis",
+    "regionKey": "TODO:port_louis",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Port Louis"
+  },
+  {
+    "name": "Cape Town",
+    "tier": "Gamma+",
+    "skillKey": "city:cape_town",
+    "regionKey": "TODO:cape_town",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Cape Town"
+  },
+  {
+    "name": "Tampa",
+    "tier": "Gamma",
+    "skillKey": "city:tampa",
+    "regionKey": "TODO:tampa",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tampa"
+  },
+  {
+    "name": "Valencia (Spain)",
+    "tier": "Gamma-",
+    "skillKey": "city:valencia_spain",
+    "regionKey": "TODO:valencia_spain",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Valencia (Spain)"
+  },
+  {
+    "name": "Macao",
+    "tier": "High sufficiency",
+    "skillKey": "city:macao",
+    "regionKey": "TODO:macao",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Macao"
+  },
+  {
+    "name": "Ottawa",
+    "tier": "Sufficiency",
+    "skillKey": "city:ottawa",
+    "regionKey": "TODO:ottawa",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Ottawa"
+  },
+  {
+    "name": "Dubai",
+    "tier": "Alpha+",
+    "skillKey": "city:dubai",
+    "regionKey": "TODO:dubai",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Dubai"
+  },
+  {
+    "name": "Jakarta",
+    "tier": "Alpha",
+    "skillKey": "city:jakarta",
+    "regionKey": "TODO:jakarta",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Jakarta"
+  },
+  {
+    "name": "Buenos Aires",
+    "tier": "Alpha-",
+    "skillKey": "city:buenos_aires",
+    "regionKey": "TODO:buenos_aires",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Buenos Aires"
+  },
+  {
+    "name": "Athens",
+    "tier": "Beta+",
+    "skillKey": "city:athens",
+    "regionKey": "TODO:athens",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Athens"
+  },
+  {
+    "name": "Nanjing",
+    "tier": "Beta",
+    "skillKey": "city:nanjing",
+    "regionKey": "TODO:nanjing",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nanjing"
+  },
+  {
+    "name": "Denver",
+    "tier": "Beta-",
+    "skillKey": "city:denver",
+    "regionKey": "TODO:denver",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Denver"
+  },
+  {
+    "name": "Dhaka",
+    "tier": "Gamma+",
+    "skillKey": "city:dhaka",
+    "regionKey": "TODO:dhaka",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Dhaka"
+  },
+  {
+    "name": "Tirana",
+    "tier": "Gamma",
+    "skillKey": "city:tirana",
+    "regionKey": "TODO:tirana",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tirana"
+  },
+  {
+    "name": "Edinburgh",
+    "tier": "Gamma-",
+    "skillKey": "city:edinburgh",
+    "regionKey": "TODO:edinburgh",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Edinburgh"
+  },
+  {
+    "name": "Gothenburg",
+    "tier": "High sufficiency",
+    "skillKey": "city:gothenburg",
+    "regionKey": "TODO:gothenburg",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Gothenburg"
+  },
+  {
+    "name": "Wroclaw",
+    "tier": "Sufficiency",
+    "skillKey": "city:wroclaw",
+    "regionKey": "TODO:wroclaw",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Wroclaw"
+  },
+  {
+    "name": "Tokyo",
+    "tier": "Alpha+",
+    "skillKey": "city:tokyo",
+    "regionKey": "TODO:tokyo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tokyo"
+  },
+  {
+    "name": "Sao Paulo",
+    "tier": "Alpha",
+    "skillKey": "city:sao_paulo",
+    "regionKey": "TODO:sao_paulo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Sao Paulo"
+  },
+  {
+    "name": "Melbourne",
+    "tier": "Alpha-",
+    "skillKey": "city:melbourne",
+    "regionKey": "TODO:melbourne",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Melbourne"
+  },
+  {
+    "name": "Hamburg",
+    "tier": "Beta+",
+    "skillKey": "city:hamburg",
+    "regionKey": "TODO:hamburg",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hamburg"
+  },
+  {
+    "name": "Oslo",
+    "tier": "Beta",
+    "skillKey": "city:oslo",
+    "regionKey": "TODO:oslo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Oslo"
+  },
+  {
+    "name": "Lagos",
+    "tier": "Beta-",
+    "skillKey": "city:lagos",
+    "regionKey": "TODO:lagos",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lagos"
+  },
+  {
+    "name": "Porto",
+    "tier": "Gamma+",
+    "skillKey": "city:porto",
+    "regionKey": "TODO:porto",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Porto"
+  },
+  {
+    "name": "Quito",
+    "tier": "Gamma",
+    "skillKey": "city:quito",
+    "regionKey": "TODO:quito",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Quito"
+  },
+  {
+    "name": "Jeddah",
+    "tier": "Gamma-",
+    "skillKey": "city:jeddah",
+    "regionKey": "TODO:jeddah",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Jeddah"
+  },
+  {
+    "name": "Raleigh",
+    "tier": "High sufficiency",
+    "skillKey": "city:raleigh",
+    "regionKey": "TODO:raleigh",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Raleigh"
+  },
+  {
+    "name": "Urumqi",
+    "tier": "Sufficiency",
+    "skillKey": "city:urumqi",
+    "regionKey": "TODO:urumqi",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Urumqi"
+  },
+  {
+    "name": "Sydney",
+    "tier": "Alpha+",
+    "skillKey": "city:sydney",
+    "regionKey": "TODO:sydney",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Sydney"
+  },
+  {
+    "name": "Mexico City",
+    "tier": "Alpha",
+    "skillKey": "city:mexico_city",
+    "regionKey": "TODO:mexico_city",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Mexico City"
+  },
+  {
+    "name": "San Francisco",
+    "tier": "Alpha-",
+    "skillKey": "city:san_francisco",
+    "regionKey": "TODO:san_francisco",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about San Francisco"
+  },
+  {
+    "name": "Doha",
+    "tier": "Beta+",
+    "skillKey": "city:doha",
+    "regionKey": "TODO:doha",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Doha"
+  },
+  {
+    "name": "Perth",
+    "tier": "Beta",
+    "skillKey": "city:perth",
+    "regionKey": "TODO:perth",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Perth"
+  },
+  {
+    "name": "Belgrade",
+    "tier": "Beta-",
+    "skillKey": "city:belgrade",
+    "regionKey": "TODO:belgrade",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Belgrade"
+  },
+  {
+    "name": "Austin",
+    "tier": "Gamma+",
+    "skillKey": "city:austin",
+    "regionKey": "TODO:austin",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Austin"
+  },
+  {
+    "name": "Nashville",
+    "tier": "Gamma",
+    "skillKey": "city:nashville",
+    "regionKey": "TODO:nashville",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nashville"
+  },
+  {
+    "name": "Turin",
+    "tier": "Gamma-",
+    "skillKey": "city:turin",
+    "regionKey": "TODO:turin",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Turin"
+  },
+  {
+    "name": "Queretaro",
+    "tier": "High sufficiency",
+    "skillKey": "city:queretaro",
+    "regionKey": "TODO:queretaro",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Queretaro"
+  },
+  {
+    "name": "Christchurch",
+    "tier": "Sufficiency",
+    "skillKey": "city:christchurch",
+    "regionKey": "TODO:christchurch",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Christchurch"
+  },
+  {
+    "name": "Mumbai",
+    "tier": "Alpha",
+    "skillKey": "city:mumbai",
+    "regionKey": "TODO:mumbai",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Mumbai"
+  },
+  {
+    "name": "Riyadh",
+    "tier": "Alpha-",
+    "skillKey": "city:riyadh",
+    "regionKey": "TODO:riyadh",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Riyadh"
+  },
+  {
+    "name": "Chengdu",
+    "tier": "Beta+",
+    "skillKey": "city:chengdu",
+    "regionKey": "TODO:chengdu",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Chengdu"
+  },
+  {
+    "name": "Abu Dhabi",
+    "tier": "Beta",
+    "skillKey": "city:abu_dhabi",
+    "regionKey": "TODO:abu_dhabi",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Abu Dhabi"
+  },
+  {
+    "name": "Montevideo",
+    "tier": "Beta-",
+    "skillKey": "city:montevideo",
+    "regionKey": "TODO:montevideo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Montevideo"
+  },
+  {
+    "name": "San Diego",
+    "tier": "Gamma+",
+    "skillKey": "city:san_diego",
+    "regionKey": "TODO:san_diego",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about San Diego"
+  },
+  {
+    "name": "Islamabad",
+    "tier": "Gamma",
+    "skillKey": "city:islamabad",
+    "regionKey": "TODO:islamabad",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Islamabad"
+  },
+  {
+    "name": "Katowice",
+    "tier": "Gamma-",
+    "skillKey": "city:katowice",
+    "regionKey": "TODO:katowice",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Katowice"
+  },
+  {
+    "name": "Glasgow",
+    "tier": "High sufficiency",
+    "skillKey": "city:glasgow",
+    "regionKey": "TODO:glasgow",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Glasgow"
+  },
+  {
+    "name": "Douala",
+    "tier": "Sufficiency",
+    "skillKey": "city:douala",
+    "regionKey": "TODO:douala",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Douala"
+  },
+  {
+    "name": "Madrid",
+    "tier": "Alpha",
+    "skillKey": "city:madrid",
+    "regionKey": "TODO:madrid",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Madrid"
+  },
+  {
+    "name": "Santiago",
+    "tier": "Alpha-",
+    "skillKey": "city:santiago",
+    "regionKey": "TODO:santiago",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Santiago"
+  },
+  {
+    "name": "Miami",
+    "tier": "Beta+",
+    "skillKey": "city:miami",
+    "regionKey": "TODO:miami",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Miami"
+  },
+  {
+    "name": "Copenhagen",
+    "tier": "Beta",
+    "skillKey": "city:copenhagen",
+    "regionKey": "TODO:copenhagen",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Copenhagen"
+  },
+  {
+    "name": "Vancouver",
+    "tier": "Beta-",
+    "skillKey": "city:vancouver",
+    "regionKey": "TODO:vancouver",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Vancouver"
+  },
+  {
+    "name": "Minneapolis",
+    "tier": "Gamma+",
+    "skillKey": "city:minneapolis",
+    "regionKey": "TODO:minneapolis",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Minneapolis"
+  },
+  {
+    "name": "Kampala",
+    "tier": "Gamma",
+    "skillKey": "city:kampala",
+    "regionKey": "TODO:kampala",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Kampala"
+  },
+  {
+    "name": "Baku",
+    "tier": "Gamma-",
+    "skillKey": "city:baku",
+    "regionKey": "TODO:baku",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Baku"
+  },
+  {
+    "name": "Zhuhai",
+    "tier": "High sufficiency",
+    "skillKey": "city:zhuhai",
+    "regionKey": "TODO:zhuhai",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Zhuhai"
+  },
+  {
+    "name": "Tashkent",
+    "tier": "Sufficiency",
+    "skillKey": "city:tashkent",
+    "regionKey": "TODO:tashkent",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tashkent"
+  },
+  {
+    "name": "Warsaw",
+    "tier": "Alpha",
+    "skillKey": "city:warsaw",
+    "regionKey": "TODO:warsaw",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Warsaw"
+  },
+  {
+    "name": "Düsseldorf",
+    "tier": "Alpha-",
+    "skillKey": "city:dsseldorf",
+    "regionKey": "TODO:dsseldorf",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Düsseldorf"
+  },
+  {
+    "name": "Tianjin",
+    "tier": "Beta+",
+    "skillKey": "city:tianjin",
+    "regionKey": "TODO:tianjin",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tianjin"
+  },
+  {
+    "name": "Manama",
+    "tier": "Beta",
+    "skillKey": "city:manama",
+    "regionKey": "TODO:manama",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Manama"
+  },
+  {
+    "name": "Seattle",
+    "tier": "Beta-",
+    "skillKey": "city:seattle",
+    "regionKey": "TODO:seattle",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Seattle"
+  },
+  {
+    "name": "Antwerp",
+    "tier": "Gamma+",
+    "skillKey": "city:antwerp",
+    "regionKey": "TODO:antwerp",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Antwerp"
+  },
+  {
+    "name": "San Salvador",
+    "tier": "Gamma",
+    "skillKey": "city:san_salvador",
+    "regionKey": "TODO:san_salvador",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about San Salvador"
+  },
+  {
+    "name": "Penang",
+    "tier": "Gamma-",
+    "skillKey": "city:penang",
+    "regionKey": "TODO:penang",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Penang"
+  },
+  {
+    "name": "Phoenix",
+    "tier": "High sufficiency",
+    "skillKey": "city:phoenix",
+    "regionKey": "TODO:phoenix",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Phoenix"
+  },
+  {
+    "name": "Lausanne",
+    "tier": "Sufficiency",
+    "skillKey": "city:lausanne",
+    "regionKey": "TODO:lausanne",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lausanne"
+  },
+  {
+    "name": "Guangzhou",
+    "tier": "Alpha",
+    "skillKey": "city:guangzhou",
+    "regionKey": "TODO:guangzhou",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Guangzhou"
+  },
+  {
+    "name": "Stockholm",
+    "tier": "Alpha-",
+    "skillKey": "city:stockholm",
+    "regionKey": "TODO:stockholm",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Stockholm"
+  },
+  {
+    "name": "Dallas",
+    "tier": "Beta+",
+    "skillKey": "city:dallas",
+    "regionKey": "TODO:dallas",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Dallas"
+  },
+  {
+    "name": "Wuhan",
+    "tier": "Beta",
+    "skillKey": "city:wuhan",
+    "regionKey": "TODO:wuhan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Wuhan"
+  },
+  {
+    "name": "Manchester",
+    "tier": "Beta-",
+    "skillKey": "city:manchester",
+    "regionKey": "TODO:manchester",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Manchester"
+  },
+  {
+    "name": "Almaty",
+    "tier": "Gamma+",
+    "skillKey": "city:almaty",
+    "regionKey": "TODO:almaty",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Almaty"
+  },
+  {
+    "name": "Muscat",
+    "tier": "Gamma",
+    "skillKey": "city:muscat",
+    "regionKey": "TODO:muscat",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Muscat"
+  },
+  {
+    "name": "Dar es Salaam",
+    "tier": "Gamma-",
+    "skillKey": "city:dar_es_salaam",
+    "regionKey": "TODO:dar_es_salaam",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Dar es Salaam"
+  },
+  {
+    "name": "Dakar",
+    "tier": "High sufficiency",
+    "skillKey": "city:dakar",
+    "regionKey": "TODO:dakar",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Dakar"
+  },
+  {
+    "name": "Málaga",
+    "tier": "Sufficiency",
+    "skillKey": "city:mlaga",
+    "regionKey": "TODO:mlaga",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Málaga"
+  },
+  {
+    "name": "Istanbul",
+    "tier": "Alpha",
+    "skillKey": "city:istanbul",
+    "regionKey": "TODO:istanbul",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Istanbul"
+  },
+  {
+    "name": "Washington DC",
+    "tier": "Alpha-",
+    "skillKey": "city:washington_dc",
+    "regionKey": "TODO:washington_dc",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Washington DC"
+  },
+  {
+    "name": "Atlanta (GA)",
+    "tier": "Beta+",
+    "skillKey": "city:atlanta_ga",
+    "regionKey": "TODO:atlanta_ga",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Atlanta (GA)"
+  },
+  {
+    "name": "Manila",
+    "tier": "Beta",
+    "skillKey": "city:manila",
+    "regionKey": "TODO:manila",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Manila"
+  },
+  {
+    "name": "Sofia",
+    "tier": "Beta-",
+    "skillKey": "city:sofia",
+    "regionKey": "TODO:sofia",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Sofia"
+  },
+  {
+    "name": "Amman",
+    "tier": "Gamma+",
+    "skillKey": "city:amman",
+    "regionKey": "TODO:amman",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Amman"
+  },
+  {
+    "name": "Phnom Penh",
+    "tier": "Gamma",
+    "skillKey": "city:phnom_penh",
+    "regionKey": "TODO:phnom_penh",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Phnom Penh"
+  },
+  {
+    "name": "Wellington",
+    "tier": "Gamma-",
+    "skillKey": "city:wellington",
+    "regionKey": "TODO:wellington",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Wellington"
+  },
+  {
+    "name": "Cincinnati",
+    "tier": "High sufficiency",
+    "skillKey": "city:cincinnati",
+    "regionKey": "TODO:cincinnati",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Cincinnati"
+  },
+  {
+    "name": "Wuxi",
+    "tier": "Sufficiency",
+    "skillKey": "city:wuxi",
+    "regionKey": "TODO:wuxi",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Wuxi"
+  },
+  {
+    "name": "Amsterdam",
+    "tier": "Alpha",
+    "skillKey": "city:amsterdam",
+    "regionKey": "TODO:amsterdam",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Amsterdam"
+  },
+  {
+    "name": "Vienna",
+    "tier": "Alpha-",
+    "skillKey": "city:vienna",
+    "regionKey": "TODO:vienna",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Vienna"
+  },
+  {
+    "name": "Auckland",
+    "tier": "Beta+",
+    "skillKey": "city:auckland",
+    "regionKey": "TODO:auckland",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Auckland"
+  },
+  {
+    "name": "Xiamen",
+    "tier": "Beta",
+    "skillKey": "city:xiamen",
+    "regionKey": "TODO:xiamen",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Xiamen"
+  },
+  {
+    "name": "Bratislava",
+    "tier": "Beta-",
+    "skillKey": "city:bratislava",
+    "regionKey": "TODO:bratislava",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bratislava"
+  },
+  {
+    "name": "Santo Domingo",
+    "tier": "Gamma+",
+    "skillKey": "city:santo_domingo",
+    "regionKey": "TODO:santo_domingo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Santo Domingo"
+  },
+  {
+    "name": "Birmingham (UK)",
+    "tier": "Gamma",
+    "skillKey": "city:birmingham_uk",
+    "regionKey": "TODO:birmingham_uk",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Birmingham (UK)"
+  },
+  {
+    "name": "Managua",
+    "tier": "Gamma-",
+    "skillKey": "city:managua",
+    "regionKey": "TODO:managua",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Managua"
+  },
+  {
+    "name": "Skopje",
+    "tier": "High sufficiency",
+    "skillKey": "city:skopje",
+    "regionKey": "TODO:skopje",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Skopje"
+  },
+  {
+    "name": "George Town (Cayman Islands)",
+    "tier": "Sufficiency",
+    "skillKey": "city:george_town_cayman_islands",
+    "regionKey": "TODO:george_town_cayman_islands",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about George Town (Cayman Islands)"
+  },
+  {
+    "name": "Bangkok",
+    "tier": "Alpha",
+    "skillKey": "city:bangkok",
+    "regionKey": "TODO:bangkok",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bangkok"
+  },
+  {
+    "name": "Lisbon",
+    "tier": "Alpha-",
+    "skillKey": "city:lisbon",
+    "regionKey": "TODO:lisbon",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lisbon"
+  },
+  {
+    "name": "Barcelona",
+    "tier": "Beta+",
+    "skillKey": "city:barcelona",
+    "regionKey": "TODO:barcelona",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Barcelona"
+  },
+  {
+    "name": "Nairobi",
+    "tier": "Beta",
+    "skillKey": "city:nairobi",
+    "regionKey": "TODO:nairobi",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nairobi"
+  },
+  {
+    "name": "Rio de Janeiro",
+    "tier": "Beta-",
+    "skillKey": "city:rio_de_janeiro",
+    "regionKey": "TODO:rio_de_janeiro",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Rio de Janeiro"
+  },
+  {
+    "name": "Rotterdam",
+    "tier": "Gamma+",
+    "skillKey": "city:rotterdam",
+    "regionKey": "TODO:rotterdam",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Rotterdam"
+  },
+  {
+    "name": "Pune",
+    "tier": "Gamma",
+    "skillKey": "city:pune",
+    "regionKey": "TODO:pune",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Pune"
+  },
+  {
+    "name": "Cleveland",
+    "tier": "Gamma-",
+    "skillKey": "city:cleveland",
+    "regionKey": "TODO:cleveland",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Cleveland"
+  },
+  {
+    "name": "Kansas City",
+    "tier": "High sufficiency",
+    "skillKey": "city:kansas_city",
+    "regionKey": "TODO:kansas_city",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Kansas City"
+  },
+  {
+    "name": "Salt Lake City",
+    "tier": "Sufficiency",
+    "skillKey": "city:salt_lake_city",
+    "regionKey": "TODO:salt_lake_city",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Salt Lake City"
+  },
+  {
+    "name": "Los Angeles",
+    "tier": "Alpha",
+    "skillKey": "city:los_angeles",
+    "regionKey": "TODO:los_angeles",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Los Angeles"
+  },
+  {
+    "name": "Munich",
+    "tier": "Alpha-",
+    "skillKey": "city:munich",
+    "regionKey": "TODO:munich",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Munich"
+  },
+  {
+    "name": "Hangzhou",
+    "tier": "Beta+",
+    "skillKey": "city:hangzhou",
+    "regionKey": "TODO:hangzhou",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hangzhou"
+  },
+  {
+    "name": "Kiev",
+    "tier": "Beta",
+    "skillKey": "city:kiev",
+    "regionKey": "TODO:kiev",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Kiev"
+  },
+  {
+    "name": "Lyon",
+    "tier": "Beta-",
+    "skillKey": "city:lyon",
+    "regionKey": "TODO:lyon",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lyon"
+  },
+  {
+    "name": "Adelaide",
+    "tier": "Gamma+",
+    "skillKey": "city:adelaide",
+    "regionKey": "TODO:adelaide",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Adelaide"
+  },
+  {
+    "name": "Ningbo",
+    "tier": "Gamma",
+    "skillKey": "city:ningbo",
+    "regionKey": "TODO:ningbo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Ningbo"
+  },
+  {
+    "name": "Nanchang",
+    "tier": "Gamma-",
+    "skillKey": "city:nanchang",
+    "regionKey": "TODO:nanchang",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nanchang"
+  },
+  {
+    "name": "Limassol",
+    "tier": "High sufficiency",
+    "skillKey": "city:limassol",
+    "regionKey": "TODO:limassol",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Limassol"
+  },
+  {
+    "name": "Tallinn",
+    "tier": "Sufficiency",
+    "skillKey": "city:tallinn",
+    "regionKey": "TODO:tallinn",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tallinn"
+  },
+  {
+    "name": "Kuala Lumpur",
+    "tier": "Alpha",
+    "skillKey": "city:kuala_lumpur",
+    "regionKey": "TODO:kuala_lumpur",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Kuala Lumpur"
+  },
+  {
+    "name": "Dublin",
+    "tier": "Alpha-",
+    "skillKey": "city:dublin",
+    "regionKey": "TODO:dublin",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Dublin"
+  },
+  {
+    "name": "Bucharest",
+    "tier": "Beta+",
+    "skillKey": "city:bucharest",
+    "regionKey": "TODO:bucharest",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bucharest"
+  },
+  {
+    "name": "Geneva",
+    "tier": "Beta",
+    "skillKey": "city:geneva",
+    "regionKey": "TODO:geneva",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Geneva"
+  },
+  {
+    "name": "Xi’an",
+    "tier": "Beta-",
+    "skillKey": "city:xian",
+    "regionKey": "TODO:xian",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Xi’an"
+  },
+  {
+    "name": "Lahore",
+    "tier": "Gamma+",
+    "skillKey": "city:lahore",
+    "regionKey": "TODO:lahore",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lahore"
+  },
+  {
+    "name": "Harbin",
+    "tier": "Gamma",
+    "skillKey": "city:harbin",
+    "regionKey": "TODO:harbin",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Harbin"
+  },
+  {
+    "name": "Changchun",
+    "tier": "Gamma-",
+    "skillKey": "city:changchun",
+    "regionKey": "TODO:changchun",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Changchun"
+  },
+  {
+    "name": "La Paz",
+    "tier": "High sufficiency",
+    "skillKey": "city:la_paz",
+    "regionKey": "TODO:la_paz",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about La Paz"
+  },
+  {
+    "name": "Nantes",
+    "tier": "Sufficiency",
+    "skillKey": "city:nantes",
+    "regionKey": "TODO:nantes",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nantes"
+  },
+  {
+    "name": "Houston",
+    "tier": "Alpha-",
+    "skillKey": "city:houston",
+    "regionKey": "TODO:houston",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Houston"
+  },
+  {
+    "name": "Lima",
+    "tier": "Beta+",
+    "skillKey": "city:lima",
+    "regionKey": "TODO:lima",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lima"
+  },
+  {
+    "name": "Jinan",
+    "tier": "Beta",
+    "skillKey": "city:jinan",
+    "regionKey": "TODO:jinan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Jinan"
+  },
+  {
+    "name": "Helsinki",
+    "tier": "Beta-",
+    "skillKey": "city:helsinki",
+    "regionKey": "TODO:helsinki",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Helsinki"
+  },
+  {
+    "name": "Colombo",
+    "tier": "Gamma+",
+    "skillKey": "city:colombo",
+    "regionKey": "TODO:colombo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Colombo"
+  },
+  {
+    "name": "San Jose (CA)",
+    "tier": "Gamma",
+    "skillKey": "city:san_jose_ca",
+    "regionKey": "TODO:san_jose_ca",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about San Jose (CA)"
+  },
+  {
+    "name": "Cali",
+    "tier": "Gamma-",
+    "skillKey": "city:cali",
+    "regionKey": "TODO:cali",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Cali"
+  },
+  {
+    "name": "Leeds",
+    "tier": "High sufficiency",
+    "skillKey": "city:leeds",
+    "regionKey": "TODO:leeds",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Leeds"
+  },
+  {
+    "name": "Medellin",
+    "tier": "Sufficiency",
+    "skillKey": "city:medellin",
+    "regionKey": "TODO:medellin",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Medellin"
+  },
+  {
+    "name": "Berlin",
+    "tier": "Alpha-",
+    "skillKey": "city:berlin",
+    "regionKey": "TODO:berlin",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Berlin"
+  },
+  {
+    "name": "Montreal",
+    "tier": "Beta+",
+    "skillKey": "city:montreal",
+    "regionKey": "TODO:montreal",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Montreal"
+  },
+  {
+    "name": "Calgary",
+    "tier": "Beta",
+    "skillKey": "city:calgary",
+    "regionKey": "TODO:calgary",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Calgary"
+  },
+  {
+    "name": "Kunming",
+    "tier": "Beta-",
+    "skillKey": "city:kunming",
+    "regionKey": "TODO:kunming",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Kunming"
+  },
+  {
+    "name": "Taiyuan",
+    "tier": "Gamma+",
+    "skillKey": "city:taiyuan",
+    "regionKey": "TODO:taiyuan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Taiyuan"
+  },
+  {
+    "name": "Bologna",
+    "tier": "Gamma",
+    "skillKey": "city:bologna",
+    "regionKey": "TODO:bologna",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bologna"
+  },
+  {
+    "name": "St Louis",
+    "tier": "Gamma-",
+    "skillKey": "city:st_louis",
+    "regionKey": "TODO:st_louis",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about St Louis"
+  },
+  {
+    "name": "Guayaquil",
+    "tier": "High sufficiency",
+    "skillKey": "city:guayaquil",
+    "regionKey": "TODO:guayaquil",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Guayaquil"
+  },
+  {
+    "name": "Edmonton",
+    "tier": "Sufficiency",
+    "skillKey": "city:edmonton",
+    "regionKey": "TODO:edmonton",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Edmonton"
+  },
+  {
+    "name": "Johannesburg",
+    "tier": "Alpha-",
+    "skillKey": "city:johannesburg",
+    "regionKey": "TODO:johannesburg",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Johannesburg"
+  },
+  {
+    "name": "Prague",
+    "tier": "Beta+",
+    "skillKey": "city:prague",
+    "regionKey": "TODO:prague",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Prague"
+  },
+  {
+    "name": "Zhengzhou",
+    "tier": "Beta",
+    "skillKey": "city:zhengzhou",
+    "regionKey": "TODO:zhengzhou",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Zhengzhou"
+  },
+  {
+    "name": "Zagreb",
+    "tier": "Beta-",
+    "skillKey": "city:zagreb",
+    "regionKey": "TODO:zagreb",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Zagreb"
+  },
+  {
+    "name": "Kuwait City",
+    "tier": "Gamma+",
+    "skillKey": "city:kuwait_city",
+    "regionKey": "TODO:kuwait_city",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Kuwait City"
+  },
+  {
+    "name": "San José (Costa Rica)",
+    "tier": "Gamma",
+    "skillKey": "city:san_jos_costa_rica",
+    "regionKey": "TODO:san_jos_costa_rica",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about San José (Costa Rica)"
+  },
+  {
+    "name": "Ljubljana",
+    "tier": "Gamma-",
+    "skillKey": "city:ljubljana",
+    "regionKey": "TODO:ljubljana",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Ljubljana"
+  },
+  {
+    "name": "Hartford",
+    "tier": "High sufficiency",
+    "skillKey": "city:hartford",
+    "regionKey": "TODO:hartford",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hartford"
+  },
+  {
+    "name": "Utrecht",
+    "tier": "Sufficiency",
+    "skillKey": "city:utrecht",
+    "regionKey": "TODO:utrecht",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Utrecht"
+  },
+  {
+    "name": "Boston",
+    "tier": "Alpha-",
+    "skillKey": "city:boston",
+    "regionKey": "TODO:boston",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Boston"
+  },
+  {
+    "name": "Shenyang",
+    "tier": "Beta",
+    "skillKey": "city:shenyang",
+    "regionKey": "TODO:shenyang",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Shenyang"
+  },
+  {
+    "name": "Nicosia",
+    "tier": "Beta-",
+    "skillKey": "city:nicosia",
+    "regionKey": "TODO:nicosia",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nicosia"
+  },
+  {
+    "name": "Ahmedabad",
+    "tier": "Gamma",
+    "skillKey": "city:ahmedabad",
+    "regionKey": "TODO:ahmedabad",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Ahmedabad"
+  },
+  {
+    "name": "Baltimore",
+    "tier": "Gamma-",
+    "skillKey": "city:baltimore",
+    "regionKey": "TODO:baltimore",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Baltimore"
+  },
+  {
+    "name": "Belfast",
+    "tier": "High sufficiency",
+    "skillKey": "city:belfast",
+    "regionKey": "TODO:belfast",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Belfast"
+  },
+  {
+    "name": "Taichung",
+    "tier": "Sufficiency",
+    "skillKey": "city:taichung",
+    "regionKey": "TODO:taichung",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Taichung"
+  },
+  {
+    "name": "New Delhi",
+    "tier": "Alpha-",
+    "skillKey": "city:new_delhi",
+    "regionKey": "TODO:new_delhi",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about New Delhi"
+  },
+  {
+    "name": "Dalian",
+    "tier": "Beta",
+    "skillKey": "city:dalian",
+    "regionKey": "TODO:dalian",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Dalian"
+  },
+  {
+    "name": "Karachi",
+    "tier": "Beta-",
+    "skillKey": "city:karachi",
+    "regionKey": "TODO:karachi",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Karachi"
+  },
+  {
+    "name": "Bristol",
+    "tier": "Gamma",
+    "skillKey": "city:bristol",
+    "regionKey": "TODO:bristol",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bristol"
+  },
+  {
+    "name": "Bilbao",
+    "tier": "Gamma-",
+    "skillKey": "city:bilbao",
+    "regionKey": "TODO:bilbao",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bilbao"
+  },
+  {
+    "name": "Indianapolis",
+    "tier": "High sufficiency",
+    "skillKey": "city:indianapolis",
+    "regionKey": "TODO:indianapolis",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Indianapolis"
+  },
+  {
+    "name": "Campinas",
+    "tier": "Sufficiency",
+    "skillKey": "city:campinas",
+    "regionKey": "TODO:campinas",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Campinas"
+  },
+  {
+    "name": "Suzhou",
+    "tier": "Beta",
+    "skillKey": "city:suzhou",
+    "regionKey": "TODO:suzhou",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Suzhou"
+  },
+  {
+    "name": "Caracas",
+    "tier": "Beta-",
+    "skillKey": "city:caracas",
+    "regionKey": "TODO:caracas",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Caracas"
+  },
+  {
+    "name": "Tegucigalpa",
+    "tier": "Gamma",
+    "skillKey": "city:tegucigalpa",
+    "regionKey": "TODO:tegucigalpa",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tegucigalpa"
+  },
+  {
+    "name": "Marseille",
+    "tier": "Gamma-",
+    "skillKey": "city:marseille",
+    "regionKey": "TODO:marseille",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Marseille"
+  },
+  {
+    "name": "Algiers",
+    "tier": "High sufficiency",
+    "skillKey": "city:algiers",
+    "regionKey": "TODO:algiers",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Algiers"
+  },
+  {
+    "name": "Lille",
+    "tier": "Sufficiency",
+    "skillKey": "city:lille",
+    "regionKey": "TODO:lille",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lille"
+  },
+  {
+    "name": "Hefei",
+    "tier": "Beta-",
+    "skillKey": "city:hefei",
+    "regionKey": "TODO:hefei",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hefei"
+  },
+  {
+    "name": "Riga",
+    "tier": "Gamma",
+    "skillKey": "city:riga",
+    "regionKey": "TODO:riga",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Riga"
+  },
+  {
+    "name": "Surabaya",
+    "tier": "Gamma-",
+    "skillKey": "city:surabaya",
+    "regionKey": "TODO:surabaya",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Surabaya"
+  },
+  {
+    "name": "Shijiazhuang",
+    "tier": "High sufficiency",
+    "skillKey": "city:shijiazhuang",
+    "regionKey": "TODO:shijiazhuang",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Shijiazhuang"
+  },
+  {
+    "name": "Abuja",
+    "tier": "Sufficiency",
+    "skillKey": "city:abuja",
+    "regionKey": "TODO:abuja",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Abuja"
+  },
+  {
+    "name": "Stuttgart",
+    "tier": "Beta-",
+    "skillKey": "city:stuttgart",
+    "regionKey": "TODO:stuttgart",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Stuttgart"
+  },
+  {
+    "name": "Detroit",
+    "tier": "Gamma",
+    "skillKey": "city:detroit",
+    "regionKey": "TODO:detroit",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Detroit"
+  },
+  {
+    "name": "Accra",
+    "tier": "Gamma-",
+    "skillKey": "city:accra",
+    "regionKey": "TODO:accra",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Accra"
+  },
+  {
+    "name": "Lusaka",
+    "tier": "High sufficiency",
+    "skillKey": "city:lusaka",
+    "regionKey": "TODO:lusaka",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lusaka"
+  },
+  {
+    "name": "Yangon",
+    "tier": "Sufficiency",
+    "skillKey": "city:yangon",
+    "regionKey": "TODO:yangon",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Yangon"
+  },
+  {
+    "name": "Panama City",
+    "tier": "Beta-",
+    "skillKey": "city:panama_city",
+    "regionKey": "TODO:panama_city",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Panama City"
+  },
+  {
+    "name": "Guadalajara",
+    "tier": "High sufficiency",
+    "skillKey": "city:guadalajara",
+    "regionKey": "TODO:guadalajara",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Guadalajara"
+  },
+  {
+    "name": "Krakow",
+    "tier": "Sufficiency",
+    "skillKey": "city:krakow",
+    "regionKey": "TODO:krakow",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Krakow"
+  },
+  {
+    "name": "Chennai",
+    "tier": "Beta-",
+    "skillKey": "city:chennai",
+    "regionKey": "TODO:chennai",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Chennai"
+  },
+  {
+    "name": "Jacksonville",
+    "tier": "Sufficiency",
+    "skillKey": "city:jacksonville",
+    "regionKey": "TODO:jacksonville",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Jacksonville"
+  },
+  {
+    "name": "Philadelphia",
+    "tier": "Beta-",
+    "skillKey": "city:philadelphia",
+    "regionKey": "TODO:philadelphia",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Philadelphia"
+  },
+  {
+    "name": "Southampton",
+    "tier": "Sufficiency",
+    "skillKey": "city:southampton",
+    "regionKey": "TODO:southampton",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Southampton"
+  },
+  {
+    "name": "San Antonio",
+    "tier": "Sufficiency",
+    "skillKey": "city:san_antonio",
+    "regionKey": "TODO:san_antonio",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about San Antonio"
+  },
+  {
+    "name": "Belo Horizonte",
+    "tier": "Sufficiency",
+    "skillKey": "city:belo_horizonte",
+    "regionKey": "TODO:belo_horizonte",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Belo Horizonte"
+  },
+  {
+    "name": "Leipzig",
+    "tier": "Sufficiency",
+    "skillKey": "city:leipzig",
+    "regionKey": "TODO:leipzig",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Leipzig"
+  },
+  {
+    "name": "Newcastle",
+    "tier": "Sufficiency",
+    "skillKey": "city:newcastle",
+    "regionKey": "TODO:newcastle",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Newcastle"
+  },
+  {
+    "name": "Naples",
+    "tier": "Sufficiency",
+    "skillKey": "city:naples",
+    "regionKey": "TODO:naples",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Naples"
+  },
+  {
+    "name": "Curitiba",
+    "tier": "Sufficiency",
+    "skillKey": "city:curitiba",
+    "regionKey": "TODO:curitiba",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Curitiba"
+  },
+  {
+    "name": "Luanda",
+    "tier": "Sufficiency",
+    "skillKey": "city:luanda",
+    "regionKey": "TODO:luanda",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Luanda"
+  },
+  {
+    "name": "Abidjan",
+    "tier": "Sufficiency",
+    "skillKey": "city:abidjan",
+    "regionKey": "TODO:abidjan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Abidjan"
+  },
+  {
+    "name": "Milwaukee",
+    "tier": "Sufficiency",
+    "skillKey": "city:milwaukee",
+    "regionKey": "TODO:milwaukee",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Milwaukee"
+  },
+  {
+    "name": "Nassau",
+    "tier": "Sufficiency",
+    "skillKey": "city:nassau",
+    "regionKey": "TODO:nassau",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nassau"
+  },
+  {
+    "name": "Gaborone",
+    "tier": "Sufficiency",
+    "skillKey": "city:gaborone",
+    "regionKey": "TODO:gaborone",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Gaborone"
+  },
+  {
+    "name": "Puebla",
+    "tier": "Sufficiency",
+    "skillKey": "city:puebla",
+    "regionKey": "TODO:puebla",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Puebla"
+  },
+  {
+    "name": "Toulouse",
+    "tier": "Sufficiency",
+    "skillKey": "city:toulouse",
+    "regionKey": "TODO:toulouse",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Toulouse"
+  },
+  {
+    "name": "Brasilia",
+    "tier": "Sufficiency",
+    "skillKey": "city:brasilia",
+    "regionKey": "TODO:brasilia",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Brasilia"
+  },
+  {
+    "name": "Podgorica",
+    "tier": "Sufficiency",
+    "skillKey": "city:podgorica",
+    "regionKey": "TODO:podgorica",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Podgorica"
+  },
+  {
+    "name": "Kaohsiung",
+    "tier": "Sufficiency",
+    "skillKey": "city:kaohsiung",
+    "regionKey": "TODO:kaohsiung",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Kaohsiung"
+  },
+  {
+    "name": "Bern",
+    "tier": "Sufficiency",
+    "skillKey": "city:bern",
+    "regionKey": "TODO:bern",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bern"
+  },
+  {
+    "name": "Porto Alegre",
+    "tier": "Sufficiency",
+    "skillKey": "city:porto_alegre",
+    "regionKey": "TODO:porto_alegre",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Porto Alegre"
+  },
+  {
+    "name": "Malmö",
+    "tier": "Sufficiency",
+    "skillKey": "city:malm",
+    "regionKey": "TODO:malm",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Malmö"
+  },
+  {
+    "name": "Des Moines",
+    "tier": "Sufficiency",
+    "skillKey": "city:des_moines",
+    "regionKey": "TODO:des_moines",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Des Moines"
+  },
+  {
+    "name": "Guiyang",
+    "tier": "Sufficiency",
+    "skillKey": "city:guiyang",
+    "regionKey": "TODO:guiyang",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Guiyang"
+  },
+  {
+    "name": "Nice",
+    "tier": "Sufficiency",
+    "skillKey": "city:nice",
+    "regionKey": "TODO:nice",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nice"
+  },
+  {
+    "name": "Tijuana",
+    "tier": "Sufficiency",
+    "skillKey": "city:tijuana",
+    "regionKey": "TODO:tijuana",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tijuana"
+  },
+  {
+    "name": "Nanning",
+    "tier": "Sufficiency",
+    "skillKey": "city:nanning",
+    "regionKey": "TODO:nanning",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nanning"
+  },
+  {
+    "name": "Canberra",
+    "tier": "Sufficiency",
+    "skillKey": "city:canberra",
+    "regionKey": "TODO:canberra",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Canberra"
+  },
+  {
+    "name": "Nürnberg",
+    "tier": "Sufficiency",
+    "skillKey": "city:nrnberg",
+    "regionKey": "TODO:nrnberg",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nürnberg"
+  },
+  {
+    "name": "Port of Spain",
+    "tier": "Sufficiency",
+    "skillKey": "city:port_of_spain",
+    "regionKey": "TODO:port_of_spain",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Port of Spain"
+  },
+  {
+    "name": "Cordoba",
+    "tier": "Sufficiency",
+    "skillKey": "city:cordoba",
+    "regionKey": "TODO:cordoba",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Cordoba"
+  },
+  {
+    "name": "Sarajevo",
+    "tier": "Sufficiency",
+    "skillKey": "city:sarajevo",
+    "regionKey": "TODO:sarajevo",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Sarajevo"
+  },
+  {
+    "name": "Foshan",
+    "tier": "Sufficiency",
+    "skillKey": "city:foshan",
+    "regionKey": "TODO:foshan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Foshan"
+  },
+  {
+    "name": "Bordeaux",
+    "tier": "Sufficiency",
+    "skillKey": "city:bordeaux",
+    "regionKey": "TODO:bordeaux",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bordeaux"
+  },
+  {
+    "name": "Florence",
+    "tier": "Sufficiency",
+    "skillKey": "city:florence",
+    "regionKey": "TODO:florence",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Florence"
+  },
+  {
+    "name": "Oklahoma City",
+    "tier": "Sufficiency",
+    "skillKey": "city:oklahoma_city",
+    "regionKey": "TODO:oklahoma_city",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Oklahoma City"
+  },
+  {
+    "name": "Astana",
+    "tier": "Sufficiency",
+    "skillKey": "city:astana",
+    "regionKey": "TODO:astana",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Astana"
+  },
+  {
+    "name": "Genoa",
+    "tier": "Sufficiency",
+    "skillKey": "city:genoa",
+    "regionKey": "TODO:genoa",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Genoa"
+  },
+  {
+    "name": "Nagoya",
+    "tier": "Sufficiency",
+    "skillKey": "city:nagoya",
+    "regionKey": "TODO:nagoya",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nagoya"
+  },
+  {
+    "name": "Lanzhou",
+    "tier": "Sufficiency",
+    "skillKey": "city:lanzhou",
+    "regionKey": "TODO:lanzhou",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lanzhou"
+  },
+  {
+    "name": "Durban",
+    "tier": "Sufficiency",
+    "skillKey": "city:durban",
+    "regionKey": "TODO:durban",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Durban"
+  },
+  {
+    "name": "Dongguan",
+    "tier": "Sufficiency",
+    "skillKey": "city:dongguan",
+    "regionKey": "TODO:dongguan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Dongguan"
+  },
+  {
+    "name": "Portland",
+    "tier": "Sufficiency",
+    "skillKey": "city:portland",
+    "regionKey": "TODO:portland",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Portland"
+  },
+  {
+    "name": "San Juan",
+    "tier": "Sufficiency",
+    "skillKey": "city:san_juan",
+    "regionKey": "TODO:san_juan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about San Juan"
+  },
+  {
+    "name": "Bergen",
+    "tier": "Sufficiency",
+    "skillKey": "city:bergen",
+    "regionKey": "TODO:bergen",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Bergen"
+  },
+  {
+    "name": "Yerevan",
+    "tier": "Sufficiency",
+    "skillKey": "city:yerevan",
+    "regionKey": "TODO:yerevan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Yerevan"
+  },
+  {
+    "name": "Richmond",
+    "tier": "Sufficiency",
+    "skillKey": "city:richmond",
+    "regionKey": "TODO:richmond",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Richmond"
+  },
+  {
+    "name": "Santa Cruz",
+    "tier": "Sufficiency",
+    "skillKey": "city:santa_cruz",
+    "regionKey": "TODO:santa_cruz",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Santa Cruz"
+  },
+  {
+    "name": "Asuncion",
+    "tier": "Sufficiency",
+    "skillKey": "city:asuncion",
+    "regionKey": "TODO:asuncion",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Asuncion"
+  },
+  {
+    "name": "Sacramento",
+    "tier": "Sufficiency",
+    "skillKey": "city:sacramento",
+    "regionKey": "TODO:sacramento",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Sacramento"
+  },
+  {
+    "name": "Cebu",
+    "tier": "Sufficiency",
+    "skillKey": "city:cebu",
+    "regionKey": "TODO:cebu",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Cebu"
+  },
+  {
+    "name": "Hohhot",
+    "tier": "Sufficiency",
+    "skillKey": "city:hohhot",
+    "regionKey": "TODO:hohhot",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hohhot"
+  },
+  {
+    "name": "Cologne",
+    "tier": "Sufficiency",
+    "skillKey": "city:cologne",
+    "regionKey": "TODO:cologne",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Cologne"
+  },
+  {
+    "name": "The Hague",
+    "tier": "Sufficiency",
+    "skillKey": "city:the_hague",
+    "regionKey": "TODO:the_hague",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about The Hague"
+  },
+  {
+    "name": "Birmingham (AL)",
+    "tier": "Sufficiency",
+    "skillKey": "city:birmingham_al",
+    "regionKey": "TODO:birmingham_al",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Birmingham (AL)"
+  },
+  {
+    "name": "Las Vegas",
+    "tier": "Sufficiency",
+    "skillKey": "city:las_vegas",
+    "regionKey": "TODO:las_vegas",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Las Vegas"
+  },
+  {
+    "name": "Ciudad Juarez",
+    "tier": "Sufficiency",
+    "skillKey": "city:ciudad_juarez",
+    "regionKey": "TODO:ciudad_juarez",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Ciudad Juarez"
+  },
+  {
+    "name": "Winnipeg",
+    "tier": "Sufficiency",
+    "skillKey": "city:winnipeg",
+    "regionKey": "TODO:winnipeg",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Winnipeg"
+  },
+  {
+    "name": "Orlando",
+    "tier": "Sufficiency",
+    "skillKey": "city:orlando",
+    "regionKey": "TODO:orlando",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Orlando"
+  },
+  {
+    "name": "Windhoek",
+    "tier": "Sufficiency",
+    "skillKey": "city:windhoek",
+    "regionKey": "TODO:windhoek",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Windhoek"
+  },
+  {
+    "name": "Hannover",
+    "tier": "Sufficiency",
+    "skillKey": "city:hannover",
+    "regionKey": "TODO:hannover",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hannover"
+  },
+  {
+    "name": "Louisville",
+    "tier": "Sufficiency",
+    "skillKey": "city:louisville",
+    "regionKey": "TODO:louisville",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Louisville"
+  },
+  {
+    "name": "Aberdeen",
+    "tier": "Sufficiency",
+    "skillKey": "city:aberdeen",
+    "regionKey": "TODO:aberdeen",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Aberdeen"
+  },
+  {
+    "name": "Liege",
+    "tier": "Sufficiency",
+    "skillKey": "city:liege",
+    "regionKey": "TODO:liege",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Liege"
+  },
+  {
+    "name": "Liverpool",
+    "tier": "Sufficiency",
+    "skillKey": "city:liverpool",
+    "regionKey": "TODO:liverpool",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Liverpool"
+  },
+  {
+    "name": "Basel",
+    "tier": "Sufficiency",
+    "skillKey": "city:basel",
+    "regionKey": "TODO:basel",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Basel"
+  },
+  {
+    "name": "Tulsa",
+    "tier": "Sufficiency",
+    "skillKey": "city:tulsa",
+    "regionKey": "TODO:tulsa",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tulsa"
+  },
+  {
+    "name": "Mannheim",
+    "tier": "Sufficiency",
+    "skillKey": "city:mannheim",
+    "regionKey": "TODO:mannheim",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Mannheim"
+  },
+  {
+    "name": "Palo Alto",
+    "tier": "Sufficiency",
+    "skillKey": "city:palo_alto",
+    "regionKey": "TODO:palo_alto",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Palo Alto"
+  },
+  {
+    "name": "San Pedro Sula",
+    "tier": "Sufficiency",
+    "skillKey": "city:san_pedro_sula",
+    "regionKey": "TODO:san_pedro_sula",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about San Pedro Sula"
+  },
+  {
+    "name": "Seville",
+    "tier": "Sufficiency",
+    "skillKey": "city:seville",
+    "regionKey": "TODO:seville",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Seville"
+  },
+  {
+    "name": "Recife",
+    "tier": "Sufficiency",
+    "skillKey": "city:recife",
+    "regionKey": "TODO:recife",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Recife"
+  },
+  {
+    "name": "Alexandria",
+    "tier": "Sufficiency",
+    "skillKey": "city:alexandria",
+    "regionKey": "TODO:alexandria",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Alexandria"
+  },
+  {
+    "name": "Moscow",
+    "tier": "Sufficiency",
+    "skillKey": "city:moscow",
+    "regionKey": "TODO:moscow",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Moscow"
+  },
+  {
+    "name": "Vientiane",
+    "tier": "Sufficiency",
+    "skillKey": "city:vientiane",
+    "regionKey": "TODO:vientiane",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Vientiane"
+  },
+  {
+    "name": "Tangshan",
+    "tier": "Sufficiency",
+    "skillKey": "city:tangshan",
+    "regionKey": "TODO:tangshan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Tangshan"
+  },
+  {
+    "name": "Ulan Bator",
+    "tier": "Sufficiency",
+    "skillKey": "city:ulan_bator",
+    "regionKey": "TODO:ulan_bator",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Ulan Bator"
+  },
+  {
+    "name": "Salvador",
+    "tier": "Sufficiency",
+    "skillKey": "city:salvador",
+    "regionKey": "TODO:salvador",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Salvador"
+  },
+  {
+    "name": "Memphis",
+    "tier": "Sufficiency",
+    "skillKey": "city:memphis",
+    "regionKey": "TODO:memphis",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Memphis"
+  },
+  {
+    "name": "Yinchuan",
+    "tier": "Sufficiency",
+    "skillKey": "city:yinchuan",
+    "regionKey": "TODO:yinchuan",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Yinchuan"
+  },
+  {
+    "name": "Linz",
+    "tier": "Sufficiency",
+    "skillKey": "city:linz",
+    "regionKey": "TODO:linz",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Linz"
+  },
+  {
+    "name": "Calcutta",
+    "tier": "Sufficiency",
+    "skillKey": "city:calcutta",
+    "regionKey": "TODO:calcutta",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Calcutta"
+  },
+  {
+    "name": "Halifax",
+    "tier": "Sufficiency",
+    "skillKey": "city:halifax",
+    "regionKey": "TODO:halifax",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Halifax"
+  },
+  {
+    "name": "San Luis Potosí",
+    "tier": "Sufficiency",
+    "skillKey": "city:san_luis_potos",
+    "regionKey": "TODO:san_luis_potos",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about San Luis Potosí"
+  },
+  {
+    "name": "Barranquilla",
+    "tier": "Sufficiency",
+    "skillKey": "city:barranquilla",
+    "regionKey": "TODO:barranquilla",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Barranquilla"
+  },
+  {
+    "name": "Libreville",
+    "tier": "Sufficiency",
+    "skillKey": "city:libreville",
+    "regionKey": "TODO:libreville",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Libreville"
+  },
+  {
+    "name": "Lodz",
+    "tier": "Sufficiency",
+    "skillKey": "city:lodz",
+    "regionKey": "TODO:lodz",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Lodz"
+  },
+  {
+    "name": "Hamilton",
+    "tier": "Sufficiency",
+    "skillKey": "city:hamilton",
+    "regionKey": "TODO:hamilton",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Hamilton"
+  },
+  {
+    "name": "Dresden",
+    "tier": "Sufficiency",
+    "skillKey": "city:dresden",
+    "regionKey": "TODO:dresden",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Dresden"
+  },
+  {
+    "name": "Arhus",
+    "tier": "Sufficiency",
+    "skillKey": "city:arhus",
+    "regionKey": "TODO:arhus",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Arhus"
+  },
+  {
+    "name": "Baoding",
+    "tier": "Sufficiency",
+    "skillKey": "city:baoding",
+    "regionKey": "TODO:baoding",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Baoding"
+  },
+  {
+    "name": "Wenzhou",
+    "tier": "Sufficiency",
+    "skillKey": "city:wenzhou",
+    "regionKey": "TODO:wenzhou",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Wenzhou"
+  },
+  {
+    "name": "Blantyre",
+    "tier": "Sufficiency",
+    "skillKey": "city:blantyre",
+    "regionKey": "TODO:blantyre",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Blantyre"
+  },
+  {
+    "name": "Nottingham",
+    "tier": "Sufficiency",
+    "skillKey": "city:nottingham",
+    "regionKey": "TODO:nottingham",
+    "countryCode": "TODO",
+    "coordinates": {
+      "lat": 0,
+      "lon": 0
+    },
+    "note": "TODO: Add info about Nottingham"
+  }
+]

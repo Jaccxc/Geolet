@@ -1,0 +1,408 @@
+/**
+ * Generate WATG24 Cities Migration Template
+ *
+ * This script parses the WATG24.csv file and generates:
+ * 1. Card groups for each WATG24 tier
+ * 2. Topics (Global Major Cities, Cities-500)
+ * 3. Template skill tags (with TODO notes for geographic info)
+ * 4. Template fact cards (with TODO for region mappings)
+ */
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { parse } from 'csv-parse/sync';
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ============================================
+// TYPES
+// ============================================
+
+interface CityEntry {
+  name: string;
+  tier: string;
+  tierKey: string; // For card group key
+}
+
+// ============================================
+// TIER MAPPING
+// ============================================
+
+const TIER_CONFIG = [
+  { column: 'Alpha++', key: 'alpha_plus_plus', display: 'Alpha++ Cities' },
+  { column: 'Alpha+', key: 'alpha_plus', display: 'Alpha+ Cities' },
+  { column: 'Alpha', key: 'alpha', display: 'Alpha Cities' },
+  { column: 'Alpha-', key: 'alpha_minus', display: 'Alpha- Cities' },
+  { column: 'Beta+', key: 'beta_plus', display: 'Beta+ Cities' },
+  { column: 'Beta', key: 'beta', display: 'Beta Cities' },
+  { column: 'Beta-', key: 'beta_minus', display: 'Beta- Cities' },
+  { column: 'Gamma+', key: 'gamma_plus', display: 'Gamma+ Cities' },
+  { column: 'Gamma', key: 'gamma', display: 'Gamma Cities' },
+  { column: 'Gamma-', key: 'gamma_minus', display: 'Gamma- Cities' },
+  { column: 'High sufficiency', key: 'high_sufficiency', display: 'High Sufficiency Cities' },
+  { column: 'Sufficiency', key: 'sufficiency', display: 'Sufficiency Cities' },
+];
+
+// ============================================
+// UTILITIES
+// ============================================
+
+function sqlEscape(str: string): string {
+  return str.replace(/'/g, "''");
+}
+
+function sanitizeForKey(name: string): string {
+  return name
+    .replace(/\s+/g, '_')
+    .replace(/[^a-zA-Z0-9_]/g, '')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '')
+    .toLowerCase();
+}
+
+function sanitizeCityName(name: string): string {
+  // Remove BOM and trim
+  return name.replace(/^\uFEFF/, '').trim();
+}
+
+// ============================================
+// PARSE CSV
+// ============================================
+
+function parseCitiesFromCSV(csvPath: string): CityEntry[] {
+  // Read and remove BOM if present
+  let csvContent = fs.readFileSync(csvPath, 'utf-8');
+  csvContent = csvContent.replace(/^\uFEFF/, '');
+
+  const records = parse(csvContent, {
+    columns: true,
+    skip_empty_lines: true,
+    trim: true,
+    bom: true, // Handle BOM
+  });
+
+  const cities: CityEntry[] = [];
+
+  for (const record of records) {
+    for (const tierConfig of TIER_CONFIG) {
+      const cityName = record[tierConfig.column];
+      if (cityName && cityName.trim()) {
+        const cleanName = sanitizeCityName(cityName);
+        cities.push({
+          name: cleanName,
+          tier: tierConfig.column,
+          tierKey: tierConfig.key,
+        });
+      }
+    }
+  }
+
+  return cities;
+}
+
+// ============================================
+// GENERATE SQL SECTIONS
+// ============================================
+
+function generateCardGroups(): string {
+  const inserts = TIER_CONFIG.map((tier) => {
+    return `  ('cities_watg24_${tier.key}')`;
+  }).join(',\n');
+
+  return `-- --------------------------------------------
+-- 1. CREATE CARD GROUPS
+-- --------------------------------------------
+
+insert into card_groups (name) values
+${inserts};
+
+`;
+}
+
+function generateTopics(): string {
+  return `-- --------------------------------------------
+-- 2. CREATE TOPICS
+-- --------------------------------------------
+
+-- Topic 1: Global Major Cities (Alpha++ and Alpha+)
+insert into topics (
+  key,
+  title,
+  description,
+  icon,
+  pick_mode_active,
+  map_mode_active,
+  difficulty,
+  target_card_group_ids
+)
+values (
+  'global-major-cities',
+  'Global Major Cities',
+  'Identify the world''s most influential cities - Alpha++ and Alpha+ tier global cities with significant economic and cultural impact.',
+  'Building',
+  true,
+  true,
+  'intermediate'::difficulty_enum,
+  array[
+    (select id from card_groups where name = 'cities_watg24_alpha_plus_plus'),
+    (select id from card_groups where name = 'cities_watg24_alpha_plus')
+  ]
+);
+
+-- Topic 2: Cities-500 (All WATG24 tiers)
+insert into topics (
+  key,
+  title,
+  description,
+  icon,
+  pick_mode_active,
+  map_mode_active,
+  difficulty,
+  target_card_group_ids
+)
+values (
+  'cities-500',
+  'Cities-500',
+  'Test your knowledge of 500+ major cities worldwide across all tiers of global city classification.',
+  'MapPin',
+  true,
+  true,
+  'advanced'::difficulty_enum,
+  array[
+    (select id from card_groups where name = 'cities_watg24_alpha_plus_plus'),
+    (select id from card_groups where name = 'cities_watg24_alpha_plus'),
+    (select id from card_groups where name = 'cities_watg24_alpha'),
+    (select id from card_groups where name = 'cities_watg24_alpha_minus'),
+    (select id from card_groups where name = 'cities_watg24_beta_plus'),
+    (select id from card_groups where name = 'cities_watg24_beta'),
+    (select id from card_groups where name = 'cities_watg24_beta_minus'),
+    (select id from card_groups where name = 'cities_watg24_gamma_plus'),
+    (select id from card_groups where name = 'cities_watg24_gamma'),
+    (select id from card_groups where name = 'cities_watg24_gamma_minus'),
+    (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
+    (select id from card_groups where name = 'cities_watg24_sufficiency')
+  ]
+);
+
+`;
+}
+
+function generateSkillTagTemplate(city: CityEntry): string {
+  const skillKey = `city:${sanitizeForKey(city.name)}`;
+  const safeName = sqlEscape(city.name);
+
+  return `-- ${city.name} (${city.tier})
+insert into skill_tags (key, family, country, display, note, examples)
+values (
+  '${skillKey}',
+  'city'::skill_family_enum,
+  null,  -- TODO: Add 2-letter country code (e.g., 'US', 'GB', 'CN')
+  '${safeName}',
+  'TODO: Add geographic/cultural info about ${safeName}. Example: Major financial hub in [region], known for [feature], located [geographic position].',
+  array[]::text[]
+);
+`;
+}
+
+function generateFactCardTemplate(city: CityEntry): string {
+  const skillKey = `city:${sanitizeForKey(city.name)}`;
+  const safeName = sqlEscape(city.name);
+  const cardGroupName = `cities_watg24_${city.tierKey}`;
+
+  return `(
+  (select id from card_groups where name = '${cardGroupName}'),
+  '${safeName}',
+  '${city.tier} tier global city',
+  array['${skillKey}'],
+  '2',
+  null  -- TODO: Map to region key, e.g., (select id from regions where key = 'US:New_York')
+)`;
+}
+
+function generateCitySection(cities: CityEntry[], tier: string): string {
+  const tierCities = cities.filter(c => c.tier === tier);
+  if (tierCities.length === 0) return '';
+
+  const tierConfig = TIER_CONFIG.find(t => t.column === tier);
+  if (!tierConfig) return '';
+
+  let section = `-- ============================================
+-- ${tierConfig.display.toUpperCase()} (${tierCities.length} cities)
+-- ============================================
+
+`;
+
+  // Skill tags
+  section += '-- Skill Tags\n';
+  for (const city of tierCities) {
+    section += generateSkillTagTemplate(city) + '\n';
+  }
+
+  // Fact cards
+  section += `-- Fact Cards
+insert into fact_cards (card_group_id, prompt, hint, primary_skill_tags, difficulty, answer_region_id)
+values
+`;
+
+  const factCards = tierCities.map(city => generateFactCardTemplate(city));
+  section += factCards.join(',\n\n');
+  section += ';\n\n';
+
+  return section;
+}
+
+// ============================================
+// GENERATE COMPLETE MIGRATION
+// ============================================
+
+function generateMigration(cities: CityEntry[]): string {
+  const header = `-- ============================================
+-- WATG24 CITIES SETUP (TEMPLATE)
+-- ============================================
+-- Generated from: public/WATG24.csv
+-- Date: ${new Date().toISOString()}
+-- Total Cities: ${cities.length}
+-- ============================================
+--
+-- TODO INSTRUCTIONS:
+-- 1. Fill in country codes for each skill_tag
+-- 2. Write geographic/cultural notes for each city
+-- 3. Map each city to its region key (or create pin region first)
+-- 4. For cities without regions, create them in a separate migration
+--    using: bun run migration:new add_watg24_city_regions
+--
+-- ============================================
+
+`;
+
+  let sql = header;
+  sql += generateCardGroups();
+  sql += generateTopics();
+
+  // Generate sections for each tier
+  for (const tierConfig of TIER_CONFIG) {
+    sql += generateCitySection(cities, tierConfig.column);
+  }
+
+  // Add statistics at the end
+  sql += `-- ============================================
+-- STATISTICS
+-- ============================================
+
+do $$
+declare
+  total_skill_tags int;
+  total_fact_cards int;
+  total_card_groups int;
+begin
+  select count(*) into total_skill_tags from skill_tags where key like 'city:%';
+  select count(*) into total_fact_cards from fact_cards
+    where card_group_id in (
+      select id from card_groups where name like 'cities_watg24_%'
+    );
+  select count(*) into total_card_groups from card_groups where name like 'cities_watg24_%';
+
+  raise notice '✅ WATG24 Cities Setup Complete!';
+  raise notice '';
+  raise notice 'Statistics:';
+  raise notice '  - Card Groups: %', total_card_groups;
+  raise notice '  - City Skill Tags: %', total_skill_tags;
+  raise notice '  - Fact Cards: %', total_fact_cards;
+  raise notice '';
+  raise notice '⚠️  TODO Items Remaining:';
+  raise notice '  - Fill in country codes';
+  raise notice '  - Write geographic notes for cities';
+  raise notice '  - Map cities to region keys';
+  raise notice '  - Create missing city regions';
+end $$;
+`;
+
+  return sql;
+}
+
+// ============================================
+// GENERATE CITY LIST (for reference)
+// ============================================
+
+function generateCityListJSON(cities: CityEntry[]): string {
+  const cityList = cities.map(c => ({
+    name: c.name,
+    tier: c.tier,
+    skillKey: `city:${sanitizeForKey(c.name)}`,
+    regionKey: `TODO:${sanitizeForKey(c.name)}`,
+    countryCode: 'TODO',
+    coordinates: { lat: 0, lon: 0 },
+    note: `TODO: Add info about ${c.name}`,
+  }));
+
+  return JSON.stringify(cityList, null, 2);
+}
+
+// ============================================
+// MAIN
+// ============================================
+
+function main() {
+  const csvPath = path.join(__dirname, '../../../public/WATG24.csv');
+  const outputDir = path.join(__dirname, '..');
+
+  console.log('🌍 Parsing WATG24.csv...\n');
+
+  if (!fs.existsSync(csvPath)) {
+    console.error(`❌ CSV file not found: ${csvPath}`);
+    process.exit(1);
+  }
+
+  try {
+    // Parse cities
+    const cities = parseCitiesFromCSV(csvPath);
+    console.log(`✅ Parsed ${cities.length} cities from CSV\n`);
+
+    // Generate tier breakdown
+    console.log('📊 Cities by Tier:');
+    for (const tierConfig of TIER_CONFIG) {
+      const count = cities.filter(c => c.tier === tierConfig.column).length;
+      console.log(`   ${tierConfig.column.padEnd(20)} : ${count} cities`);
+    }
+    console.log('');
+
+    // Generate SQL migration template
+    console.log('📝 Generating SQL migration template...');
+    const sqlMigration = generateMigration(cities);
+    const sqlPath = path.join(outputDir, 'watg24_cities_template.sql');
+    fs.writeFileSync(sqlPath, sqlMigration);
+    console.log(`✅ Written to: ${path.relative(process.cwd(), sqlPath)}\n`);
+
+    // Generate city list JSON for reference
+    console.log('📋 Generating city reference JSON...');
+    const cityListJSON = generateCityListJSON(cities);
+    const jsonPath = path.join(outputDir, 'watg24_cities_list.json');
+    fs.writeFileSync(jsonPath, cityListJSON);
+    console.log(`✅ Written to: ${path.relative(process.cwd(), jsonPath)}\n`);
+
+    console.log('✨ Generation complete!\n');
+    console.log('📋 Next Steps:');
+    console.log('   1. Review: supabase/seed/watg24_cities_template.sql');
+    console.log('   2. Reference: supabase/seed/watg24_cities_list.json');
+    console.log('   3. Fill in TODOs incrementally:');
+    console.log('      - Country codes');
+    console.log('      - Geographic notes');
+    console.log('      - Region mappings');
+    console.log('   4. Create migration:');
+    console.log('      bun run migration:new add_watg24_cities_setup');
+    console.log('   5. Copy filled template to migration file');
+    console.log('   6. Apply: bun run migration:up\n');
+
+  } catch (error) {
+    console.error('❌ Error:', error);
+    process.exit(1);
+  }
+}
+
+// Run main
+main();
+
+export { parseCitiesFromCSV, generateMigration };
