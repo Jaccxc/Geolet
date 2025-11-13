@@ -165,7 +165,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus'),
   'Hong Kong',
-  'Alpha+ tier global city',
+  'Alpha+ tier city',
   array['city:hong_kong'],
   '2',
   (select id from regions where key = 'HK:Hong_Kong')
@@ -174,7 +174,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus'),
   'Beijing',
-  'Alpha+ tier global city',
+  'Alpha+ tier city',
   array['city:beijing'],
   '2',
   (select id from regions where key = 'CN:Beijing')
@@ -183,7 +183,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus'),
   'Singapore',
-  'Alpha+ tier global city',
+  'Alpha+ tier city',
   array['city:singapore'],
   '2',
   (select id from regions where key = 'SG:Singapore')
@@ -192,7 +192,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus'),
   'Shanghai',
-  'Alpha+ tier global city',
+  'Alpha+ tier city',
   array['city:shanghai'],
   '2',
   (select id from regions where key = 'CN:Shanghai')
@@ -201,7 +201,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus'),
   'Paris',
-  'Alpha+ tier global city',
+  'Alpha+ tier city',
   array['city:paris'],
   '2',
   (select id from regions where key = 'FR:Paris')
@@ -210,7 +210,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus'),
   'Dubai',
-  'Alpha+ tier global city',
+  'Alpha+ tier city',
   array['city:dubai'],
   '2',
   (select id from regions where key = 'AE:Dubai')
@@ -219,7 +219,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus'),
   'Tokyo',
-  'Alpha+ tier global city',
+  'Alpha+ tier city',
   array['city:tokyo'],
   '2',
   (select id from regions where key = 'JP:Tokyo')
@@ -228,7 +228,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus'),
   'Sydney',
-  'Alpha+ tier global city',
+  'Alpha+ tier city',
   array['city:sydney'],
   '2',
   (select id from regions where key = 'AU:Sydney')

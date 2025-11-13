@@ -324,7 +324,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Izmir',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:izmir'],
   '2',
   (select id from regions where key = 'TR:Izmir')
@@ -333,7 +333,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Harare',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:harare'],
   '2',
   (select id from regions where key = 'ZW:Harare')
@@ -342,7 +342,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Maputo',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:maputo'],
   '2',
   (select id from regions where key = 'MZ:Maputo')
@@ -351,7 +351,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Vilnius',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:vilnius'],
   '2',
   (select id from regions where key = 'LT:Vilnius')
@@ -360,7 +360,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Macao',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:macao'],
   '2',
   (select id from regions where key = 'MO:Macao')
@@ -369,7 +369,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Gothenburg',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:gothenburg'],
   '2',
   (select id from regions where key = 'SE:Gothenburg')
@@ -378,7 +378,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Raleigh',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:raleigh'],
   '2',
   (select id from regions where key = 'US:Raleigh')
@@ -387,7 +387,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Queretaro',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:queretaro'],
   '2',
   (select id from regions where key = 'MX:Queretaro')
@@ -396,7 +396,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Glasgow',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:glasgow'],
   '2',
   (select id from regions where key = 'GB:Glasgow')
@@ -405,7 +405,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Zhuhai',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:zhuhai'],
   '2',
   (select id from regions where key = 'CN:Zhuhai')
@@ -414,7 +414,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Phoenix',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:phoenix'],
   '2',
   (select id from regions where key = 'US:Phoenix')
@@ -423,7 +423,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Dakar',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:dakar'],
   '2',
   (select id from regions where key = 'SN:Dakar')
@@ -432,7 +432,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Cincinnati',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:cincinnati'],
   '2',
   (select id from regions where key = 'US:Cincinnati')
@@ -441,7 +441,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Skopje',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:skopje'],
   '2',
   (select id from regions where key = 'MK:Skopje')
@@ -450,7 +450,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Kansas City',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:kansas_city'],
   '2',
   (select id from regions where key = 'US:Kansas_City')
@@ -459,7 +459,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Limassol',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:limassol'],
   '2',
   (select id from regions where key = 'CY:Limassol')
@@ -468,7 +468,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'La Paz',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:la_paz'],
   '2',
   (select id from regions where key = 'BO:La_Paz')
@@ -477,7 +477,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Leeds',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:leeds'],
   '2',
   (select id from regions where key = 'GB:Leeds')
@@ -486,7 +486,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Guayaquil',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:guayaquil'],
   '2',
   (select id from regions where key = 'EC:Guayaquil')
@@ -495,7 +495,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Hartford',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:hartford'],
   '2',
   (select id from regions where key = 'US:Hartford')
@@ -504,7 +504,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Belfast',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:belfast'],
   '2',
   (select id from regions where key = 'GB:Belfast')
@@ -513,7 +513,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Indianapolis',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:indianapolis'],
   '2',
   (select id from regions where key = 'US:Indianapolis')
@@ -522,7 +522,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Algiers',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:algiers'],
   '2',
   (select id from regions where key = 'DZ:Algiers')
@@ -531,7 +531,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Shijiazhuang',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:shijiazhuang'],
   '2',
   (select id from regions where key = 'CN:Shijiazhuang')
@@ -540,7 +540,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Lusaka',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:lusaka'],
   '2',
   (select id from regions where key = 'ZM:Lusaka')
@@ -549,7 +549,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
   'Guadalajara',
-  'High sufficiency tier global city',
+  'High sufficiency tier city',
   array['city:guadalajara'],
   '2',
   (select id from regions where key = 'MX:Guadalajara')

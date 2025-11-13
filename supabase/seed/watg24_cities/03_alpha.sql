@@ -336,7 +336,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Seoul',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:seoul'],
   '2',
   (select id from regions where key = 'KR:Seoul')
@@ -345,7 +345,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Milan',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:milan'],
   '2',
   (select id from regions where key = 'IT:Milan')
@@ -354,7 +354,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Toronto',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:toronto'],
   '2',
   (select id from regions where key = 'CA:Toronto')
@@ -363,7 +363,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Frankfurt',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:frankfurt'],
   '2',
   (select id from regions where key = 'DE:Frankfurt')
@@ -372,7 +372,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Chicago',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:chicago'],
   '2',
   (select id from regions where key = 'US:Chicago')
@@ -381,7 +381,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Jakarta',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:jakarta'],
   '2',
   (select id from regions where key = 'ID:Jakarta')
@@ -390,7 +390,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Sao Paulo',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:sao_paulo'],
   '2',
   (select id from regions where key = 'BR:Sao_Paulo')
@@ -399,7 +399,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Mexico City',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:mexico_city'],
   '2',
   (select id from regions where key = 'MX:Mexico_City')
@@ -408,7 +408,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Mumbai',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:mumbai'],
   '2',
   (select id from regions where key = 'IN:Mumbai')
@@ -417,7 +417,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Madrid',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:madrid'],
   '2',
   (select id from regions where key = 'ES:Madrid')
@@ -426,7 +426,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Warsaw',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:warsaw'],
   '2',
   (select id from regions where key = 'PL:Warsaw')
@@ -435,7 +435,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Guangzhou',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:guangzhou'],
   '2',
   (select id from regions where key = 'CN:Guangzhou')
@@ -444,7 +444,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Istanbul',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:istanbul'],
   '2',
   (select id from regions where key = 'TR:Istanbul')
@@ -453,7 +453,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Amsterdam',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:amsterdam'],
   '2',
   (select id from regions where key = 'NL:Amsterdam')
@@ -462,7 +462,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Bangkok',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:bangkok'],
   '2',
   (select id from regions where key = 'TH:Bangkok')
@@ -471,7 +471,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Los Angeles',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:los_angeles'],
   '2',
   (select id from regions where key = 'US:Los_Angeles')
@@ -480,7 +480,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha'),
   'Kuala Lumpur',
-  'Alpha tier global city',
+  'Alpha tier city',
   array['city:kuala_lumpur'],
   '2',
   (select id from regions where key = 'MY:Kuala_Lumpur')

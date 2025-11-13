@@ -51,7 +51,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus_plus'),
   'London',
-  'Alpha++ tier global city',
+  'Alpha++ tier city',
   array['city:london'],
   '2',
   (select id from regions where key = 'GB:London')
@@ -60,7 +60,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_alpha_plus_plus'),
   'New York',
-  'Alpha++ tier global city',
+  'Alpha++ tier city',
   array['city:new_york'],
   '2',
   (select id from regions where key = 'US:New_York')

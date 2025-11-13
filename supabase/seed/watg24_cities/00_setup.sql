@@ -31,7 +31,6 @@ insert into card_groups (name) values
   ('cities_watg24_gamma'),
   ('cities_watg24_gamma_minus'),
   ('cities_watg24_high_sufficiency'),
-  ('cities_watg24_sufficiency');
 
 -- --------------------------------------------
 -- 2. CREATE TOPICS
@@ -93,6 +92,5 @@ values (
     (select id from card_groups where name = 'cities_watg24_gamma'),
     (select id from card_groups where name = 'cities_watg24_gamma_minus'),
     (select id from card_groups where name = 'cities_watg24_high_sufficiency'),
-    (select id from card_groups where name = 'cities_watg24_sufficiency')
   ]
 );

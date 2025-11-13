@@ -312,7 +312,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Poznan',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:poznan'],
   '2',
   (select id from regions where key = 'PL:Poznan')
@@ -321,7 +321,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Labuan',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:labuan'],
   '2',
   (select id from regions where key = 'MY:Labuan')
@@ -330,7 +330,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Charlotte',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:charlotte'],
   '2',
   (select id from regions where key = 'US:Charlotte')
@@ -339,7 +339,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Pittsburgh',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:pittsburgh'],
   '2',
   (select id from regions where key = 'US:Pittsburgh')
@@ -348,7 +348,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Valencia (Spain)',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:valencia_spain'],
   '2',
   (select id from regions where key = 'ES:Valencia')
@@ -357,7 +357,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Edinburgh',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:edinburgh'],
   '2',
   (select id from regions where key = 'GB:Edinburgh')
@@ -366,7 +366,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Jeddah',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:jeddah'],
   '2',
   (select id from regions where key = 'SA:Jeddah')
@@ -375,7 +375,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Turin',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:turin'],
   '2',
   (select id from regions where key = 'IT:Turin')
@@ -384,7 +384,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Katowice',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:katowice'],
   '2',
   (select id from regions where key = 'PL:Katowice')
@@ -393,7 +393,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Baku',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:baku'],
   '2',
   (select id from regions where key = 'AZ:Baku')
@@ -402,7 +402,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Penang',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:penang'],
   '2',
   (select id from regions where key = 'MY:Penang')
@@ -411,7 +411,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Dar es Salaam',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:dar_es_salaam'],
   '2',
   (select id from regions where key = 'TZ:Dar_es_Salaam')
@@ -420,7 +420,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Wellington',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:wellington'],
   '2',
   (select id from regions where key = 'NZ:Wellington')
@@ -429,7 +429,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Managua',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:managua'],
   '2',
   (select id from regions where key = 'NI:Managua')
@@ -438,7 +438,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Cleveland',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:cleveland'],
   '2',
   (select id from regions where key = 'US:Cleveland')
@@ -447,7 +447,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Nanchang',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:nanchang'],
   '2',
   (select id from regions where key = 'CN:Nanchang')
@@ -456,7 +456,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Changchun',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:changchun'],
   '2',
   (select id from regions where key = 'CN:Changchun')
@@ -465,7 +465,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Cali',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:cali'],
   '2',
   (select id from regions where key = 'CO:Cali')
@@ -474,7 +474,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'St Louis',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:st_louis'],
   '2',
   (select id from regions where key = 'US:St_Louis')
@@ -483,7 +483,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Ljubljana',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:ljubljana'],
   '2',
   (select id from regions where key = 'SI:Ljubljana')
@@ -492,7 +492,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Baltimore',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:baltimore'],
   '2',
   (select id from regions where key = 'US:Baltimore')
@@ -501,7 +501,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Bilbao',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:bilbao'],
   '2',
   (select id from regions where key = 'ES:Bilbao')
@@ -510,7 +510,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Marseille',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:marseille'],
   '2',
   (select id from regions where key = 'FR:Marseille')
@@ -519,7 +519,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Surabaya',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:surabaya'],
   '2',
   (select id from regions where key = 'ID:Surabaya')
@@ -528,7 +528,7 @@ values
 (
   (select id from card_groups where name = 'cities_watg24_gamma_minus'),
   'Accra',
-  'Gamma- tier global city',
+  'Gamma- tier city',
   array['city:accra'],
   '2',
   (select id from regions where key = 'GH:Accra')
