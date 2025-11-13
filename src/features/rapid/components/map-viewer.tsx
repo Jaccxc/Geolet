@@ -19,6 +19,7 @@ export function MapViewer({ regions, onPinDrop, disabled = false, showAnswer = f
   const map = useRef<maplibregl.Map | null>(null);
   const [userPin, setUserPin] = useState<maplibregl.Marker | null>(null);
   const answerMarkersRef = useRef<maplibregl.Marker[]>([]);
+  const hasZoomedToAnswer = useRef<boolean>(false);
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
@@ -99,7 +100,13 @@ export function MapViewer({ regions, onPinDrop, disabled = false, showAnswer = f
 
   // Show answer regions
   useEffect(() => {
-    if (!map.current || !showAnswer) return;
+    if (!map.current || !showAnswer) {
+      // Reset zoom flag when answer is hidden
+      if (!showAnswer) {
+        hasZoomedToAnswer.current = false;
+      }
+      return;
+    }
 
     const sourceId = 'answer-regions';
     const outlineId = `${sourceId}-outline`;
@@ -189,8 +196,8 @@ export function MapViewer({ regions, onPinDrop, disabled = false, showAnswer = f
       answerMarkersRef.current.push(marker);
     });
 
-    // Zoom to answer regions
-    if (regions.length > 0) {
+    // Zoom to answer regions (only once when answer is first shown)
+    if (regions.length > 0 && !hasZoomedToAnswer.current) {
       // Calculate bbox from geometry or use centroids
       const regionsWithGeometry = regions.filter((r) => r.geometry);
 
@@ -230,6 +237,9 @@ export function MapViewer({ regions, onPinDrop, disabled = false, showAnswer = f
           });
         }
       }
+
+      // Mark that we've zoomed to the answer
+      hasZoomedToAnswer.current = true;
     }
   }, [showAnswer, regions]);
 
