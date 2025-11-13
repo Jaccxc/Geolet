@@ -74,14 +74,6 @@ export function MapCard({ prompt, hint, answerRegion, onAnswer }: MapCardProps) 
           {hint && <div className='mt-1 text-sm text-muted-foreground'>{hint}</div>}
         </div>
 
-        {/* Instructions */}
-        {!pinLocation && !submitted && (
-          <Badge variant='outline' className='inline-flex items-center gap-2'>
-            <MapPin className='h-4 w-4' />
-            Click on the map to place your answer
-          </Badge>
-        )}
-
         {/* Result Feedback */}
         {result && submitted && (
           <div
@@ -110,12 +102,7 @@ export function MapCard({ prompt, hint, answerRegion, onAnswer }: MapCardProps) 
 
       <CardContent className='space-y-4'>
         {/* Map */}
-        <MapViewer
-          regions={[answerRegion]}
-          onPinDrop={handlePinDrop}
-          disabled={submitted}
-          showAnswer={submitted}
-        />
+        <MapViewer regions={[answerRegion]} onPinDrop={handlePinDrop} disabled={submitted} showAnswer={submitted} />
 
         {/* Action Button */}
         {!submitted ? (
