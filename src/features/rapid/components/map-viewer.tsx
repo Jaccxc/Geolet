@@ -20,6 +20,7 @@ export function MapViewer({ regions, onPinDrop, disabled = false, showAnswer = f
   const [userPin, setUserPin] = useState<maplibregl.Marker | null>(null);
   const answerMarkersRef = useRef<maplibregl.Marker[]>([]);
   const hasZoomedToAnswer = useRef<boolean>(false);
+  const layersAdded = useRef<boolean>(false);
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
@@ -100,31 +101,43 @@ export function MapViewer({ regions, onPinDrop, disabled = false, showAnswer = f
 
   // Show answer regions
   useEffect(() => {
-    if (!map.current || !showAnswer) {
-      // Reset zoom flag when answer is hidden
-      if (!showAnswer) {
-        hasZoomedToAnswer.current = false;
-      }
-      return;
-    }
+    if (!map.current) return;
 
     const sourceId = 'answer-regions';
     const outlineId = `${sourceId}-outline`;
 
-    // Remove existing layers/sources
-    if (map.current.getLayer(sourceId)) {
-      map.current.removeLayer(sourceId);
-    }
-    if (map.current.getLayer(outlineId)) {
-      map.current.removeLayer(outlineId);
-    }
-    if (map.current.getSource(sourceId)) {
-      map.current.removeSource(sourceId);
+    // If answer should be hidden and layers are added, remove them
+    if (!showAnswer && layersAdded.current) {
+      // Remove existing layers/sources
+      if (map.current.getLayer(sourceId)) {
+        map.current.removeLayer(sourceId);
+      }
+      if (map.current.getLayer(outlineId)) {
+        map.current.removeLayer(outlineId);
+      }
+      if (map.current.getSource(sourceId)) {
+        map.current.removeSource(sourceId);
+      }
+
+      // Clear existing answer markers
+      answerMarkersRef.current.forEach((marker) => marker.remove());
+      answerMarkersRef.current = [];
+
+      // Reset flags
+      hasZoomedToAnswer.current = false;
+      layersAdded.current = false;
+      return;
     }
 
-    // Clear existing answer markers
-    answerMarkersRef.current.forEach((marker) => marker.remove());
-    answerMarkersRef.current = [];
+    // If answer should be shown but layers are already added, do nothing
+    if (showAnswer && layersAdded.current) {
+      return;
+    }
+
+    // If answer should be shown and layers haven't been added yet, add them
+    if (!showAnswer) {
+      return;
+    }
 
     // Build GeoJSON FeatureCollection from regions with geometry
     const features = regions.filter((r) => r.geometry).map((r) => ({
@@ -241,6 +254,9 @@ export function MapViewer({ regions, onPinDrop, disabled = false, showAnswer = f
       // Mark that we've zoomed to the answer
       hasZoomedToAnswer.current = true;
     }
+
+    // Mark that layers have been added
+    layersAdded.current = true;
   }, [showAnswer, regions]);
 
   return <div ref={mapContainer} className={`map-container ${!disabled ? 'map-pin-cursor' : ''}`} />;
