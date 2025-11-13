@@ -8,10 +8,10 @@
  * 4. Template fact cards (with TODO for region mappings)
  */
 
+import { parse } from 'csv-parse/sync';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { parse } from 'csv-parse/sync';
 
 // ES module equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -223,10 +223,10 @@ function generateFactCardTemplate(city: CityEntry): string {
 }
 
 function generateCitySection(cities: CityEntry[], tier: string): string {
-  const tierCities = cities.filter(c => c.tier === tier);
+  const tierCities = cities.filter((c) => c.tier === tier);
   if (tierCities.length === 0) return '';
 
-  const tierConfig = TIER_CONFIG.find(t => t.column === tier);
+  const tierConfig = TIER_CONFIG.find((t) => t.column === tier);
   if (!tierConfig) return '';
 
   let section = `-- ============================================
@@ -247,7 +247,7 @@ insert into fact_cards (card_group_id, prompt, hint, primary_skill_tags, difficu
 values
 `;
 
-  const factCards = tierCities.map(city => generateFactCardTemplate(city));
+  const factCards = tierCities.map((city) => generateFactCardTemplate(city));
   section += factCards.join(',\n\n');
   section += ';\n\n';
 
@@ -328,7 +328,7 @@ end $$;
 // ============================================
 
 function generateCityListJSON(cities: CityEntry[]): string {
-  const cityList = cities.map(c => ({
+  const cityList = cities.map((c) => ({
     name: c.name,
     tier: c.tier,
     skillKey: `city:${sanitizeForKey(c.name)}`,
@@ -364,7 +364,7 @@ function main() {
     // Generate tier breakdown
     console.log('📊 Cities by Tier:');
     for (const tierConfig of TIER_CONFIG) {
-      const count = cities.filter(c => c.tier === tierConfig.column).length;
+      const count = cities.filter((c) => c.tier === tierConfig.column).length;
       console.log(`   ${tierConfig.column.padEnd(20)} : ${count} cities`);
     }
     console.log('');
@@ -395,7 +395,6 @@ function main() {
     console.log('      bun run migration:new add_watg24_cities_setup');
     console.log('   5. Copy filled template to migration file');
     console.log('   6. Apply: bun run migration:up\n');
-
   } catch (error) {
     console.error('❌ Error:', error);
     process.exit(1);
@@ -405,4 +404,4 @@ function main() {
 // Run main
 main();
 
-export { parseCitiesFromCSV, generateMigration };
+export { generateMigration, parseCitiesFromCSV };
