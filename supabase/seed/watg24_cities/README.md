@@ -4,7 +4,7 @@ This directory contains WATG24 city data split into separate files for easier ma
 
 ## File Structure
 
-**Completed Tiers (165/335 cities - 49.3%):**
+**Completed Tiers (216/335 cities - 64.5%):**
 - ✅ `00_setup.sql` - Card groups and topics setup
 - ✅ `01_alpha_plus_plus.sql` - Alpha++ tier (2 cities)
 - ✅ `02_alpha_plus.sql` - Alpha+ tier (8 cities)
@@ -15,11 +15,11 @@ This directory contains WATG24 city data split into separate files for easier ma
 - ✅ `07_beta_minus.sql` - Beta- tier (28 cities)
 - ✅ `08_gamma_plus.sql` - Gamma+ tier (20 cities)
 - ✅ `09_gamma.sql` - Gamma tier (25 cities)
+- ✅ `10_gamma_minus.sql` - Gamma- tier (25 cities)
+- ✅ `11_high_sufficiency.sql` - High Sufficiency tier (26 cities)
 
-**Pending Tiers (170/335 cities - 50.7%):**
-- ⏳ `10_gamma_minus.sql` - Gamma- tier (25 cities) - NEXT
-- ⏳ `11_high_sufficiency.sql` - High Sufficiency tier (26 cities)
-- ⏳ `12_sufficiency.sql` - Sufficiency tier (119 cities)
+**Pending Tiers (119/335 cities - 35.5%):**
+- ⏳ `12_sufficiency.sql` - Sufficiency tier (119 cities) - NEXT
 
 ## Usage
 

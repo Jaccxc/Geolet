@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 import type { Topic } from '../types';
 
+import { TopicSkeleton } from './topic-skeleton';
+
 interface TopicSelectorProps {
   mode: 'pick' | 'map';
   onSelect: (topicKey: string) => void;
@@ -43,11 +45,10 @@ export function TopicSelector({ mode, onSelect, selectedTopic }: TopicSelectorPr
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center py-12'>
-        <div className='text-center'>
-          <div className='mb-2 text-lg'>Loading topics...</div>
-          <div className='text-sm text-muted-foreground'>Fetching available game topics</div>
-        </div>
+      <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
+        {Array.from({ length: 6 }).map((_, idx) => (
+          <TopicSkeleton key={idx} />
+        ))}
       </div>
     );
   }
@@ -65,9 +66,7 @@ export function TopicSelector({ mode, onSelect, selectedTopic }: TopicSelectorPr
     return (
       <div className='rounded-lg border border-dashed p-12 text-center'>
         <div className='text-lg font-semibold'>No topics available</div>
-        <div className='mt-2 text-sm text-muted-foreground'>
-          No topics are configured for {mode} mode yet.
-        </div>
+        <div className='mt-2 text-sm text-muted-foreground'>No topics are configured for {mode} mode yet.</div>
       </div>
     );
   }
