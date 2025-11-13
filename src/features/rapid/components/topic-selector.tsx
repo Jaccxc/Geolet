@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
+import { DynamicIcon } from 'lucide-react/dynamic';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -74,9 +75,6 @@ export function TopicSelector({ mode, onSelect, selectedTopic }: TopicSelectorPr
   return (
     <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
       {topics.map((topic) => {
-        const maybeIcon = LucideIcons[topic.icon as keyof typeof LucideIcons];
-        const Icon = (typeof maybeIcon === 'function' ? maybeIcon : LucideIcons.HelpCircle) as LucideIcon;
-
         return (
           <Card
             key={topic.key}
@@ -89,7 +87,7 @@ export function TopicSelector({ mode, onSelect, selectedTopic }: TopicSelectorPr
           >
             <CardHeader>
               <CardTitle className='flex items-center gap-2'>
-                <Icon className='h-5 w-5 text-primary' />
+                <DynamicIcon name={(topic.icon ?? 'HelpCircle') as any} className='h-5 w-5 text-primary' />
                 <span>{topic.title}</span>
               </CardTitle>
               {topic.description && <CardDescription>{topic.description}</CardDescription>}
