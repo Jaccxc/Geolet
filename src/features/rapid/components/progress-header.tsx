@@ -30,7 +30,7 @@ export function ProgressHeader({ current, total, correct, timeElapsed }: Progres
           </Badge>
         </div>
       </div>
-      <Progress value={(current - 1 / total) * 100} className='h-2' />
+      <Progress value={((current - 1) / total) * 100} className='h-2' />
     </div>
   );
 }
