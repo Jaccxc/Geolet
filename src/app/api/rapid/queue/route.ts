@@ -35,6 +35,13 @@ export async function POST(req: NextRequest) {
       maxCards,
     });
 
+    // Fetch topic if topicKey provided (needed for use_country_region)
+    let topic = null;
+    if (topicKey) {
+      const { data } = await supabase.from('topics').select('*').eq('key', topicKey).single();
+      topic = data;
+    }
+
     // Generate appropriate queue items
     if (mode === 'pick') {
       // Pick Mode: Generate choice options
@@ -45,7 +52,7 @@ export async function POST(req: NextRequest) {
           prompt: card.prompt,
           hint: card.hint,
           difficulty: card.difficulty,
-          options: await generatePickOptions(card),
+          options: await generatePickOptions(card, topic),
         }))
       );
 

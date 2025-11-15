@@ -1,14 +1,18 @@
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
-import type { FactCard, PickOption } from '../types';
+import type { FactCard, PickOption, Topic } from '../types';
 
 /**
  * Generate multiple-choice options for Pick mode
  * Returns 1 correct answer + 5 distractors (shuffled)
  *
- * NEW: Works with answer_region_id FK instead of answer contract
+ * If topic.use_country_region is true, will display country regions
+ * instead of the answer region (useful for city-level cards)
  */
-export async function generatePickOptions(card: FactCard): Promise<PickOption[]> {
+export async function generatePickOptions(
+  card: FactCard,
+  topic: Topic | null = null
+): Promise<PickOption[]> {
   const supabase = await createSupabaseServerClient();
 
   // Get the correct answer region
@@ -22,26 +26,43 @@ export async function generatePickOptions(card: FactCard): Promise<PickOption[]>
     throw new Error(`Answer region not found: ${card.answer_region_id}`);
   }
 
-  // Get distractor regions (same level, different keys)
+  // Determine which region to use for display
+  let displayRegion = correctRegion;
+
+  if (topic?.use_country_region && correctRegion.country) {
+    // Fetch the country region using the country code
+    const { data: countryRegion } = await supabase
+      .from('regions')
+      .select('*')
+      .eq('key', correctRegion.country)
+      .single();
+
+    if (countryRegion) {
+      displayRegion = countryRegion;
+    }
+  }
+
+  // Get distractor regions (same level as display region)
   const { data: allRegions } = await supabase
     .from('regions')
     .select('*')
-    .eq('level', correctRegion.level)
-    .neq('id', correctRegion.id)
+    .eq('level', displayRegion.level)
+    .neq('id', displayRegion.id)
     .limit(50);
 
   if (!allRegions || allRegions.length < 5) {
-    throw new Error(`Not enough distractor regions for level: ${correctRegion.level}`);
+    throw new Error(`Not enough distractor regions for level: ${displayRegion.level}`);
   }
 
   // Randomly select 5 distractors
   const distractors = shuffleArray(allRegions).slice(0, 5);
 
-  // Build options
+  // Build options using displayRegion for labels
+  // BUT keep correctRegion.id for validation!
   const options: PickOption[] = [
     {
-      region_id: correctRegion.id,
-      label: correctRegion.name,
+      region_id: correctRegion.id, // IMPORTANT: Still use original for grading!
+      label: displayRegion.name,
       correct: true,
     },
     ...distractors.map((r) => ({

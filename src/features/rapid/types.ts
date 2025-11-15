@@ -29,6 +29,7 @@ export const topicSchema = z.object({
   map_mode_active: z.boolean(),
   difficulty: topicDifficultySchema.nullable(),
   target_card_group_ids: z.array(z.string().uuid()),
+  use_country_region: z.boolean(),
   created_at: z.string(),
 });
 
