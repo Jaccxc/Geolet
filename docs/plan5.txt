@@ -1,0 +1,22 @@
+MUST MUST MUST make these few changes:
+
+Before doing any of the tasks, please first invistigate the related function and code. 
+After doing any of this tasks, please write a report of what you did and save it to /docs, be concise about the report.
+create a comprehensive to-do list before execution
+
+you could do any of the operations to this codebase, no need to ask me first.
+
+1. make topic card displayed in /rapid sort in time by created_time
+
+2. during pick mode in rapid game, either player had made correct choice or wrong choice, the whole six cards would looked ghosted(or should i say disabled). but the correct behavior should be: if the player had made correct choice, the picked item would lit up (like what we have now) and still be ENABLED state (by that i mean it should not looked ghosted) in visual, and most importantly, it should look green, still not clickable tho. and when player made incorrect choice, the correct answer would like what we had if player did correctly, ENABLED but the color is white. and the player chosen wrong answer should be red (also ENABLED)
+
+3. investigate how current flow of rapid mode and @docs/manual_ADDING_NEW_CONTENT.md. notice that we have optional skill card for every fact card. but it seems like we are not utilize this to our game. in my imagine, for every card pick in pick mode and every pin submit in map mode. when revealing answer,  we should show this skill card on the side to make user learn.
+design this skill card and integrate to currrent game. also, remember that we should make api calls as less as possible. 
+
+4. in map mode, current flow is that we make user place pin on map, and player has to hit submit answer. i want that player could also press space. when pin is presented, and user press space, it should also submit answer
+
+5. i dont want auto transfer to next round in pick mode and map mode. we have already modified to the map mode, so only the pick mode have to be changed. instead of auto transfer, we would have hint on top of the whole panel of those 6 options (but under the hightlighted correct answer / wrong answer) to say click anywhere to go next kind of stuff. and we make it that way. and also, space should do the same trick.
+
+6. also implement this press space to go to next round for map mode.
+
+7. after either of the game mode, in the finish screen, there is a start a new session button. currently it;s not working, fix it. 

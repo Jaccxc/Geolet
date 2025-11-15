@@ -20,9 +20,10 @@ interface GameScreenProps {
   queueItems: (PickQueueItem | MapQueueItem)[];
   mode: 'pick' | 'map';
   onComplete: (results: any) => void;
+  onNewSession?: () => void;
 }
 
-export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
+export function GameScreen({ queueItems, mode, onComplete, onNewSession }: GameScreenProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [results, setResults] = useState<any[]>([]);
   const [startTime] = useState(Date.now());
@@ -86,7 +87,7 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
   const correctCount = results.filter((r) => r.correct).length;
 
   if (isComplete) {
-    return <SessionRecap results={results} mode={mode} totalTimeMs={Date.now() - startTime} />;
+    return <SessionRecap results={results} mode={mode} totalTimeMs={Date.now() - startTime} onNewSession={onNewSession} />;
   }
 
   const currentItem = queueItems[currentIndex];
@@ -116,6 +117,7 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
           hint={currentItem.hint}
           answerRegion={currentItem.answer_region}
           onAnswer={(pin, time, correct) => handleAnswer(pin, time, correct)}
+          skillTags={currentItem.skill_tags}
         />
       ) : 'options' in currentItem ? (
         <PickCard
@@ -124,6 +126,7 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
           hint={currentItem.hint}
           options={currentItem.options}
           onAnswer={handleAnswer}
+          skillTags={currentItem.skill_tags}
         />
       ) : null}
     </div>

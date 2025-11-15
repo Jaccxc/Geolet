@@ -171,6 +171,7 @@ export interface PickQueueItem {
   hint: string | null;
   difficulty: FactDifficulty;
   options: PickOption[];
+  skill_tags?: SkillTag[];
 }
 
 // Map Mode
@@ -181,6 +182,7 @@ export interface MapQueueItem {
   hint: string | null;
   difficulty: FactDifficulty;
   answer_region: Region;
+  skill_tags?: SkillTag[];
 }
 
 export type QueueItem = PickQueueItem | MapQueueItem;

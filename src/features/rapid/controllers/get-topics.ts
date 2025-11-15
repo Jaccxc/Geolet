@@ -22,6 +22,9 @@ export async function getTopics(options?: {
     query = query.eq('map_mode_active', true);
   }
 
+  // Sort by created_at in ascending order (oldest first)
+  query = query.order('created_at', { ascending: true });
+
   const { data, error } = await query;
 
   if (error) throw error;

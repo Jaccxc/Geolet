@@ -86,6 +86,13 @@ export function MapModeTab() {
     }
   };
 
+  const handleNewSession = () => {
+    setSessionState('topics');
+    setQueueItems([]);
+    setSelectedTopic(undefined);
+    setError(null);
+  };
+
   if (loading) {
     return (
       <div className='flex items-center justify-center py-20'>
@@ -106,7 +113,7 @@ export function MapModeTab() {
   }
 
   if (sessionState === 'playing') {
-    return <GameScreen queueItems={queueItems} mode="map" onComplete={handleSessionComplete} />;
+    return <GameScreen queueItems={queueItems} mode="map" onComplete={handleSessionComplete} onNewSession={handleNewSession} />;
   }
 
   return (

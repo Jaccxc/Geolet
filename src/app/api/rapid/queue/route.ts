@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { buildQueue } from '@/features/rapid/controllers/build-queue';
 import { getAnswerRegion } from '@/features/rapid/controllers/generate-map-regions';
 import { generatePickOptions } from '@/features/rapid/controllers/generate-pick-options';
+import { getSkillTagsByKeys } from '@/features/rapid/controllers/get-skill-tags';
 import type { MapQueueItem, PickQueueItem } from '@/features/rapid/types';
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
@@ -46,14 +47,22 @@ export async function POST(req: NextRequest) {
     if (mode === 'pick') {
       // Pick Mode: Generate choice options
       const queueItems: PickQueueItem[] = await Promise.all(
-        cards.map(async (card) => ({
-          fact_id: card.id,
-          card_group_id: card.card_group_id,
-          prompt: card.prompt,
-          hint: card.hint,
-          difficulty: card.difficulty,
-          options: await generatePickOptions(card, topic),
-        }))
+        cards.map(async (card) => {
+          // Fetch skill tags for this card
+          const skillTags = card.primary_skill_tags.length > 0
+            ? await getSkillTagsByKeys(card.primary_skill_tags)
+            : [];
+
+          return {
+            fact_id: card.id,
+            card_group_id: card.card_group_id,
+            prompt: card.prompt,
+            hint: card.hint,
+            difficulty: card.difficulty,
+            options: await generatePickOptions(card, topic),
+            skill_tags: skillTags,
+          };
+        })
       );
 
       return NextResponse.json({
@@ -67,6 +76,11 @@ export async function POST(req: NextRequest) {
         cards.map(async (card) => {
           const answerRegion = await getAnswerRegion(card);
 
+          // Fetch skill tags for this card
+          const skillTags = card.primary_skill_tags.length > 0
+            ? await getSkillTagsByKeys(card.primary_skill_tags)
+            : [];
+
           return {
             fact_id: card.id,
             card_group_id: card.card_group_id,
@@ -74,6 +88,7 @@ export async function POST(req: NextRequest) {
             hint: card.hint,
             difficulty: card.difficulty,
             answer_region: answerRegion,
+            skill_tags: skillTags,
           };
         })
       );
