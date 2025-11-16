@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { PasswordInput } from '@/components/ui/password-input';
 import { PasswordStrengthIndicator } from '@/components/ui/password-strength-indicator';
 import { toast } from '@/components/ui/use-toast';
-import { createSupabaseClientClient } from '@/libs/supabase/supabase-client-client';
+import { createSupabaseBrowserClient } from '@/libs/supabase/supabase-browser-client';
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState('');
@@ -51,7 +51,7 @@ export default function ResetPasswordPage() {
     }
 
     try {
-      const supabase = createSupabaseClientClient();
+      const supabase = createSupabaseBrowserClient();
       const { error } = await supabase.auth.updateUser({ password });
 
       if (error) {
