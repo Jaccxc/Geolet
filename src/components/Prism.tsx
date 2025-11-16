@@ -177,7 +177,7 @@ const Prism: React.FC<PrismProps> = ({
           wob = mat2(c0, c1, c2, c0);
         }
 
-        const int STEPS = 100;
+        const int STEPS = 40;
         for (int i = 0; i < STEPS; i++) {
           p = vec3(f, z);
           p.xz = p.xz * wob;
@@ -241,16 +241,28 @@ const Prism: React.FC<PrismProps> = ({
     });
     const mesh = new Mesh(gl, { geometry, program });
 
+    // --- Add this constant near the top of useEffect() ---
+    const renderScale = 0.6; // 60% internal resolution (try 0.5–0.8)
+
+    // --- Replace your resize function with this ---
     const resize = () => {
       const w = container.clientWidth || 1;
       const h = container.clientHeight || 1;
-      renderer.setSize(w, h);
+
+      // render smaller internally, but upscale visually
+      renderer.setSize(w * renderScale, h * renderScale);
+      gl.canvas.style.width = `${w}px`;
+      gl.canvas.style.height = `${h}px`;
+
+      // update uniforms based on actual buffer size
       iResBuf[0] = gl.drawingBufferWidth;
       iResBuf[1] = gl.drawingBufferHeight;
-      offsetPxBuf[0] = offX * dpr;
-      offsetPxBuf[1] = offY * dpr;
-      program.uniforms.uPxScale.value = 1 / ((gl.drawingBufferHeight || 1) * 0.1 * SCALE);
+      offsetPxBuf[0] = offX * dpr * renderScale;
+      offsetPxBuf[1] = offY * dpr * renderScale;
+      program.uniforms.uPxScale.value =
+        1 / ((gl.drawingBufferHeight || 1) * 0.1 * SCALE);
     };
+
     const ro = new ResizeObserver(resize);
     ro.observe(container);
     resize();

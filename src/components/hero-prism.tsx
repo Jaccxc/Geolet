@@ -18,14 +18,15 @@ export function HeroPrism({ className }: HeroPrismProps) {
     <div className={cn('relative h-[40rem] w-full', className)}>
       <Prism
         animationType='rotate'
-        timeScale={0.5}
+        timeScale={0.25}
         height={3.5}
         baseWidth={5.5}
         scale={3.6}
         hueShift={0}
         colorFrequency={1}
         noise={0}
-        glow={1}
+        glow={0.8}
+        offset={{ x: 0, y: 400 }}
       />
     </div>
   );

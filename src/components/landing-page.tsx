@@ -9,26 +9,28 @@ import { HeroPrism } from './hero-prism';
 
 export function LandingPage() {
   return (
-    <div className='flex flex-col gap-20 py-12'>
+    <>
       <HeroSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <CTASection />
-    </div>
+      <div className='flex flex-col gap-20 py-20'>
+        <FeaturesSection />
+        <HowItWorksSection />
+        <CTASection />
+      </div>
+    </>
   );
 }
 
 function HeroSection() {
   return (
-    <section className='relative overflow-hidden'>
+    <section className='relative flex min-h-screen items-center overflow-hidden'>
       <div className='pointer-events-none absolute inset-0 -z-10 opacity-80'>
         <HeroPrism className='h-full w-full' />
         <div className='absolute inset-0 bg-gradient-to-b from-black via-black/60 to-black'></div>
       </div>
 
-      <div className='container relative z-10 mx-auto px-4 py-20 text-center'>
+      <div className='container relative z-10 mx-auto flex w-full flex-col justify-center px-4 py-16 text-center'>
         <div className='mx-auto max-w-5xl space-y-10'>
-          <div className='relative mx-auto h-[26rem] w-full max-w-5xl'>
+          <div className='relative mx-auto hidden h-[88vh] w-full max-w-5xl items-center justify-center md:flex'>
             <TextHoverEffect text='Geolet' />
           </div>
 
