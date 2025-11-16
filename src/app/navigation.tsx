@@ -5,17 +5,25 @@ import { AccountMenu } from '@/components/account-menu';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
-import { getSession } from '@/features/account/controllers/get-session';
+import type { Tables } from '@/libs/supabase/types';
 
 import { signOut } from './(auth)/auth-actions';
 
-export async function Navigation() {
-  const session = await getSession();
+interface NavigationProps {
+  isAuthenticated: boolean;
+  user: Tables<'users'> | null;
+}
 
+export function Navigation({ isAuthenticated, user }: NavigationProps) {
   return (
     <div className='relative flex items-center gap-6'>
-      {session ? (
-        <AccountMenu signOut={signOut} />
+      {isAuthenticated ? (
+        <div className='flex items-center gap-3'>
+          <span className='hidden text-sm font-medium text-white/90 sm:inline-flex'>
+            {user?.full_name ?? 'Set your name'}
+          </span>
+          <AccountMenu signOut={signOut} displayName={user?.full_name} avatarUrl={user?.avatar_url} />
+        </div>
       ) : (
         <>
           <Button variant='default' className='hidden flex-shrink-0 lg:flex' asChild>

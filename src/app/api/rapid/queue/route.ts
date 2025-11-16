@@ -22,15 +22,11 @@ export async function POST(req: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const body = await req.json();
     const { mode, topicKey, cardGroupIds, maxCards } = requestSchema.parse(body);
 
     // Build queue
-    const cards = await buildQueue(user.id, {
+    const cards = await buildQueue(user?.id ?? null, {
       topicKey,
       cardGroupIds,
       maxCards,

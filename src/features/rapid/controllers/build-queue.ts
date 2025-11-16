@@ -4,7 +4,7 @@ import type { FactCard, QueueOptions } from '../types';
 
 import { getFactCards, getFactCardsByTopic } from './get-fact-cards';
 
-export async function buildQueue(userId: string, options: QueueOptions): Promise<FactCard[]> {
+export async function buildQueue(userId: string | null, options: QueueOptions): Promise<FactCard[]> {
   const supabase = await createSupabaseServerClient();
   const maxCards = options.maxCards ?? 20;
 
@@ -30,13 +30,21 @@ export async function buildQueue(userId: string, options: QueueOptions): Promise
     return [];
   }
 
-  const { data: stats } = await supabase
-    .from('user_fact_stats')
-    .select('*')
-    .eq('user_id', userId)
-    .in('fact_id', cardIds);
+  const statsMap = new Map<string, any>();
 
-  const statsMap = new Map(stats?.map((s) => [s.fact_id, s]) || []);
+  if (userId) {
+    const { data: stats, error } = await supabase
+      .from('user_fact_stats')
+      .select('*')
+      .eq('user_id', userId)
+      .in('fact_id', cardIds);
+
+    if (error) {
+      console.error('Failed to load user stats for queue prioritization:', error);
+    } else {
+      stats?.forEach((row) => statsMap.set(row.fact_id, row));
+    }
+  }
 
   // Score and prioritize cards
   const scored = cards.map((card) => {

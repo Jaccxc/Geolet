@@ -41,23 +41,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(`${siteUrl}/login?error=${encodeURIComponent('Failed to get user data')}`);
     }
 
-    // Check if user is subscribed, if not redirect to pricing page
-    const { data: userSubscription, error: subscriptionError } = await supabase
-      .from('subscriptions')
-      .select('*, prices(*, products(*))')
-      .in('status', ['trialing', 'active'])
-      .maybeSingle();
-
-    if (subscriptionError) {
-      console.error('Error checking subscription:', subscriptionError);
-      // Continue anyway, will redirect to pricing if no subscription
-    }
-
-    if (!userSubscription) {
-      return NextResponse.redirect(`${siteUrl}/pricing`);
-    } else {
-      return NextResponse.redirect(`${siteUrl}`);
-    }
+    return NextResponse.redirect(`${siteUrl}`);
   }
 
   // No code provided, redirect to home

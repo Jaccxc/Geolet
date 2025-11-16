@@ -208,7 +208,7 @@ export interface GradeResult {
   correct: boolean;
   time_ms: number;
   distance?: number;
-  srs: {
+  srs?: {
     new_ease: number;
     due_at: string;
     interval_days: number;

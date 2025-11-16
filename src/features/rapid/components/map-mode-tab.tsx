@@ -3,9 +3,11 @@
 import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 
+import { useRapidGuestContext } from '../context/rapid-guest-context';
 import type { Topic } from '../types';
 
 import { GameScreen } from './game-screen';
+import { GuestLimitDialog } from './guest-limit-dialog';
 import { TopicSelector } from './topic-selector';
 
 export function MapModeTab() {
@@ -15,6 +17,9 @@ export function MapModeTab() {
   const [selectedTopic, setSelectedTopic] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [limitDialogOpen, setLimitDialogOpen] = useState(false);
+  const { isAuthenticated, guestSessions, guestLimit, incrementGuestSession } = useRapidGuestContext();
+  const remainingSessions = Math.max(guestLimit - guestSessions, 0);
 
   // Fetch topics on mount
   useEffect(() => {
@@ -33,6 +38,11 @@ export function MapModeTab() {
   }, []);
 
   const handleTopicSelect = async (topicKey: string) => {
+    if (!isAuthenticated && guestSessions >= guestLimit) {
+      setLimitDialogOpen(true);
+      return;
+    }
+
     setSelectedTopic(topicKey);
     setLoading(true);
     setError(null);
@@ -83,6 +93,13 @@ export function MapModeTab() {
       });
     } catch (err) {
       console.error('Failed to submit grades:', err);
+    } finally {
+      if (!isAuthenticated) {
+        const nextCount = incrementGuestSession();
+        if (nextCount >= guestLimit) {
+          setLimitDialogOpen(true);
+        }
+      }
     }
   };
 
@@ -123,7 +140,22 @@ export function MapModeTab() {
         <p className='text-muted-foreground'>Click on a map to identify regions based on scripts and phone codes</p>
       </div>
 
+      {!isAuthenticated && (
+        <div className='rounded-lg border border-yellow-500/30 bg-yellow-500/10 p-3 text-sm text-yellow-200'>
+          You can play{' '}
+          <span className='font-semibold'>{remainingSessions > 0 ? remainingSessions : 0}</span> more session
+          {remainingSessions === 1 ? '' : 's'} as a guest. Log in to unlock unlimited runs and tracked progress.
+        </div>
+      )}
+
       <TopicSelector mode="map" onSelect={handleTopicSelect} selectedTopic={selectedTopic} />
+
+      <GuestLimitDialog
+        open={limitDialogOpen}
+        onOpenChange={setLimitDialogOpen}
+        remainingSessions={remainingSessions}
+        limit={guestLimit}
+      />
     </div>
   );
 }
