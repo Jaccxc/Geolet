@@ -4,8 +4,8 @@ import { getSession } from '@/features/account/controllers/get-session';
 import { getSubscription } from '@/features/account/controllers/get-subscription';
 
 import {
-  resendConfirmationEmail,
   requestPasswordReset,
+  resendConfirmationEmail,
   signInWithOAuth,
   signInWithPassword,
   signUp,
