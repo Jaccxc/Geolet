@@ -6,12 +6,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 import { TextHoverEffect } from './ui/text-hover-effect';
 import { HeroPrism } from './hero-prism';
+import SpotlightCard from './SpotlightCard';
 
 export function LandingPage() {
   return (
     <>
       <HeroSection />
-      <div className='flex flex-col gap-20 py-20'>
+      <div className='flex flex-col gap-32 py-32'>
         <FeaturesSection />
         <HowItWorksSection />
         <CTASection />
@@ -113,17 +114,17 @@ function FeaturesSection() {
         {features.map((feature, index) => {
           const Icon = feature.icon;
           return (
-            <Card key={index} className='border-border bg-card'>
-              <CardHeader>
-                <div className='mb-2 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10'>
+            <SpotlightCard key={index} className='h-full'>
+              <CardHeader className='p-0'>
+                <div className='mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10'>
                   <Icon className='h-6 w-6 text-primary' />
                 </div>
-                <CardTitle>{feature.title}</CardTitle>
+                <CardTitle className='text-2xl'>{feature.title}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className='text-base'>{feature.description}</CardDescription>
+              <CardContent className='p-0 pt-4'>
+                <CardDescription className='text-base leading-relaxed text-muted-foreground'>{feature.description}</CardDescription>
               </CardContent>
-            </Card>
+            </SpotlightCard>
           );
         })}
       </div>
@@ -180,15 +181,25 @@ function HowItWorksSection() {
 function CTASection() {
   return (
     <section className='container mx-auto px-4'>
-      <Card className='border-primary/20 bg-gradient-to-br from-primary/10 to-purple-500/10'>
-        <CardContent className='py-12 text-center'>
-          <h2 className='mb-4 text-4xl font-bold'>Ready to Level Up?</h2>
-          <p className='mb-8 text-xl text-muted-foreground'>Join players training smarter every day</p>
-          <Button asChild size='lg' className='text-lg'>
-            <Link href='/signup'>Start Free Training</Link>
-          </Button>
-        </CardContent>
-      </Card>
+      <div className='relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-neutral-900/50 via-black to-black p-12 text-center shadow-[0_0_120px_rgba(0,0,0,0.45)]'>
+        <div className='pointer-events-none absolute inset-0 opacity-60'>
+        </div>
+
+        <div className='relative z-10 space-y-6'>
+          <h2 className='text-4xl font-bold text-white md:text-5xl'>Train smarter. Climb faster.</h2>
+          <p className='text-lg text-muted-foreground md:text-xl'>
+            Personalized drills, analytics, and rapid mode designed for GeoGuessr grinders.
+          </p>
+          <div className='flex flex-col gap-3 sm:flex-row sm:justify-center'>
+            <Button asChild size='lg' className='text-base font-semibold'>
+              <Link href='/signup'>Start Free Training</Link>
+            </Button>
+            <Button asChild size='lg' variant='outline' className='text-base text-white/80 hover:text-white'>
+              <Link href='/pricing'>See pricing plans</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
