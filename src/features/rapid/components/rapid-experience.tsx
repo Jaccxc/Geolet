@@ -15,7 +15,7 @@ interface RapidExperienceProps {
 
 export function RapidExperience({ isAuthenticated }: RapidExperienceProps) {
   return (
-    <RapidGuestProvider isAuthenticated={isAuthenticated}>
+    <RapidGuestProvider key={isAuthenticated ? 'auth' : 'guest'} isAuthenticated={isAuthenticated}>
       <div className='container mx-auto px-4 py-8'>
         <div className='mb-8'>
           <h1 className='mb-2 text-4xl font-bold'>Rapid Mode</h1>
@@ -35,11 +35,11 @@ export function RapidExperience({ isAuthenticated }: RapidExperienceProps) {
           </TabsList>
 
           <TabsContent value='pick' className='mt-0'>
-            <PickModeTab />
+            <PickModeTab isAuthenticated={isAuthenticated} />
           </TabsContent>
 
           <TabsContent value='map' className='mt-0'>
-            <MapModeTab />
+            <MapModeTab isAuthenticated={isAuthenticated} />
           </TabsContent>
         </Tabs>
       </div>

@@ -10,7 +10,11 @@ import { GameScreen } from './game-screen';
 import { GuestLimitDialog } from './guest-limit-dialog';
 import { TopicSelector } from './topic-selector';
 
-export function PickModeTab() {
+interface PickModeTabProps {
+  isAuthenticated: boolean;
+}
+
+export function PickModeTab({ isAuthenticated }: PickModeTabProps) {
   const [sessionState, setSessionState] = useState<'topics' | 'playing'>('topics');
   const [queueItems, setQueueItems] = useState<any[]>([]);
   const [topics, setTopics] = useState<Topic[]>([]);
@@ -18,7 +22,7 @@ export function PickModeTab() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [limitDialogOpen, setLimitDialogOpen] = useState(false);
-  const { isAuthenticated, guestSessions, guestLimit, incrementGuestSession } = useRapidGuestContext();
+  const { guestSessions, guestLimit, incrementGuestSession } = useRapidGuestContext();
   const remainingSessions = Math.max(guestLimit - guestSessions, 0);
 
   // Fetch topics on mount
@@ -36,6 +40,14 @@ export function PickModeTab() {
     }
     fetchTopics();
   }, []);
+
+  useEffect(() => {
+    setSessionState('topics');
+    setQueueItems([]);
+    setSelectedTopic(undefined);
+    setError(null);
+    setLimitDialogOpen(false);
+  }, [isAuthenticated]);
 
   const handleTopicSelect = async (topicKey: string) => {
     if (!isAuthenticated && guestSessions >= guestLimit) {
