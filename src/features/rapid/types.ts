@@ -30,6 +30,7 @@ export const topicSchema = z.object({
   difficulty: topicDifficultySchema.nullable(),
   target_card_group_ids: z.array(z.string().uuid()),
   queue_mode: z.string().default('pick'),
+  use_country_region: z.boolean().default(false),
   created_at: z.string(),
 });
 
@@ -173,6 +174,7 @@ export interface PickQueueItem {
   hint: string | null;
   difficulty: FactDifficulty;
   options: PickOption[];
+  skill_tags?: SkillTag[];
 }
 
 // Map Mode
@@ -183,6 +185,7 @@ export interface MapQueueItem {
   hint: string | null;
   difficulty: FactDifficulty;
   answer_region: Region;
+  skill_tags?: SkillTag[];
 }
 
 export type QueueItem = PickQueueItem | MapQueueItem;
@@ -208,7 +211,7 @@ export interface GradeResult {
   correct: boolean;
   time_ms: number;
   distance?: number;
-  srs: {
+  srs?: {
     new_ease: number;
     due_at: string;
     interval_days: number;

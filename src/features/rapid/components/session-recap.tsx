@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { Clock, Target, TrendingUp, Trophy } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -10,10 +9,10 @@ interface SessionRecapProps {
   results: any[];
   mode: string;
   totalTimeMs: number;
+  onNewSession?: () => void;
 }
 
-export function SessionRecap({ results, mode, totalTimeMs }: SessionRecapProps) {
-  const router = useRouter();
+export function SessionRecap({ results, mode, totalTimeMs, onNewSession }: SessionRecapProps) {
   const correct = results.filter((r) => r.correct).length;
   const accuracy = Math.round((correct / results.length) * 100);
   const avgTimeMs = results.reduce((sum, r) => sum + r.time_ms, 0) / results.length;
@@ -73,8 +72,17 @@ export function SessionRecap({ results, mode, totalTimeMs }: SessionRecapProps) 
 
           {/* Actions */}
           <div className='flex gap-3'>
-            <Button className='flex-1' onClick={() => router.push('/rapid')}>
-              New Session
+            <Button 
+              className='flex-1' 
+              onClick={() => {
+                if (onNewSession) {
+                  onNewSession();
+                } else {
+                  window.location.href = '/rapid';
+                }
+              }}
+            >
+              Start a New Session
             </Button>
           </div>
         </CardContent>

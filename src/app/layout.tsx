@@ -5,11 +5,15 @@ import Link from 'next/link';
 
 import { Logo } from '@/components/logo';
 import { PageTabs } from '@/components/page-tabs';
+import { ProfileCompletionDialog } from '@/components/profile-completion-dialog';
 import { Toaster } from '@/components/ui/toaster';
 import { getSession } from '@/features/account/controllers/get-session';
+import { getUser } from '@/features/account/controllers/get-user';
+import type { Tables } from '@/libs/supabase/types';
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 
+import { updateFullName } from './(account)/account-actions';
 import { Navigation } from './navigation';
 
 import '@/styles/globals.css';
@@ -36,6 +40,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   const session = await getSession();
+  const userProfile = session ? await getUser() : null;
 
   return (
     <html lang="en" className="dark">
@@ -48,7 +53,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       >
         <div className="flex min-h-screen flex-col">
           {/* Header */}
-          <AppBar />
+          <AppBar isAuthenticated={Boolean(session)} user={userProfile} />
 
           {/* Tabs below header */}
           {session && <PageTabs />}
@@ -61,6 +66,10 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           <Footer />
         </div>
 
+        {session && (
+          <ProfileCompletionDialog initialName={userProfile?.full_name ?? ''} updateFullName={updateFullName} />
+        )}
+
         <Toaster />
         <Analytics />
       </body>
@@ -69,12 +78,12 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 }
 
 
-async function AppBar() {
+function AppBar({ isAuthenticated, user }: { isAuthenticated: boolean; user: Tables<'users'> | null }) {
   return (
     <header className="border-white/8 h-[65px] min-h-[65px] flex-shrink-0">
       <div className="flex h-full items-center justify-between px-8 w-full">
         <Logo />
-        <Navigation />
+        <Navigation isAuthenticated={isAuthenticated} user={user} />
       </div>
     </header>
   );

@@ -5,6 +5,7 @@ import { buildDoomsdayQueueItem } from '@/features/rapid/controllers/build-dooms
 import { buildQueue } from '@/features/rapid/controllers/build-queue';
 import { getAnswerRegion } from '@/features/rapid/controllers/generate-map-regions';
 import { generatePickOptions } from '@/features/rapid/controllers/generate-pick-options';
+import { getSkillTagsByKeys } from '@/features/rapid/controllers/get-skill-tags';
 import type { DoomsdayQueueItem, MapQueueItem, PickQueueItem } from '@/features/rapid/types';
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
@@ -22,38 +23,48 @@ export async function POST(req: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const body = await req.json();
     const { mode, topicKey, cardGroupIds, maxCards } = requestSchema.parse(body);
 
     // Build queue
-    const cards = await buildQueue(user.id, {
+    const cards = await buildQueue(user?.id ?? null, {
       topicKey,
       cardGroupIds,
       maxCards,
     });
 
-    // Doomsday mode: programmatic cards — no region lookups
+    // Doomsday mode: programmatic cards — no region lookups needed
     if (mode === 'doomsday') {
       const queueItems: DoomsdayQueueItem[] = cards.map(buildDoomsdayQueueItem);
       return NextResponse.json({ mode, items: queueItems, total: queueItems.length });
+    }
+
+    // Fetch topic if topicKey provided (needed for use_country_region in pick options)
+    let topic = null;
+    if (topicKey) {
+      const { data } = await supabase.from('topics').select('*').eq('key', topicKey).single();
+      topic = data;
     }
 
     // Generate appropriate queue items
     if (mode === 'pick') {
       // Pick Mode: Generate choice options
       const queueItems: PickQueueItem[] = await Promise.all(
-        cards.map(async (card) => ({
-          fact_id: card.id,
-          card_group_id: card.card_group_id,
-          prompt: card.prompt,
-          hint: card.hint,
-          difficulty: card.difficulty,
-          options: await generatePickOptions(card),
-        }))
+        cards.map(async (card) => {
+          const skillTags = card.primary_skill_tags.length > 0
+            ? await getSkillTagsByKeys(card.primary_skill_tags)
+            : [];
+
+          return {
+            fact_id: card.id,
+            card_group_id: card.card_group_id,
+            prompt: card.prompt,
+            hint: card.hint,
+            difficulty: card.difficulty,
+            options: await generatePickOptions(card, topic),
+            skill_tags: skillTags,
+          };
+        })
       );
 
       return NextResponse.json({
@@ -67,6 +78,10 @@ export async function POST(req: NextRequest) {
         cards.map(async (card) => {
           const answerRegion = await getAnswerRegion(card);
 
+          const skillTags = card.primary_skill_tags.length > 0
+            ? await getSkillTagsByKeys(card.primary_skill_tags)
+            : [];
+
           return {
             fact_id: card.id,
             card_group_id: card.card_group_id,
@@ -74,6 +89,7 @@ export async function POST(req: NextRequest) {
             hint: card.hint,
             difficulty: card.difficulty,
             answer_region: answerRegion,
+            skill_tags: skillTags,
           };
         })
       );

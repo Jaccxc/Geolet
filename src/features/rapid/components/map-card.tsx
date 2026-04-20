@@ -8,18 +8,20 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 import { validateMapAnswer } from '../models/answer-validator';
-import type { Region } from '../types';
+import type { Region, SkillTag } from '../types';
 
 import { MapViewer } from './map-viewer';
+import { SkillCard } from './skill-card';
 
 interface MapCardProps {
   prompt: string;
   hint: string | null;
   answerRegion: Region;
   onAnswer: (pinDrop: [number, number], timeMs: number, correct: boolean) => void;
+  skillTags?: SkillTag[];
 }
 
-export function MapCard({ prompt, hint, answerRegion, onAnswer }: MapCardProps) {
+export function MapCard({ prompt, hint, answerRegion, onAnswer, skillTags }: MapCardProps) {
   const [pinLocation, setPinLocation] = useState<[number, number] | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState<{ correct: boolean; distance?: number } | null>(null);
@@ -47,10 +49,11 @@ export function MapCard({ prompt, hint, answerRegion, onAnswer }: MapCardProps) 
     onAnswer(pinLocation, timeMs, result.correct);
   };
 
-  // Keyboard shortcut for submit/continue
+  // Keyboard shortcut for submit/continue (Enter or Space)
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault(); // Prevent page scroll on space
         if (!submitted && pinLocation) {
           handleSubmit();
         } else if (submitted && pinLocation) {
@@ -65,8 +68,9 @@ export function MapCard({ prompt, hint, answerRegion, onAnswer }: MapCardProps) 
   }, [pinLocation, submitted]);
 
   return (
-    <Card className='mx-auto'>
-      <CardHeader className='space-y-4 text-center'>
+    <div className='space-y-6'>
+      <Card className='mx-auto'>
+        <CardHeader className='space-y-4 text-center'>
         {/* Prompt */}
         <div>
           <div className='mb-2 text-lg font-medium text-muted-foreground'>Where is this located?</div>
@@ -107,14 +111,28 @@ export function MapCard({ prompt, hint, answerRegion, onAnswer }: MapCardProps) 
         {/* Action Button */}
         {!submitted ? (
           <Button size='lg' className='w-full' onClick={handleSubmit} disabled={!pinLocation}>
-            {pinLocation ? 'Submit Answer' : 'Place pin to continue'}
+            {pinLocation ? (
+              <>
+                Submit Answer <span className='ml-2 text-xs opacity-70'>(or press Space)</span>
+              </>
+            ) : (
+              'Place pin to continue'
+            )}
           </Button>
         ) : (
           <Button size='lg' className='w-full' onClick={handleContinue} variant='default'>
-            Continue
+            Continue <span className='ml-2 text-xs opacity-70'>(or press Space)</span>
           </Button>
         )}
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+
+      {/* Show skill card when answer is revealed */}
+      {submitted && skillTags && skillTags.length > 0 && (
+        <div className='mx-auto max-w-3xl'>
+          <SkillCard skillTags={skillTags} />
+        </div>
+      )}
+    </div>
   );
 }

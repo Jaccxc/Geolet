@@ -11,32 +11,39 @@ const siteUrl = getURL();
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get('code');
+  const error = requestUrl.searchParams.get('error');
+  const errorDescription = requestUrl.searchParams.get('error_description');
+
+  // Handle errors from Supabase
+  if (error) {
+    console.error('Auth callback error:', error, errorDescription);
+    return NextResponse.redirect(`${siteUrl}/login?error=${encodeURIComponent(errorDescription || error)}`);
+  }
 
   if (code) {
     const supabase = await createSupabaseServerClient();
-    await supabase.auth.exchangeCodeForSession(code);
+    
+    // Exchange code for session
+    const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+
+    if (exchangeError) {
+      console.error('Error exchanging code for session:', exchangeError);
+      return NextResponse.redirect(`${siteUrl}/login?error=${encodeURIComponent('Authentication failed')}`);
+    }
 
     const {
       data: { user },
+      error: userError,
     } = await supabase.auth.getUser();
 
-    if (!user?.id) {
-      return NextResponse.redirect(`${siteUrl}/login`);
+    if (userError || !user?.id) {
+      console.error('Error getting user:', userError);
+      return NextResponse.redirect(`${siteUrl}/login?error=${encodeURIComponent('Failed to get user data')}`);
     }
 
-    // Check if user is subscribed, if not redirect to pricing page
-    const { data: userSubscription } = await supabase
-      .from('subscriptions')
-      .select('*, prices(*, products(*))')
-      .in('status', ['trialing', 'active'])
-      .maybeSingle();
-
-    if (!userSubscription) {
-      return NextResponse.redirect(`${siteUrl}/pricing`);
-    } else {
-      return NextResponse.redirect(`${siteUrl}`);
-    }
+    return NextResponse.redirect(`${siteUrl}`);
   }
 
+  // No code provided, redirect to home
   return NextResponse.redirect(siteUrl);
 }

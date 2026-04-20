@@ -375,6 +375,7 @@ export type Database = {
           pick_mode_active: boolean
           target_card_group_ids: string[] | null
           title: string
+          use_country_region: boolean
         }
         Insert: {
           created_at?: string
@@ -387,6 +388,7 @@ export type Database = {
           pick_mode_active?: boolean
           target_card_group_ids?: string[] | null
           title: string
+          use_country_region?: boolean
         }
         Update: {
           created_at?: string
@@ -399,6 +401,7 @@ export type Database = {
           pick_mode_active?: boolean
           target_card_group_ids?: string[] | null
           title?: string
+          use_country_region?: boolean
         }
         Relationships: []
       }

@@ -1,19 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { getTopics } from '@/features/rapid/controllers/get-topics';
-import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
 export async function GET(req: NextRequest) {
   try {
-    const supabase = await createSupabaseServerClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const { searchParams } = new URL(req.url);
     const mode = searchParams.get('mode');
 

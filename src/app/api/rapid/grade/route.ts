@@ -39,12 +39,9 @@ export async function POST(req: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const body = await req.json();
     const { mode, items } = requestSchema.parse(body);
+    const userId = user?.id ?? null;
 
     // Grade each item and update SRS
     const results: GradeResult[] = await Promise.all(
@@ -82,22 +79,26 @@ export async function POST(req: NextRequest) {
         const quality = correct ? (item.time_ms < 5000 ? 5 : 4) : 2;
 
         // Update SRS
-        const srsResult = await updateUserFactStat(user.id, {
-          fact_id: item.fact_id,
-          quality,
-          time_ms: item.time_ms,
-        });
+        const srsResult = userId
+          ? await updateUserFactStat(userId, {
+              fact_id: item.fact_id,
+              quality,
+              time_ms: item.time_ms,
+            })
+          : null;
 
         return {
           fact_id: item.fact_id,
           correct,
           time_ms: item.time_ms,
           distance,
-          srs: {
-            new_ease: srsResult.new_ease,
-            due_at: srsResult.due_at.toISOString(),
-            interval_days: srsResult.interval_days,
-          },
+          srs: srsResult
+            ? {
+                new_ease: srsResult.new_ease,
+                due_at: srsResult.due_at.toISOString(),
+                interval_days: srsResult.interval_days,
+              }
+            : undefined,
         };
       })
     );
@@ -111,11 +112,13 @@ export async function POST(req: NextRequest) {
     };
 
     // Save session
-    await supabase.from('game_sessions').insert({
-      user_id: user.id,
-      mode,
-      summary: summary as any,
-    });
+    if (userId) {
+      await supabase.from('game_sessions').insert({
+        user_id: userId,
+        mode,
+        summary: summary as any,
+      });
+    }
 
     return NextResponse.json({
       results,

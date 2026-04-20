@@ -3,7 +3,13 @@ import { redirect } from 'next/navigation';
 import { getSession } from '@/features/account/controllers/get-session';
 import { getSubscription } from '@/features/account/controllers/get-subscription';
 
-import { signInWithEmail, signInWithOAuth } from '../auth-actions';
+import {
+  requestPasswordReset,
+  resendConfirmationEmail,
+  signInWithOAuth,
+  signInWithPassword,
+  signUp,
+} from '../auth-actions';
 import { AuthUI } from '../auth-ui';
 
 export default async function LoginPage() {
@@ -11,16 +17,23 @@ export default async function LoginPage() {
   const subscription = await getSubscription();
 
   if (session && subscription) {
-    redirect('/account');
+    redirect('/');
   }
 
   if (session && !subscription) {
-    redirect('/pricing');
+    redirect('/');
   }
 
   return (
     <div className='container mx-auto px-4'>
-      <AuthUI mode='login' signInWithOAuth={signInWithOAuth} signInWithEmail={signInWithEmail} />
+      <AuthUI
+        mode='login'
+        signInWithOAuth={signInWithOAuth}
+        signUp={signUp}
+        signInWithPassword={signInWithPassword}
+        resendConfirmationEmail={resendConfirmationEmail}
+        requestPasswordReset={requestPasswordReset}
+      />
     </div>
   );
 }
