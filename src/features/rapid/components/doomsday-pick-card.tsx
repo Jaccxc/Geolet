@@ -51,6 +51,12 @@ export function DoomsdayPickCard({ cardType, prompt, hint, options, onAnswer }: 
         const isSelected = selected === option.value;
         const showCorrect = showFeedback && option.correct;
         const showWrong = showFeedback && isSelected && !option.correct;
+        // Only disable "other" options after answering. Keep the correct answer
+        // and the user's selected wrong answer visually enabled so they don't
+        // get the button's base `disabled:opacity-50` overlay on top of the
+        // highlight variant.
+        const isHighlighted = showCorrect || showWrong;
+        const isDisabled = showFeedback && !isHighlighted;
 
         return (
           <Button
@@ -59,7 +65,7 @@ export function DoomsdayPickCard({ cardType, prompt, hint, options, onAnswer }: 
             size='lg'
             className='relative h-16 text-base font-medium'
             onClick={() => handleSelect(option.value)}
-            disabled={!!selected}
+            disabled={isDisabled}
           >
             {option.label}
             {showCorrect && <CheckCircle2 className='absolute right-2 top-2 h-4 w-4' />}
