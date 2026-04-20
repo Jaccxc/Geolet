@@ -49,8 +49,10 @@ export type Database = {
       }
       fact_cards: {
         Row: {
-          answer_region_id: string
+          answer_region_id: string | null
           card_group_id: string
+          card_params: Json | null
+          card_type: string
           created_at: string
           difficulty: Database["public"]["Enums"]["fact_difficulty_enum"]
           hint: string | null
@@ -59,8 +61,10 @@ export type Database = {
           prompt: string
         }
         Insert: {
-          answer_region_id: string
+          answer_region_id?: string | null
           card_group_id: string
+          card_params?: Json | null
+          card_type?: string
           created_at?: string
           difficulty?: Database["public"]["Enums"]["fact_difficulty_enum"]
           hint?: string | null
@@ -69,8 +73,10 @@ export type Database = {
           prompt: string
         }
         Update: {
-          answer_region_id?: string
+          answer_region_id?: string | null
           card_group_id?: string
+          card_params?: Json | null
+          card_type?: string
           created_at?: string
           difficulty?: Database["public"]["Enums"]["fact_difficulty_enum"]
           hint?: string | null
@@ -373,6 +379,7 @@ export type Database = {
           key: string
           map_mode_active: boolean
           pick_mode_active: boolean
+          queue_mode: string
           target_card_group_ids: string[] | null
           title: string
           use_country_region: boolean
@@ -386,6 +393,7 @@ export type Database = {
           key: string
           map_mode_active?: boolean
           pick_mode_active?: boolean
+          queue_mode?: string
           target_card_group_ids?: string[] | null
           title: string
           use_country_region?: boolean
@@ -399,6 +407,7 @@ export type Database = {
           key?: string
           map_mode_active?: boolean
           pick_mode_active?: boolean
+          queue_mode?: string
           target_card_group_ids?: string[] | null
           title?: string
           use_country_region?: boolean
