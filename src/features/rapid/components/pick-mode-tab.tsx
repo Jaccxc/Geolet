@@ -122,6 +122,12 @@ export function PickModeTab({ isAuthenticated }: PickModeTabProps) {
     setError(null);
   };
 
+  const handlePlayAgain = () => {
+    if (selectedTopic) {
+      handleTopicSelect(selectedTopic, activeQueueMode);
+    }
+  };
+
   if (loading) {
     return (
       <div className='flex items-center justify-center py-20'>
@@ -142,7 +148,7 @@ export function PickModeTab({ isAuthenticated }: PickModeTabProps) {
   }
 
   if (sessionState === 'playing') {
-    return <GameScreen queueItems={queueItems} mode={activeQueueMode} onComplete={handleSessionComplete} onNewSession={handleNewSession} />;
+    return <GameScreen queueItems={queueItems} mode={activeQueueMode} onComplete={handleSessionComplete} onNewSession={handleNewSession} onPlayAgain={handlePlayAgain} />;
   }
 
   return (

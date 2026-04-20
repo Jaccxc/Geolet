@@ -63,8 +63,22 @@ src/
 ### Game Flow (Rapid Minigame)
 
 1. `/api/rapid/queue` — builds a prioritized list of up to 20 `fact_cards`, joining with `user_fact_stats` to surface due SRS cards first.
-2. Client renders questions in `features/rapid/components/game-screen.tsx`. Questions are either **pick mode** (multiple choice) or **map mode** (click on a map via MapLibre GL).
+2. Client renders questions in `features/rapid/components/game-screen.tsx`. Questions are either **pick mode** (multiple choice), **map mode** (click on a map via MapLibre GL), or **doomsday mode** (mental calendar calculation drills).
 3. `/api/rapid/grade` — validates the answer (`features/rapid/models/answer-validator.ts`), updates `user_fact_stats`, and recalculates `due_at` using the SM-2 algorithm (`features/srs/`).
+
+### Doomsday Drill Mode
+
+A special game mode for training the [Doomsday algorithm](https://en.wikipedia.org/wiki/Doomsday_rule) (mental day-of-week calculation).
+
+- **Card types** stored in `fact_cards.card_type`:
+  - `doomsday_month` — Drill 1: identify the Doomsday anchor date for a given month
+  - `doomsday_year_template` — Drills 2/2.1/2.5/2.99: calculate the year code (Doomsday for a year)
+  - `doomsday_anchor_template` — Drill 3: find offset from nearest anchor date
+  - `doomsday_full_template` — Drill 4: full chain (day of week for any date)
+- **`card_params`** stores drill-specific config (e.g. `year_range`, `month`, `is_leap`).
+- `build-doomsday-queue.ts` — programmatically generates randomised questions from template cards (no DB lookup per question). Template cards are expanded to fill the requested `maxCards` count.
+- `doomsday-pick-card.tsx` — renders doomsday questions; layout varies by `card_type`.
+- `doomsday-calculator.ts` — pure model functions (getDoomsdayForYear, getDayOfWeek, etc.).
 
 ### Database Schema (key tables)
 

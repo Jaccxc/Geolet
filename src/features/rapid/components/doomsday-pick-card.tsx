@@ -63,13 +63,13 @@ export function DoomsdayPickCard({ cardType, prompt, hint, options, onAnswer }: 
             key={option.value}
             variant={showCorrect ? 'default' : showWrong ? 'destructive' : isSelected ? 'secondary' : 'outline'}
             size='lg'
-            className='relative h-16 text-base font-medium'
+            className='relative min-h-14 h-auto py-3 text-sm sm:text-base font-medium whitespace-normal break-words leading-snug'
             onClick={() => handleSelect(option.value)}
             disabled={isDisabled}
           >
-            {option.label}
-            {showCorrect && <CheckCircle2 className='absolute right-2 top-2 h-4 w-4' />}
-            {showWrong && <XCircle className='absolute right-2 top-2 h-4 w-4' />}
+            <span className='pr-5'>{option.label}</span>
+            {showCorrect && <CheckCircle2 className='absolute right-2 top-2 h-4 w-4 shrink-0' />}
+            {showWrong && <XCircle className='absolute right-2 top-2 h-4 w-4 shrink-0' />}
           </Button>
         );
       })}

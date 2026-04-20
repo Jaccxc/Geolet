@@ -22,9 +22,10 @@ interface GameScreenProps {
   mode: 'pick' | 'map' | 'doomsday';
   onComplete: (results: any) => void;
   onNewSession?: () => void;
+  onPlayAgain?: () => void;
 }
 
-export function GameScreen({ queueItems, mode, onComplete, onNewSession }: GameScreenProps) {
+export function GameScreen({ queueItems, mode, onComplete, onNewSession, onPlayAgain }: GameScreenProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [results, setResults] = useState<any[]>([]);
   const [startTime] = useState(Date.now());
@@ -99,7 +100,7 @@ export function GameScreen({ queueItems, mode, onComplete, onNewSession }: GameS
   const correctCount = results.filter((r) => r.correct).length;
 
   if (isComplete) {
-    return <SessionRecap results={results} mode={mode} totalTimeMs={Date.now() - startTime} onNewSession={onNewSession} />;
+    return <SessionRecap results={results} mode={mode} totalTimeMs={Date.now() - startTime} onNewSession={onNewSession} onPlayAgain={onPlayAgain} />;
   }
 
   const currentItem = queueItems[currentIndex];

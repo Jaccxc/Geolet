@@ -10,9 +10,10 @@ interface SessionRecapProps {
   mode: string;
   totalTimeMs: number;
   onNewSession?: () => void;
+  onPlayAgain?: () => void;
 }
 
-export function SessionRecap({ results, mode, totalTimeMs, onNewSession }: SessionRecapProps) {
+export function SessionRecap({ results, mode, totalTimeMs, onNewSession, onPlayAgain }: SessionRecapProps) {
   const correct = results.filter((r) => r.correct).length;
   const accuracy = Math.round((correct / results.length) * 100);
   const avgTimeMs = results.reduce((sum, r) => sum + r.time_ms, 0) / results.length;
@@ -72,8 +73,14 @@ export function SessionRecap({ results, mode, totalTimeMs, onNewSession }: Sessi
 
           {/* Actions */}
           <div className='flex gap-3'>
-            <Button 
-              className='flex-1' 
+            {onPlayAgain && (
+              <Button className='flex-1' onClick={onPlayAgain}>
+                Play Again
+              </Button>
+            )}
+            <Button
+              variant={onPlayAgain ? 'outline' : 'default'}
+              className='flex-1'
               onClick={() => {
                 if (onNewSession) {
                   onNewSession();
@@ -82,7 +89,7 @@ export function SessionRecap({ results, mode, totalTimeMs, onNewSession }: Sessi
                 }
               }}
             >
-              Start a New Session
+              Back to Topics
             </Button>
           </div>
         </CardContent>

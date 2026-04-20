@@ -33,10 +33,18 @@ export async function POST(req: NextRequest) {
       maxCards,
     });
 
-    // Doomsday mode: programmatic cards — no region lookups needed
+    // Doomsday mode: programmatic cards — no region lookups needed.
+    // Template cards (year/anchor/full) represent a single DB row but generate
+    // unique randomised questions each call, so we expand them to fill maxCards.
     if (mode === 'doomsday') {
-      const queueItems: DoomsdayQueueItem[] = cards.map(buildDoomsdayQueueItem);
-      return NextResponse.json({ mode, items: queueItems, total: queueItems.length });
+      const targetCount = maxCards ?? 8;
+      const expanded: DoomsdayQueueItem[] = [];
+      let i = 0;
+      while (expanded.length < targetCount) {
+        expanded.push(buildDoomsdayQueueItem(cards[i % cards.length]));
+        i++;
+      }
+      return NextResponse.json({ mode, items: expanded, total: expanded.length });
     }
 
     // Fetch topic if topicKey provided (needed for use_country_region in pick options)
