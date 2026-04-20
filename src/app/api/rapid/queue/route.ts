@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
+import { buildDoomsdayQueueItem } from '@/features/rapid/controllers/build-doomsday-queue';
 import { buildQueue } from '@/features/rapid/controllers/build-queue';
 import { getAnswerRegion } from '@/features/rapid/controllers/generate-map-regions';
 import { generatePickOptions } from '@/features/rapid/controllers/generate-pick-options';
-import type { MapQueueItem, PickQueueItem } from '@/features/rapid/types';
+import type { DoomsdayQueueItem, MapQueueItem, PickQueueItem } from '@/features/rapid/types';
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
 const requestSchema = z.object({
-  mode: z.enum(['pick', 'map']),
+  mode: z.enum(['pick', 'map', 'doomsday']),
   topicKey: z.string().optional(),
   cardGroupIds: z.array(z.string().uuid()).optional(),
   maxCards: z.number().int().min(1).max(50).optional(),
@@ -34,6 +35,12 @@ export async function POST(req: NextRequest) {
       cardGroupIds,
       maxCards,
     });
+
+    // Doomsday mode: programmatic cards — no region lookups
+    if (mode === 'doomsday') {
+      const queueItems: DoomsdayQueueItem[] = cards.map(buildDoomsdayQueueItem);
+      return NextResponse.json({ mode, items: queueItems, total: queueItems.length });
+    }
 
     // Generate appropriate queue items
     if (mode === 'pick') {

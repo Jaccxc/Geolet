@@ -3,8 +3,8 @@ import { z } from 'zod';
 
 import { getAnswerRegion } from '@/features/rapid/controllers/generate-map-regions';
 import { getFactCardById } from '@/features/rapid/controllers/get-fact-cards';
-import { validateMapAnswer, validatePickAnswer } from '@/features/rapid/models/answer-validator';
-import type { GradeResult, GradeSummary, MapGradeItem, PickGradeItem } from '@/features/rapid/types';
+import { validateDoomsdayAnswer, validateMapAnswer, validatePickAnswer } from '@/features/rapid/models/answer-validator';
+import type { DoomsdayGradeItem, GradeResult, GradeSummary, MapGradeItem, PickGradeItem } from '@/features/rapid/types';
 import { updateUserFactStat } from '@/features/srs/controllers/update-user-fact-stat';
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
@@ -20,9 +20,16 @@ const mapGradeItemSchema = z.object({
   time_ms: z.number().int(),
 });
 
+const doomsdayGradeItemSchema = z.object({
+  fact_id: z.string().uuid(),
+  selected_value: z.string(),
+  question_params: z.record(z.unknown()),
+  time_ms: z.number().int(),
+});
+
 const requestSchema = z.object({
-  mode: z.enum(['pick', 'map']),
-  items: z.array(z.union([pickGradeItemSchema, mapGradeItemSchema])),
+  mode: z.enum(['pick', 'map', 'doomsday']),
+  items: z.array(z.union([pickGradeItemSchema, mapGradeItemSchema, doomsdayGradeItemSchema])),
 });
 
 export async function POST(req: NextRequest) {
@@ -53,9 +60,16 @@ export async function POST(req: NextRequest) {
         let correct: boolean;
         let distance: number | undefined;
 
-        if (mode === 'pick') {
+        if (mode === 'doomsday') {
+          const doomsdayItem = item as DoomsdayGradeItem;
+          correct = validateDoomsdayAnswer(
+            card.card_type,
+            doomsdayItem.question_params,
+            doomsdayItem.selected_value
+          );
+        } else if (mode === 'pick') {
           const pickItem = item as PickGradeItem;
-          correct = validatePickAnswer(card.answer_region_id, pickItem.selected_region_id);
+          correct = validatePickAnswer(card.answer_region_id!, pickItem.selected_region_id);
         } else {
           const mapItem = item as MapGradeItem;
           const answerRegion = await getAnswerRegion(card);

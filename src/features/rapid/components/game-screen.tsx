@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-import type { MapQueueItem, PickQueueItem } from '../types';
+import type { DoomsdayQueueItem, MapQueueItem, PickQueueItem } from '../types';
 
+import { DoomsdayPickCard } from './doomsday-pick-card';
 import { MapLoading } from './map-loading';
 import { PickCard } from './pick-card';
 import { ProgressHeader } from './progress-header';
@@ -17,8 +18,8 @@ const MapCard = dynamic(() => import('./map-card').then((mod) => ({ default: mod
 });
 
 interface GameScreenProps {
-  queueItems: (PickQueueItem | MapQueueItem)[];
-  mode: 'pick' | 'map';
+  queueItems: (PickQueueItem | MapQueueItem | DoomsdayQueueItem)[];
+  mode: 'pick' | 'map' | 'doomsday';
   onComplete: (results: any) => void;
 }
 
@@ -47,14 +48,25 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
     const item = queueItems[currentIndex];
 
     let newResult: any;
-    if (typeof selectedRegionIdOrPin === 'string') {
-      // Pick mode - NEW: using region_id instead of key
+    if (mode === 'doomsday') {
+      // Doomsday mode: selectedRegionIdOrPin is the option value string
+      const doomsdayItem = item as DoomsdayQueueItem;
+      const selectedValue = selectedRegionIdOrPin as string;
+      newResult = {
+        fact_id: item.fact_id,
+        selected_value: selectedValue,
+        question_params: doomsdayItem.question_params,
+        time_ms: timeMs,
+        correct: doomsdayItem.options.find((o) => o.value === selectedValue)?.correct ?? false,
+      };
+    } else if (typeof selectedRegionIdOrPin === 'string') {
+      // Pick mode
       newResult = {
         fact_id: item.fact_id,
         selected_region_id: selectedRegionIdOrPin,
         time_ms: timeMs,
         correct:
-          'options' in item ? item.options.find((o) => o.region_id === selectedRegionIdOrPin)?.correct || false : false,
+          'options' in item ? (item as PickQueueItem).options.find((o) => o.region_id === selectedRegionIdOrPin)?.correct || false : false,
       };
     } else {
       // Map mode
@@ -62,7 +74,7 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
         fact_id: item.fact_id,
         clicked_point: selectedRegionIdOrPin,
         time_ms: timeMs,
-        correct: correctOverride ?? false, // Use validation from MapCard
+        correct: correctOverride ?? false,
       };
     }
 
@@ -109,12 +121,20 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
         timeElapsed={timeElapsed}
       />
 
-      {isMapMode && 'answer_region' in currentItem ? (
+      {mode === 'doomsday' ? (
+        <DoomsdayPickCard
+          key={currentItem.fact_id}
+          prompt={(currentItem as DoomsdayQueueItem).prompt}
+          hint={(currentItem as DoomsdayQueueItem).hint}
+          options={(currentItem as DoomsdayQueueItem).options}
+          onAnswer={handleAnswer}
+        />
+      ) : isMapMode && 'answer_region' in currentItem ? (
         <MapCard
           key={currentItem.fact_id}
           prompt={currentItem.prompt}
           hint={currentItem.hint}
-          answerRegion={currentItem.answer_region}
+          answerRegion={(currentItem as MapQueueItem).answer_region}
           onAnswer={(pin, time, correct) => handleAnswer(pin, time, correct)}
         />
       ) : 'options' in currentItem ? (
@@ -122,7 +142,7 @@ export function GameScreen({ queueItems, mode, onComplete }: GameScreenProps) {
           key={currentItem.fact_id}
           prompt={currentItem.prompt}
           hint={currentItem.hint}
-          options={currentItem.options}
+          options={(currentItem as PickQueueItem).options}
           onAnswer={handleAnswer}
         />
       ) : null}

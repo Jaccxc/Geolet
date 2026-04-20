@@ -29,6 +29,7 @@ export const topicSchema = z.object({
   map_mode_active: z.boolean(),
   difficulty: topicDifficultySchema.nullable(),
   target_card_group_ids: z.array(z.string().uuid()),
+  queue_mode: z.string().default('pick'),
   created_at: z.string(),
 });
 
@@ -98,7 +99,9 @@ export const factCardSchema = z.object({
   hint: z.string().nullable(),
   primary_skill_tags: z.array(z.string()),
   difficulty: factDifficultySchema,
-  answer_region_id: z.string().uuid(),
+  answer_region_id: z.string().uuid().nullable(),
+  card_type: z.string().default('geo'),
+  card_params: z.record(z.unknown()).nullable().optional(),
   created_at: z.string(),
 });
 
@@ -217,4 +220,36 @@ export interface GradeSummary {
   correct: number;
   accuracy: number;
   avg_time_ms: number;
+}
+
+// ============================================================================
+// Doomsday Drill Types
+// ============================================================================
+
+// A single multiple-choice option for a doomsday card.
+// value: string representation of the answer (day index "0"-"6", date "4", offset "-2", etc.)
+export interface DoomsdayOption {
+  value: string;
+  label: string;
+  correct: boolean;
+}
+
+// Queue item returned for mode='doomsday'.
+export interface DoomsdayQueueItem {
+  fact_id: string;
+  card_type: string;
+  prompt: string;
+  hint: string | null;
+  difficulty: FactDifficulty;
+  question_params: Record<string, unknown>; // echoed back to server on grade
+  options: DoomsdayOption[];
+}
+
+// Grade item sent to /api/rapid/grade when mode='doomsday'.
+export interface DoomsdayGradeItem {
+  fact_id: string;
+  selected_value: string;
+  question_params: Record<string, unknown>;
+  time_ms: number;
+  correct: boolean; // client-computed for SessionRecap; server re-validates independently
 }

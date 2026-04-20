@@ -12,7 +12,7 @@ import { TopicSkeleton } from './topic-skeleton';
 
 interface TopicSelectorProps {
   mode: 'pick' | 'map';
-  onSelect: (topicKey: string) => void;
+  onSelect: (topicKey: string, queueMode: string) => void;
   selectedTopic?: string;
 }
 
@@ -85,7 +85,7 @@ export function TopicSelector({ mode, onSelect, selectedTopic }: TopicSelectorPr
                 ? 'border-primary bg-primary/5 ring-2 ring-primary'
                 : 'hover:border-primary/50'
             }`}
-            onClick={() => onSelect(topic.key)}
+            onClick={() => onSelect(topic.key, topic.queue_mode ?? 'pick')}
           >
             <CardHeader>
               <CardTitle className='flex items-center gap-2'>

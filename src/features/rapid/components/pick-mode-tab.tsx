@@ -13,6 +13,7 @@ export function PickModeTab() {
   const [queueItems, setQueueItems] = useState<any[]>([]);
   const [topics, setTopics] = useState<Topic[]>([]);
   const [selectedTopic, setSelectedTopic] = useState<string | undefined>();
+  const [activeQueueMode, setActiveQueueMode] = useState<'pick' | 'map' | 'doomsday'>('pick');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,8 +33,9 @@ export function PickModeTab() {
     fetchTopics();
   }, []);
 
-  const handleTopicSelect = async (topicKey: string) => {
+  const handleTopicSelect = async (topicKey: string, queueMode = 'pick') => {
     setSelectedTopic(topicKey);
+    setActiveQueueMode(queueMode as 'pick' | 'map' | 'doomsday');
     setLoading(true);
     setError(null);
 
@@ -43,7 +45,7 @@ export function PickModeTab() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          mode: 'pick',
+          mode: queueMode,
           topicKey: topicKey,
           maxCards: 8,
         }),
@@ -72,12 +74,11 @@ export function PickModeTab() {
 
   const handleSessionComplete = async (results: any[]) => {
     try {
-      // Call grade API
       await fetch('/api/rapid/grade', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          mode: 'pick',
+          mode: activeQueueMode,
           items: results,
         }),
       });
@@ -106,7 +107,7 @@ export function PickModeTab() {
   }
 
   if (sessionState === 'playing') {
-    return <GameScreen queueItems={queueItems} mode="pick" onComplete={handleSessionComplete} />;
+    return <GameScreen queueItems={queueItems} mode={activeQueueMode} onComplete={handleSessionComplete} />;
   }
 
   return (

@@ -2,6 +2,8 @@ import * as turf from '@turf/turf';
 
 import type { Region } from '../types';
 
+import { getDayOfWeek, getDoomsdayForYear } from './doomsday-calculator';
+
 /**
  * Validate a Pick mode answer
  * NEW: Validates by region_id instead of generic key
@@ -55,4 +57,38 @@ export function validateMapAnswer(
   }
 
   return { correct: false };
+}
+
+/**
+ * Validate a Doomsday drill answer.
+ * The server re-derives the expected answer from question_params — does not trust selected_value alone.
+ */
+export function validateDoomsdayAnswer(
+  cardType: string,
+  questionParams: Record<string, unknown>,
+  selectedValue: string
+): boolean {
+  const selected = parseInt(selectedValue, 10);
+  if (isNaN(selected)) return false;
+
+  switch (cardType) {
+    case 'doomsday_month': {
+      const correctDate = questionParams.correct_date as number;
+      return selected === correctDate;
+    }
+    case 'doomsday_year_template': {
+      const year = questionParams.year as number;
+      return selected === getDoomsdayForYear(year);
+    }
+    case 'doomsday_anchor_template': {
+      const offset = questionParams.offset as number;
+      return selected === offset;
+    }
+    case 'doomsday_full_template': {
+      const { year, month, day } = questionParams as { year: number; month: number; day: number };
+      return selected === getDayOfWeek(year, month, day);
+    }
+    default:
+      return false;
+  }
 }
