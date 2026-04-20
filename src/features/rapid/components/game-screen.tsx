@@ -146,7 +146,7 @@ export function GameScreen({ queueItems, mode, onComplete, onNewSession }: GameS
           hint={currentItem.hint}
           options={(currentItem as PickQueueItem).options}
           onAnswer={handleAnswer}
-          skillTags={currentItem.skill_tags}
+          skillTags={(currentItem as PickQueueItem).skill_tags}
         />
       ) : null}
     </div>
