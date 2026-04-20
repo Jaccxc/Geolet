@@ -117,6 +117,13 @@ export function PickCard({ prompt, hint, options, onAnswer, skillTags }: PickCar
               variant = 'secondary';
             }
 
+            // Only disable "other" options after answering.
+            // Keep the correct answer and the user's selected answer visually enabled
+            // so they don't get the browser's grey disabled overlay on top of our
+            // green/red highlight styles.
+            const isHighlighted = showCorrect || showWrong;
+            const isDisabled = showFeedback && !isHighlighted;
+
             return (
               <Button
                 key={option.region_id}
@@ -124,7 +131,7 @@ export function PickCard({ prompt, hint, options, onAnswer, skillTags }: PickCar
                 size='lg'
                 className={`relative h-20 text-base font-medium ${customClassName}`}
                 onClick={() => handleSelect(option.region_id)}
-                disabled={!!selected}
+                disabled={isDisabled}
               >
                 {option.label}
                 {showCorrect && <CheckCircle2 className='absolute right-2 top-2 h-5 w-5' />}

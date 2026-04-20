@@ -125,6 +125,7 @@ export function GameScreen({ queueItems, mode, onComplete, onNewSession }: GameS
       {mode === 'doomsday' ? (
         <DoomsdayPickCard
           key={currentItem.fact_id}
+          cardType={(currentItem as DoomsdayQueueItem).card_type}
           prompt={(currentItem as DoomsdayQueueItem).prompt}
           hint={(currentItem as DoomsdayQueueItem).hint}
           options={(currentItem as DoomsdayQueueItem).options}
