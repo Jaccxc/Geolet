@@ -234,6 +234,9 @@ export interface GradeSummary {
 export interface DoomsdayOption {
   value: string;
   label: string;
+  // Optional compact label shown on narrow screens (e.g. "Wed" for "Wednesday").
+  // When omitted, `label` is always rendered.
+  shortLabel?: string;
   correct: boolean;
 }
 

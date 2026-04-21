@@ -1,5 +1,6 @@
 import {
   DAY_NAMES,
+  DAY_NAMES_SHORT,
   daysInMonth,
   getAllDoomsdaysInMonth,
   getDayOfWeek,
@@ -116,6 +117,7 @@ function buildYearCard(card: FactCard, params: Record<string, unknown>): Doomsda
   const options: DoomsdayOption[] = DAY_NAMES.map((name, i) => ({
     value: String(i),
     label: name,
+    shortLabel: DAY_NAMES_SHORT[i],
     correct: i === correctDay,
   }));
 
@@ -142,15 +144,19 @@ function buildAnchorCard(card: FactCard, params: Record<string, unknown>): Dooms
 
   const options: DoomsdayOption[] = [-3, -2, -1, 0, 1, 2, 3].map((o) => ({
     value: String(o),
-    label: o === 0 ? '0 (it IS a Doomsday)' : o > 0 ? `+${o}` : String(o),
+    label: o > 0 ? `+${o}` : String(o),
     correct: o === offset,
   }));
+
+  const hint = card.hint
+    ? `${card.hint} (0 means the date itself is a Doomsday anchor.)`
+    : '0 means the date itself is a Doomsday anchor.';
 
   return {
     fact_id: card.id,
     card_type: card.card_type,
     prompt: `How many days is ${MONTH_NAMES[month]} ${day}, ${year} from the nearest Doomsday anchor?`,
-    hint: card.hint,
+    hint,
     difficulty: card.difficulty,
     question_params: { year, month, day, offset },
     options,
@@ -170,6 +176,7 @@ function buildFullChainCard(card: FactCard, params: Record<string, unknown>): Do
   const options: DoomsdayOption[] = DAY_NAMES.map((name, i) => ({
     value: String(i),
     label: name,
+    shortLabel: DAY_NAMES_SHORT[i],
     correct: i === correctDay,
   }));
 
