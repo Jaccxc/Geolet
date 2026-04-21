@@ -121,6 +121,7 @@ export function GameScreen({ queueItems, mode, onComplete, onNewSession, onPlayA
         total={queueItems.length}
         correct={correctCount}
         timeElapsed={timeElapsed}
+        onQuit={onNewSession}
       />
 
       {mode === 'doomsday' ? (

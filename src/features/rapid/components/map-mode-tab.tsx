@@ -12,9 +12,12 @@ import { TopicSelector } from './topic-selector';
 
 interface MapModeTabProps {
   isAuthenticated: boolean;
+  // Fired whenever this tab enters or leaves an active game session, so
+  // RapidExperience can hide/show the page chrome (title + tab switcher).
+  onPlayingChange?: (isPlaying: boolean) => void;
 }
 
-export function MapModeTab({ isAuthenticated }: MapModeTabProps) {
+export function MapModeTab({ isAuthenticated, onPlayingChange }: MapModeTabProps) {
   const [sessionState, setSessionState] = useState<'topics' | 'playing'>('topics');
   const [queueItems, setQueueItems] = useState<any[]>([]);
   const [topics, setTopics] = useState<Topic[]>([]);
@@ -48,6 +51,13 @@ export function MapModeTab({ isAuthenticated }: MapModeTabProps) {
     setError(null);
     setLimitDialogOpen(false);
   }, [isAuthenticated]);
+
+  // Notify parent whenever we enter / leave the active gameplay state.
+  // Includes the recap view (sessionState stays 'playing' until user returns)
+  // so page chrome stays hidden through gameplay → recap → next action.
+  useEffect(() => {
+    onPlayingChange?.(sessionState === 'playing');
+  }, [sessionState, onPlayingChange]);
 
   const handleTopicSelect = async (topicKey: string) => {
     if (!isAuthenticated && guestSessions >= guestLimit) {
