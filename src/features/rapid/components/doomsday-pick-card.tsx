@@ -69,11 +69,11 @@ export function DoomsdayPickCard({ cardType, prompt, hint, options, onAnswer }: 
           >
             {option.shortLabel ? (
               <>
-                <span className='pr-5 sm:hidden'>{option.shortLabel}</span>
-                <span className='hidden pr-5 sm:inline'>{option.label}</span>
+                <span className='sm:hidden'>{option.shortLabel}</span>
+                <span className='hidden sm:inline'>{option.label}</span>
               </>
             ) : (
-              <span className='pr-5'>{option.label}</span>
+              <span>{option.label}</span>
             )}
             {showCorrect && <CheckCircle2 className='absolute right-2 top-2 h-4 w-4 shrink-0' />}
             {showWrong && <XCircle className='absolute right-2 top-2 h-4 w-4 shrink-0' />}
