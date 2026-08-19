@@ -278,13 +278,14 @@
   top: -100%;
   width: 300%;
   height: 300%;
+  /* band width matches the original 240% background-size look */
   background: linear-gradient(
     115deg,
-    transparent 43%,
-    rgba(150, 170, 255, 0.2) 47.5%,
+    transparent 35.6%,
+    rgba(150, 170, 255, 0.2) 46%,
     rgba(244, 215, 136, 0.16) 50%,
-    rgba(150, 170, 255, 0.2) 52.5%,
-    transparent 57%
+    rgba(150, 170, 255, 0.2) 54%,
+    transparent 64.4%
   );
   transform: translate(calc(var(--tx) * -13%), calc(var(--ty) * -13%));
   mix-blend-mode: screen;
@@ -720,16 +721,17 @@
   top: -100%;
   width: 300%;
   height: 300%;
+  /* stops scaled so the band width on the card matches the original 320% background-size look */
   background: repeating-linear-gradient(
     112deg,
     hsl(0 90% 60%) 0%,
-    hsl(40 95% 58%) 1.3%,
-    hsl(80 85% 55%) 2.7%,
-    hsl(160 80% 55%) 4%,
-    hsl(210 95% 60%) 5.3%,
-    hsl(270 90% 62%) 6.7%,
-    hsl(320 90% 60%) 8%,
-    hsl(0 90% 60%) 9.3%
+    hsl(40 95% 58%) 4.3%,
+    hsl(80 85% 55%) 8.5%,
+    hsl(160 80% 55%) 12.8%,
+    hsl(210 95% 60%) 17.1%,
+    hsl(270 90% 62%) 21.3%,
+    hsl(320 90% 60%) 25.6%,
+    hsl(0 90% 60%) 29.9%
   );
   transform: translate(calc(var(--tx) * 14%), calc(var(--ty) * 14%));
   mix-blend-mode: color-dodge;
