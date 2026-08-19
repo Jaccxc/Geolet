@@ -39,8 +39,9 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {
-  const session = await getSession();
-  const userProfile = session ? await getUser() : null;
+  // Fall back to logged-out rendering when Supabase env vars are absent (e.g. demo pages on a fresh clone).
+  const session = await getSession().catch(() => null);
+  const userProfile = session ? await getUser().catch(() => null) : null;
 
   return (
     <html lang="en" className="dark">
