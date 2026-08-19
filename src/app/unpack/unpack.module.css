@@ -177,8 +177,10 @@
   inset: 0;
   border-radius: 8px;
   outline: none;
-  /* sits above the cards layer, so emerging cards are masked by the pack body */
+  /* sits above the cards layer, so emerging cards are masked by the pack body.
+     Real 3D depth too: inside preserve-3d, WebKit sorts by depth, not z-index. */
   z-index: 2;
+  transform: translateZ(1px);
 }
 
 .pack:focus-visible {
@@ -541,6 +543,7 @@
   place-items: center;
   pointer-events: none;
   z-index: 1;
+  transform: translateZ(-1px);
 }
 
 .minorWrap {
@@ -616,7 +619,6 @@
     0 34px 70px -22px rgba(0, 0, 0, 0.9),
     0 0 60px -12px rgba(120, 110, 255, 0.25),
     inset 0 0 0 1px rgba(244, 215, 136, 0.4);
-  transform: translateZ(30px);
 }
 
 .heroInner {
