@@ -162,7 +162,7 @@
   width: var(--pack-w);
   aspect-ratio: 33 / 50;
   transform-style: preserve-3d;
-  transform: rotateX(calc(var(--ty) * var(--damp) * -8deg)) rotateY(calc(var(--tx) * var(--damp) * 11deg));
+  transform: rotateX(calc(var(--ty) * var(--damp) * -4.5deg)) rotateY(calc(var(--tx) * var(--damp) * 6deg));
   will-change: transform;
 }
 
@@ -213,17 +213,6 @@
 .packStrip {
   position: absolute;
   inset: 0;
-}
-
-/* ambient drop shadow lives on its own underlay so the silhouette clip can't cut it off */
-.packShadow {
-  position: absolute;
-  inset: 3% 5%;
-  border-radius: 16px;
-  box-shadow:
-    0 30px 70px -18px rgba(0, 0, 0, 0.9),
-    0 10px 26px -6px rgba(0, 0, 0, 0.55);
-  z-index: 0;
 }
 
 .packArt {

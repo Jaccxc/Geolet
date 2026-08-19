@@ -472,7 +472,6 @@ export function UnpackExperience() {
                 onPointerCancel={onSeamUp}
               >
                 <div className={s.packFloat}>
-                  <div className={s.packShadow} />
                   {/* bottom piece */}
                   <motion.div
                     className={s.packBody}
