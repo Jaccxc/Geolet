@@ -11,7 +11,7 @@ type TiltMode = 'pointer' | 'gyro' | 'gyro-locked' | 'static';
 
 /* Deterministic jagged tear edge (percent y at each 10% x step). */
 const JAG_X = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-const JAG_Y = [20, 19.4, 20.7, 19.6, 20.9, 19.2, 20.5, 19.5, 21, 19.3, 20];
+const JAG_Y = [20, 19.76, 20.28, 19.84, 20.36, 19.68, 20.2, 19.8, 20.4, 19.72, 20];
 
 const STRIP_CLIP = `polygon(0% 0%, 100% 0%, ${[...JAG_X]
   .reverse()
