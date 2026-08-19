@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from 'motion/react';
 import s from './unpack.module.css';
 
 type Phase = 'idle' | 'ripping' | 'burst' | 'revealed';
-type TiltMode = 'pointer' | 'gyro' | 'gyro-locked' | 'static';
 
 /* Deterministic jagged tear edge (percent y at each 10% x step). */
 const JAG_X = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
@@ -30,23 +29,45 @@ const MINOR_CARDS = [
 
 /**
  * Drives --tx / --ty / --hyp custom properties on the stage element.
- * Desktop: pointer position. Mobile: gyroscope (with iOS permission gate).
+ * Desktop: mouse position. Touch devices: finger position while touching,
+ * blended with a slow ambient sway (no gyroscope, no permission prompt).
  */
 function useTilt(stageRef: React.RefObject<HTMLDivElement | null>) {
   const target = useRef({ x: 0, y: 0 });
-  const [mode, setMode] = useState<TiltMode>('static');
+  const sway = useRef(false);
+  const [coarse, setCoarse] = useState(false);
+
+  useEffect(() => {
+    const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+    setCoarse(isCoarse);
+    sway.current = isCoarse && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }, []);
 
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
     let raf = 0;
     const cur = { x: 0, y: 0 };
+    let wx = NaN;
+    let wy = NaN;
     const tick = () => {
-      cur.x += (target.current.x - cur.x) * 0.09;
-      cur.y += (target.current.y - cur.y) * 0.09;
-      el.style.setProperty('--tx', cur.x.toFixed(4));
-      el.style.setProperty('--ty', cur.y.toFixed(4));
-      el.style.setProperty('--hyp', Math.min(1, Math.hypot(cur.x, cur.y)).toFixed(4));
+      let tx = target.current.x;
+      let ty = target.current.y;
+      if (sway.current) {
+        const t = performance.now() / 1000;
+        tx = Math.max(-1, Math.min(1, tx + Math.sin(t * 0.9) * 0.42));
+        ty = Math.max(-1, Math.min(1, ty + Math.cos(t * 0.61) * 0.3));
+      }
+      cur.x += (tx - cur.x) * 0.09;
+      cur.y += (ty - cur.y) * 0.09;
+      /* skip style writes once settled: idle frames cost nothing */
+      if (Math.abs(cur.x - wx) > 0.0006 || Math.abs(cur.y - wy) > 0.0006) {
+        wx = cur.x;
+        wy = cur.y;
+        el.style.setProperty('--tx', cur.x.toFixed(4));
+        el.style.setProperty('--ty', cur.y.toFixed(4));
+        el.style.setProperty('--hyp', Math.min(1, Math.hypot(cur.x, cur.y)).toFixed(4));
+      }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -54,56 +75,28 @@ function useTilt(stageRef: React.RefObject<HTMLDivElement | null>) {
   }, [stageRef]);
 
   useEffect(() => {
-    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (fine) {
-      setMode('pointer');
-      return;
-    }
-    const DOE = window.DeviceOrientationEvent as
-      | (typeof DeviceOrientationEvent & { requestPermission?: () => Promise<string> })
-      | undefined;
-    if (DOE && typeof DOE.requestPermission === 'function') setMode('gyro-locked');
-    else if (DOE) setMode('gyro');
-  }, []);
-
-  /* Pointer input is always attached: on touch devices pointermove barely fires,
-     so gyro (below) simply takes over when available. */
-  useEffect(() => {
+    /* touch positions cluster around the pack, so amplify them to get a full tilt range */
+    const gain = window.matchMedia('(pointer: coarse)').matches ? 1.7 : 1;
     const onMove = (e: PointerEvent) => {
-      target.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      target.current.y = (e.clientY / window.innerHeight) * 2 - 1;
+      target.current.x = Math.max(-1, Math.min(1, ((e.clientX / window.innerWidth) * 2 - 1) * gain));
+      target.current.y = Math.max(-1, Math.min(1, ((e.clientY / window.innerHeight) * 2 - 1) * gain));
+    };
+    const onRelease = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') target.current = { x: 0, y: 0 };
     };
     window.addEventListener('pointermove', onMove);
-    return () => window.removeEventListener('pointermove', onMove);
+    window.addEventListener('pointerdown', onMove);
+    window.addEventListener('pointerup', onRelease);
+    window.addEventListener('pointercancel', onRelease);
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerdown', onMove);
+      window.removeEventListener('pointerup', onRelease);
+      window.removeEventListener('pointercancel', onRelease);
+    };
   }, []);
 
-  useEffect(() => {
-    if (mode === 'gyro') {
-      let baseBeta: number | null = null;
-      const onOrient = (e: DeviceOrientationEvent) => {
-        if (e.beta === null || e.gamma === null) return;
-        if (baseBeta === null) baseBeta = e.beta;
-        target.current.x = Math.max(-1, Math.min(1, e.gamma / 24));
-        target.current.y = Math.max(-1, Math.min(1, (e.beta - baseBeta) / 24));
-      };
-      window.addEventListener('deviceorientation', onOrient);
-      return () => window.removeEventListener('deviceorientation', onOrient);
-    }
-  }, [mode]);
-
-  const enableGyro = useCallback(async () => {
-    const DOE = window.DeviceOrientationEvent as
-      | (typeof DeviceOrientationEvent & { requestPermission?: () => Promise<string> })
-      | undefined;
-    try {
-      const res = await DOE?.requestPermission?.();
-      if (res === 'granted') setMode('gyro');
-    } catch {
-      /* user dismissed the iOS prompt; keep the button visible */
-    }
-  }, []);
-
-  return { mode, enableGyro };
+  return coarse;
 }
 
 /* ------------------------------------------------------------------ */
@@ -136,13 +129,19 @@ const SparkCanvas = forwardRef<SparkHandle>(function SparkCanvas(_props, ref) {
   const raf = useRef(0);
   const running = useRef(false);
   const reduced = useRef(false);
+  const coarse = useRef(false);
+
+  /* mobile GPUs choke on a large additive canvas: cap resolution and particle count */
+  const dprCap = () => Math.min(coarse.current ? 1.25 : 2, window.devicePixelRatio || 1);
+  const maxSparks = () => (coarse.current ? 150 : MAX_SPARKS);
 
   useEffect(() => {
     reduced.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    coarse.current = window.matchMedia('(pointer: coarse)').matches;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const fit = () => {
-      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      const dpr = dprCap();
       const rect = canvas.getBoundingClientRect();
       canvas.width = Math.max(1, Math.round(rect.width * dpr));
       canvas.height = Math.max(1, Math.round(rect.height * dpr));
@@ -164,7 +163,8 @@ const SparkCanvas = forwardRef<SparkHandle>(function SparkCanvas(_props, ref) {
       return;
     }
     const { width: w, height: h } = canvas;
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const dpr = dprCap();
+    const drawHalo = !coarse.current;
 
     /* fade previous frame instead of clearing: cheap motion trails */
     ctx.globalCompositeOperation = 'destination-out';
@@ -190,11 +190,12 @@ const SparkCanvas = forwardRef<SparkHandle>(function SparkCanvas(_props, ref) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
       ctx.fill();
-      /* faint halo */
-      ctx.fillStyle = `rgba(255, ${g}, ${b}, ${0.16 * t})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, r * 3.2, 0, Math.PI * 2);
-      ctx.fill();
+      if (drawHalo) {
+        ctx.fillStyle = `rgba(255, ${g}, ${b}, ${0.16 * t})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r * 3.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
     sparks.current = alive;
     if (alive.length > 0) {
@@ -215,11 +216,12 @@ const SparkCanvas = forwardRef<SparkHandle>(function SparkCanvas(_props, ref) {
   const spawn = useCallback((u: number, v: number, count: number, speed: number, spread: number, up: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const dpr = dprCap();
+    const n = coarse.current ? Math.ceil(count / 2) : count;
     const cx = ((CANVAS_OFFSET + u) / CANVAS_SPAN) * canvas.width;
     const cy = ((CANVAS_OFFSET + v) / CANVAS_SPAN) * canvas.height;
-    for (let i = 0; i < count; i++) {
-      if (sparks.current.length >= MAX_SPARKS) break;
+    for (let i = 0; i < n; i++) {
+      if (sparks.current.length >= maxSparks()) break;
       const angle = -Math.PI / 2 + (Math.random() - 0.5) * spread;
       const vel = (0.4 + Math.random() * speed) * dpr;
       const maxLife = 26 + Math.random() * 40;
@@ -351,12 +353,18 @@ export function UnpackExperience() {
   const dragX = useRef(0);
   const packW = useRef(1);
   const springRaf = useRef(0);
+  const ripRaf = useRef(0);
   const sparksRef = useRef<SparkHandle>(null);
-  const { mode, enableGyro } = useTilt(stageRef);
+  const coarse = useTilt(stageRef);
 
+  /* touch pointermove can outpace the display; coalesce --rip writes to one per frame */
   const setRipVar = (v: number) => {
     rip.current = v;
-    packRef.current?.style.setProperty('--rip', v.toFixed(4));
+    if (ripRaf.current) return;
+    ripRaf.current = requestAnimationFrame(() => {
+      ripRaf.current = 0;
+      packRef.current?.style.setProperty('--rip', rip.current.toFixed(4));
+    });
   };
 
   const completeRip = useCallback(() => {
@@ -585,17 +593,7 @@ export function UnpackExperience() {
             </button>
           </motion.div>
         )}
-        {mode === 'gyro-locked' && (
-          <button type="button" className={s.gyroBtn} onClick={enableGyro}>
-            Enable tilt (gyroscope)
-          </button>
-        )}
-        <p className={s.modeTag}>
-          {mode === 'pointer' && 'Follows your mouse'}
-          {mode === 'gyro' && 'Follows your phone’s tilt'}
-          {mode === 'gyro-locked' && 'Motion access needed for tilt'}
-          {mode === 'static' && ''}
-        </p>
+        <p className={s.modeTag}>{coarse ? 'Tilts with your touch' : 'Follows your mouse'}</p>
       </footer>
     </div>
   );

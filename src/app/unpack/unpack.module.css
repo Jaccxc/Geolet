@@ -29,8 +29,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(60% 46% at 50% 40%, rgba(70, 64, 140, 0.3), transparent 70%),
-    radial-gradient(38% 30% at 50% 46%, rgba(200, 150, 60, 0.08), transparent 70%);
+    radial-gradient(60% 46% at 50% 40%, rgba(76, 70, 158, 0.45), transparent 72%),
+    radial-gradient(38% 30% at 50% 46%, rgba(200, 150, 60, 0.12), transparent 70%);
 }
 
 .vignette {
@@ -122,8 +122,7 @@
   color: rgba(242, 227, 181, 0.85);
 }
 
-.replayBtn,
-.gyroBtn {
+.replayBtn {
   appearance: none;
   background: rgba(244, 215, 136, 0.06);
   border: 1px solid var(--gold-dim);
@@ -139,8 +138,7 @@
   transition: background-color 0.25s, border-color 0.25s, transform 0.25s;
 }
 
-.replayBtn:hover,
-.gyroBtn:hover {
+.replayBtn:hover {
   background: rgba(244, 215, 136, 0.14);
   border-color: rgba(244, 215, 136, 0.85);
   transform: translateY(-1px);
@@ -867,5 +865,18 @@
   .seamBolt,
   .seamBoltFine {
     filter: none;
+  }
+}
+
+/* touch devices: the SVG displacement filters are CPU-rendered and re-evaluated
+   on every --rip change, which is the main source of drag jank on phones.
+   Fall back to the plain hot line + aura + sparks there. */
+@media (pointer: coarse) {
+  .seamBolt {
+    filter: none;
+  }
+
+  .seamBoltFine {
+    display: none;
   }
 }
