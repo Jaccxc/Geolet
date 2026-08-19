@@ -237,6 +237,6 @@ MIT License - see LICENSE file for details
 
 ---
 
-Built with ❤️ for the GeoGuessr community
+Built with ❤️ for the GeoGuessr community.
 
 Jacc.
