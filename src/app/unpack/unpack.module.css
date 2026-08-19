@@ -314,21 +314,20 @@
   border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/* wrinkles pulled into the foil by the crimp seals */
+/* wrinkles pulled into the foil by the crimp seals.
+   Three soft-edged layers with coprime-ish periods interfere into an
+   irregular, organic pattern instead of a mechanical stripe grid. */
 .packCrimpTop::after,
 .packCrimpBottom::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
-  height: 230%;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.28) 0 5px,
-    transparent 5px 25px,
-    rgba(0, 0, 0, 0.16) 25px 29px,
-    transparent 29px 53px
-  );
+  height: 210%;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 9px, rgba(0, 0, 0, 0.1) 13px, transparent 17px 34px),
+    repeating-linear-gradient(90deg, transparent 0 21px, rgba(255, 255, 255, 0.04) 25px, transparent 29px 55px),
+    repeating-linear-gradient(90deg, transparent 0 38px, rgba(0, 0, 0, 0.07) 46px, transparent 54px 89px);
 }
 
 .packCrimpTop::after {
