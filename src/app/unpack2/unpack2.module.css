@@ -228,8 +228,8 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  -webkit-mask-image: url('/unpack2/pack.png');
-  mask-image: url('/unpack2/pack.png');
+  -webkit-mask-image: url('/unpack2/pack-v2.png');
+  mask-image: url('/unpack2/pack-v2.png');
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }

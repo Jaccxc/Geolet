@@ -49,8 +49,8 @@ function useTilt(stageRef: React.RefObject<HTMLDivElement | null>) {
     if (!el) return;
     let raf = 0;
     const cur = { x: 0, y: 0 };
-    let wx = NaN;
-    let wy = NaN;
+    let wx = Infinity;
+    let wy = Infinity;
     const tick = () => {
       let tx = target.current.x;
       let ty = target.current.y;
