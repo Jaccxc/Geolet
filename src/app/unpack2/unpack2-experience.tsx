@@ -39,6 +39,7 @@ const MINOR_CARDS = [
 function useTilt(stageRef: React.RefObject<HTMLDivElement | null>) {
   const target = useRef({ x: 0, y: 0 });
   const sway = useRef(false);
+  const lastPointer = useRef(0);
   const [coarse, setCoarse] = useState(false);
 
   useEffect(() => {
@@ -80,6 +81,7 @@ function useTilt(stageRef: React.RefObject<HTMLDivElement | null>) {
   useEffect(() => {
     const gain = window.matchMedia('(pointer: coarse)').matches ? 1.7 : 1;
     const onMove = (e: PointerEvent) => {
+      lastPointer.current = performance.now();
       target.current.x = Math.max(-1, Math.min(1, ((e.clientX / window.innerWidth) * 2 - 1) * gain));
       target.current.y = Math.max(-1, Math.min(1, ((e.clientY / window.innerHeight) * 2 - 1) * gain));
     };
@@ -95,6 +97,47 @@ function useTilt(stageRef: React.RefObject<HTMLDivElement | null>) {
       window.removeEventListener('pointerdown', onMove);
       window.removeEventListener('pointerup', onRelease);
       window.removeEventListener('pointercancel', onRelease);
+    };
+  }, []);
+
+  /* Gyroscope tilt with no dedicated button: Android attaches straight away;
+     iOS asks for motion permission on the first touch (a valid user gesture).
+     Pointer input wins while recently active; the ambient sway retires once
+     real gyro data arrives. Falls back to touch + sway when denied/absent. */
+  useEffect(() => {
+    if (!window.matchMedia('(pointer: coarse)').matches) return;
+    const DOE = window.DeviceOrientationEvent as
+      | (typeof DeviceOrientationEvent & { requestPermission?: () => Promise<string> })
+      | undefined;
+    if (!DOE) return;
+    let attached = false;
+    let baseBeta: number | null = null;
+    const onOrient = (e: DeviceOrientationEvent) => {
+      if (e.beta === null || e.gamma === null) return;
+      sway.current = false;
+      if (performance.now() - lastPointer.current < 600) return;
+      if (baseBeta === null) baseBeta = e.beta;
+      target.current.x = Math.max(-1, Math.min(1, e.gamma / 24));
+      target.current.y = Math.max(-1, Math.min(1, (e.beta - baseBeta) / 24));
+    };
+    const attach = () => {
+      if (attached) return;
+      attached = true;
+      window.addEventListener('deviceorientation', onOrient);
+    };
+    const askOnGesture = () => {
+      window.removeEventListener('pointerdown', askOnGesture);
+      DOE.requestPermission?.()
+        .then((res) => {
+          if (res === 'granted') attach();
+        })
+        .catch(() => {});
+    };
+    if (typeof DOE.requestPermission === 'function') window.addEventListener('pointerdown', askOnGesture);
+    else attach();
+    return () => {
+      window.removeEventListener('pointerdown', askOnGesture);
+      window.removeEventListener('deviceorientation', onOrient);
     };
   }, []);
 

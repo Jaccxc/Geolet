@@ -160,7 +160,8 @@
   --damp: 1;
   position: relative;
   width: var(--pack-w);
-  aspect-ratio: 2 / 3;
+  /* matches the alpha-cropped pack artwork exactly, so seam and hit zones align */
+  aspect-ratio: 906 / 1531;
   transform-style: preserve-3d;
   transform: rotateX(calc(var(--ty) * var(--damp) * -4.5deg)) rotateY(calc(var(--tx) * var(--damp) * 6deg));
   will-change: transform;
