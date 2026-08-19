@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { AnimatePresence, motion } from 'motion/react';
 
 import s from './unpack.module.css';
@@ -105,46 +106,12 @@ function useTilt(stageRef: React.RefObject<HTMLDivElement | null>) {
   return { mode, enableGyro };
 }
 
-function GlobeMark({ idPrefix, className }: { idPrefix: string; className?: string }) {
-  const g = (name: string) => `${idPrefix}-${name}`;
-  return (
-    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
-      <defs>
-        <radialGradient id={g('sea')} cx="38%" cy="32%" r="80%">
-          <stop offset="0%" stopColor="#3d5aa8" />
-          <stop offset="45%" stopColor="#20306b" />
-          <stop offset="100%" stopColor="#0c1030" />
-        </radialGradient>
-        <linearGradient id={g('rim')} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#f4d788" />
-          <stop offset="50%" stopColor="#a8801f" />
-          <stop offset="100%" stopColor="#f0c25c" />
-        </linearGradient>
-      </defs>
-      <circle cx="100" cy="100" r="80" fill={`url(#${g('sea')})`} stroke={`url(#${g('rim')})`} strokeWidth="2.5" />
-      {/* graticule */}
-      <g stroke="#93aef0" strokeOpacity="0.42" strokeWidth="1" fill="none">
-        <ellipse cx="100" cy="100" rx="80" ry="80" />
-        <ellipse cx="100" cy="100" rx="52" ry="80" />
-        <ellipse cx="100" cy="100" rx="24" ry="80" />
-        <line x1="100" y1="20" x2="100" y2="180" />
-        <path d="M 24 62 A 96 96 0 0 1 176 62" />
-        <line x1="20" y1="100" x2="180" y2="100" />
-        <path d="M 24 138 A 96 96 0 0 0 176 138" />
-      </g>
-      {/* abstract landmasses */}
-      <g fill="#e9d9a6" fillOpacity="0.8">
-        <path d="M62 58 q14 -12 30 -6 q10 4 6 14 q-4 9 -16 10 q-16 2 -24 -6 q-4 -7 4 -12z" />
-        <path d="M116 92 q18 -4 26 8 q6 10 -2 20 q-9 11 -24 8 q-12 -3 -12 -15 q0 -14 12 -21z" />
-        <path d="M66 118 q12 -2 16 8 q3 9 -6 15 q-11 7 -20 0 q-7 -6 -2 -14 q4 -7 12 -9z" />
-      </g>
-      <circle cx="100" cy="100" r="80" fill="none" stroke={`url(#${g('rim')})`} strokeWidth="2.5" />
-    </svg>
-  );
+function LogoMark({ className }: { className?: string }) {
+  return <Image src="/logo.png" width={240} height={240} alt="" aria-hidden="true" className={className} />;
 }
 
 /** The booster wrapper artwork; rendered twice (strip + body) so the tear stays aligned. */
-function PackArt({ idPrefix }: { idPrefix: string }) {
+function PackArt() {
   return (
     <div className={s.packArt}>
       <div className={s.packFoil} />
@@ -152,7 +119,7 @@ function PackArt({ idPrefix }: { idPrefix: string }) {
       <div className={s.packCrimpBottom} />
       <div className={s.packContent}>
         <p className={s.packKicker}>TRAINER BOOSTER</p>
-        <GlobeMark idPrefix={idPrefix} className={s.packGlobe} />
+        <LogoMark className={s.packGlobe} />
         <p className={s.packWordmark}>GEOLET</p>
         <p className={s.packSub}>FIVE CARDS · ONE WORLD</p>
       </div>
@@ -165,7 +132,7 @@ function CardBack() {
   return (
     <div className={s.cardBack}>
       <div className={s.cardBackRing}>
-        <GlobeMark idPrefix="back" className={s.cardBackGlobe} />
+        <LogoMark className={s.cardBackGlobe} />
       </div>
       <p className={s.cardBackWord}>GEOLET</p>
     </div>
@@ -178,7 +145,7 @@ function HeroCard() {
       <div className={s.heroInner}>
         <div className={s.heroArt}>
           <div className={s.heroStars} />
-          <GlobeMark idPrefix="hero" className={s.heroGlobe} />
+          <LogoMark className={s.heroGlobe} />
         </div>
         <div className={s.heroPlate}>
           <p className={s.heroName}>GEOLET</p>
@@ -333,7 +300,7 @@ export function UnpackExperience() {
                     }
                     transition={{ duration: 0.65, delay: phase === 'burst' ? 0.22 : 0, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <PackArt idPrefix={`body-${round}`} />
+                    <PackArt />
                     <div className={s.tornShadow} />
                   </motion.div>
 
@@ -348,7 +315,7 @@ export function UnpackExperience() {
                     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <div className={s.packStrip} style={{ clipPath: STRIP_CLIP }}>
-                      <PackArt idPrefix={`strip-${round}`} />
+                      <PackArt />
                     </div>
                   </motion.div>
 

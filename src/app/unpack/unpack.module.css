@@ -212,7 +212,7 @@
   position: absolute;
   inset: 0;
   transform-origin: 104% 24%;
-  transform: translateY(calc(var(--rip) * -1.2%)) rotate(calc(var(--rip) * -4.5deg));
+  transform: translateY(calc(var(--rip) * 0.6%)) rotate(calc(var(--rip) * 5deg));
 }
 
 .packArt {
@@ -293,8 +293,9 @@
 
 .packGlobe {
   width: 54%;
+  height: auto;
   margin-top: 12%;
-  filter: drop-shadow(0 6px 18px rgba(40, 70, 200, 0.45));
+  filter: drop-shadow(0 6px 20px rgba(34, 197, 94, 0.4));
 }
 
 .packWordmark {
@@ -502,6 +503,7 @@
 
 .cardBackGlobe {
   width: 100%;
+  height: auto;
   opacity: 0.85;
 }
 
@@ -567,8 +569,9 @@
 }
 
 .heroGlobe {
-  width: 66%;
-  filter: drop-shadow(0 10px 24px rgba(30, 60, 190, 0.55));
+  width: 60%;
+  height: auto;
+  filter: drop-shadow(0 10px 26px rgba(34, 197, 94, 0.45));
 }
 
 .heroPlate {
