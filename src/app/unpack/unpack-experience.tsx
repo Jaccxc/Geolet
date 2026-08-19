@@ -331,7 +331,13 @@ export function UnpackExperience() {
                     <div className={s.seamSpark} />
                   </div>
 
-                  {phase === 'burst' && <div className={s.flash} />}
+                  {phase === 'burst' && (
+                    <div className={s.burstFx}>
+                      <div className={s.flash} />
+                      <div className={s.flashStreak} />
+                      <div className={s.shockwave} />
+                    </div>
+                  )}
                 </div>
               </motion.div>
             )}
