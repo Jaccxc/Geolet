@@ -123,8 +123,6 @@ type Spark = {
 export type SparkHandle = {
   /** Spray embers at pack-relative coords (u, v in 0..1). */
   tear: (u: number, v: number, intensity: number) => void;
-  /** Radial explosion at pack-relative coords. */
-  burst: (u: number, v: number) => void;
 };
 
 /* Canvas spans 260% of the pack (80% overhang each side) so sparks can fly past its edges. */
@@ -245,11 +243,6 @@ const SparkCanvas = forwardRef<SparkHandle>(function SparkCanvas(_props, ref) {
         spawn(u, v, 1 + Math.round(intensity * 2), 1.6 + intensity, Math.PI * 1.1, 1);
         wake();
       },
-      burst: (u, v) => {
-        if (reduced.current) return;
-        spawn(u, v, 130, 5.5, Math.PI * 2, 0.9);
-        wake();
-      },
     }),
     [spawn, wake]
   );
@@ -300,6 +293,7 @@ function PackArt() {
   return (
     <div className={s.packArt}>
       <div className={s.packFoil} />
+      <div className={s.packShading} />
       <div className={s.packCrimpTop} />
       <div className={s.packCrimpBottom} />
       <div className={s.packContent}>
@@ -368,7 +362,6 @@ export function UnpackExperience() {
   const completeRip = useCallback(() => {
     setRipVar(1);
     if ('vibrate' in navigator) navigator.vibrate?.(35);
-    sparksRef.current?.burst(0.5, 0.2);
     setPhase('burst');
   }, []);
 
@@ -479,16 +472,22 @@ export function UnpackExperience() {
                 onPointerCancel={onSeamUp}
               >
                 <div className={s.packFloat}>
+                  <div className={s.packShadow} />
                   {/* bottom piece */}
                   <motion.div
                     className={s.packBody}
                     style={{ clipPath: BODY_CLIP }}
                     animate={
                       phase === 'burst'
-                        ? { y: '58%', rotate: 4, opacity: 0 }
+                        ? { y: '62%', rotate: 3, opacity: [1, 1, 0] }
                         : { y: 0, rotate: 0, opacity: 1 }
                     }
-                    transition={{ duration: 0.65, delay: phase === 'burst' ? 0.22 : 0, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{
+                      duration: 0.7,
+                      delay: phase === 'burst' ? 0.3 : 0,
+                      ease: [0.22, 1, 0.36, 1],
+                      opacity: { duration: 0.7, delay: phase === 'burst' ? 0.3 : 0, times: [0, 0.55, 1] },
+                    }}
                   >
                     <PackArt />
                     <div className={s.tornShadow} />
@@ -523,13 +522,6 @@ export function UnpackExperience() {
                   </div>
 
                   <SparkCanvas ref={sparksRef} />
-
-                  {phase === 'burst' && (
-                    <div className={s.burstFx}>
-                      <div className={s.flash} />
-                      <div className={s.flashStreak} />
-                    </div>
-                  )}
                 </div>
               </motion.div>
             )}
@@ -541,13 +533,20 @@ export function UnpackExperience() {
                 <div key={`minor-${round}-${i}`} className={s.minorWrap}>
                   <motion.div
                     className={s.minorCard}
-                    initial={{ x: 0, y: 30, scale: 0.55, rotate: 0, opacity: 0 }}
-                    animate={{ x: t.x, y: t.y, scale: 0.8, rotate: t.r, opacity: [0, 1, 1, 0] }}
+                    initial={{ x: '0vw', y: '6vh', scale: 0.6, rotate: 0 }}
+                    animate={{
+                      x: ['0vw', '0vw', t.x],
+                      y: ['6vh', '-26vh', t.y],
+                      scale: [0.6, 0.78, 0.82],
+                      rotate: [0, 0, t.r],
+                      opacity: [1, 1, 0],
+                    }}
                     transition={{
-                      duration: 1.05,
-                      delay: 0.16 + i * 0.07,
-                      ease: [0.16, 1, 0.3, 1],
-                      opacity: { duration: 1.05, delay: 0.16 + i * 0.07, times: [0, 0.12, 0.68, 1] },
+                      duration: 1.25,
+                      delay: 0.1 + i * 0.06,
+                      ease: [0.3, 0.9, 0.35, 1],
+                      times: [0, 0.42, 1],
+                      opacity: { duration: 1.25, delay: 0.1 + i * 0.06, times: [0, 0.7, 1] },
                     }}
                   >
                     <CardBack />
@@ -557,9 +556,12 @@ export function UnpackExperience() {
               <motion.div
                 key={`hero-${round}`}
                 className={s.heroSlot}
-                initial={{ y: 70, scale: 0.5, opacity: 0 }}
-                animate={{ y: 0, scale: 1, opacity: 1 }}
-                transition={{ type: 'spring', stiffness: 160, damping: 17, delay: 0.38 }}
+                initial={{ y: '7vh', scale: 0.62 }}
+                animate={{
+                  y: ['7vh', '-25vh', '-25vh', '0vh'],
+                  scale: [0.62, 0.85, 0.9, 1],
+                }}
+                transition={{ duration: 1.55, delay: 0.16, ease: [0.3, 0.8, 0.3, 1], times: [0, 0.36, 0.52, 1] }}
                 onAnimationComplete={() => setPhase('revealed')}
               >
                 <HeroCard />
