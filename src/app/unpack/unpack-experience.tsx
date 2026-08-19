@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'motion/react';
 
@@ -106,6 +106,191 @@ function useTilt(stageRef: React.RefObject<HTMLDivElement | null>) {
   return { mode, enableGyro };
 }
 
+/* ------------------------------------------------------------------ */
+/* Spark particles: additively blended embers sprayed from the tear.   */
+/* ------------------------------------------------------------------ */
+
+type Spark = {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  life: number;
+  maxLife: number;
+  size: number;
+};
+
+export type SparkHandle = {
+  /** Spray embers at pack-relative coords (u, v in 0..1). */
+  tear: (u: number, v: number, intensity: number) => void;
+  /** Radial explosion at pack-relative coords. */
+  burst: (u: number, v: number) => void;
+};
+
+/* Canvas spans 260% of the pack (80% overhang each side) so sparks can fly past its edges. */
+const CANVAS_SPAN = 2.6;
+const CANVAS_OFFSET = 0.8;
+const MAX_SPARKS = 420;
+
+const SparkCanvas = forwardRef<SparkHandle>(function SparkCanvas(_props, ref) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sparks = useRef<Spark[]>([]);
+  const raf = useRef(0);
+  const running = useRef(false);
+  const reduced = useRef(false);
+
+  useEffect(() => {
+    reduced.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const fit = () => {
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    return () => {
+      window.removeEventListener('resize', fit);
+      cancelAnimationFrame(raf.current);
+      running.current = false;
+    };
+  }, []);
+
+  const step = useCallback(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    if (!canvas || !ctx) {
+      running.current = false;
+      return;
+    }
+    const { width: w, height: h } = canvas;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+
+    /* fade previous frame instead of clearing: cheap motion trails */
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    ctx.fillRect(0, 0, w, h);
+
+    /* additive blending: overlapping embers bloom to white */
+    ctx.globalCompositeOperation = 'lighter';
+    const alive: Spark[] = [];
+    for (const p of sparks.current) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.055 * dpr;
+      p.vx *= 0.985;
+      p.life -= 1;
+      if (p.life <= 0 || p.y > h) continue;
+      alive.push(p);
+      const t = p.life / p.maxLife;
+      const g = Math.round(140 + 115 * t);
+      const b = Math.round(30 + 200 * t * t);
+      const r = p.size * (0.6 + t);
+      ctx.fillStyle = `rgba(255, ${g}, ${b}, ${Math.min(1, t * 1.6)})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fill();
+      /* faint halo */
+      ctx.fillStyle = `rgba(255, ${g}, ${b}, ${0.16 * t})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r * 3.2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    sparks.current = alive;
+    if (alive.length > 0) {
+      raf.current = requestAnimationFrame(step);
+    } else {
+      ctx.clearRect(0, 0, w, h);
+      running.current = false;
+    }
+  }, []);
+
+  const wake = useCallback(() => {
+    if (!running.current) {
+      running.current = true;
+      raf.current = requestAnimationFrame(step);
+    }
+  }, [step]);
+
+  const spawn = useCallback((u: number, v: number, count: number, speed: number, spread: number, up: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const cx = ((CANVAS_OFFSET + u) / CANVAS_SPAN) * canvas.width;
+    const cy = ((CANVAS_OFFSET + v) / CANVAS_SPAN) * canvas.height;
+    for (let i = 0; i < count; i++) {
+      if (sparks.current.length >= MAX_SPARKS) break;
+      const angle = -Math.PI / 2 + (Math.random() - 0.5) * spread;
+      const vel = (0.4 + Math.random() * speed) * dpr;
+      const maxLife = 26 + Math.random() * 40;
+      sparks.current.push({
+        x: cx + (Math.random() - 0.5) * 3 * dpr,
+        y: cy + (Math.random() - 0.5) * 2 * dpr,
+        vx: Math.cos(angle) * vel,
+        vy: Math.sin(angle) * vel * up,
+        life: maxLife,
+        maxLife,
+        size: (0.5 + Math.random() * 1.3) * dpr,
+      });
+    }
+  }, []);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      tear: (u, v, intensity) => {
+        if (reduced.current) return;
+        spawn(u, v, 1 + Math.round(intensity * 2), 1.6 + intensity, Math.PI * 1.1, 1);
+        wake();
+      },
+      burst: (u, v) => {
+        if (reduced.current) return;
+        spawn(u, v, 130, 5.5, Math.PI * 2, 0.9);
+        wake();
+      },
+    }),
+    [spawn, wake]
+  );
+
+  return <canvas ref={canvasRef} className={s.sparkCanvas} aria-hidden="true" />;
+});
+
+/** Turbulence filters that displace the seam line into a crackling energy bolt. */
+function BoltFilters() {
+  return (
+    <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+      <defs>
+        <filter id="unpack-bolt-a" x="-5%" y="-900%" width="110%" height="1900%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.028 0.09" numOctaves="2" seed="3" result="n">
+            <animate
+              attributeName="seed"
+              dur="0.45s"
+              values="3;7;11;15;19;23"
+              repeatCount="indefinite"
+              calcMode="discrete"
+            />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <filter id="unpack-bolt-b" x="-5%" y="-1400%" width="110%" height="2900%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.055 0.16" numOctaves="2" seed="8" result="n">
+            <animate
+              attributeName="seed"
+              dur="0.35s"
+              values="8;2;14;26;20;32"
+              repeatCount="indefinite"
+              calcMode="discrete"
+            />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
+
 function LogoMark({ className }: { className?: string }) {
   return <Image src="/logo.png" width={240} height={240} alt="" aria-hidden="true" className={className} />;
 }
@@ -172,6 +357,7 @@ export function UnpackExperience() {
   const dragX = useRef(0);
   const packW = useRef(1);
   const springRaf = useRef(0);
+  const sparksRef = useRef<SparkHandle>(null);
   const { mode, enableGyro } = useTilt(stageRef);
 
   const setRipVar = (v: number) => {
@@ -182,6 +368,7 @@ export function UnpackExperience() {
   const completeRip = useCallback(() => {
     setRipVar(1);
     if ('vibrate' in navigator) navigator.vibrate?.(35);
+    sparksRef.current?.burst(0.5, 0.2);
     setPhase('burst');
   }, []);
 
@@ -206,6 +393,7 @@ export function UnpackExperience() {
     if (dx <= 0) return;
     const next = Math.min(1, rip.current + dx / packW.current);
     setRipVar(next);
+    sparksRef.current?.tear(next, 0.2, Math.min(1, dx / 14));
     if (next >= 1) {
       e.currentTarget.releasePointerCapture(e.pointerId);
       completeRip();
@@ -242,6 +430,7 @@ export function UnpackExperience() {
         return;
       }
       setRipVar(next);
+      sparksRef.current?.tear(next, 0.2, 0.7);
       springRaf.current = requestAnimationFrame(rush);
     };
     setPhase('ripping');
@@ -260,6 +449,7 @@ export function UnpackExperience() {
 
   return (
     <div ref={stageRef} className={s.stage} data-phase={phase}>
+      <BoltFilters />
       <div className={s.backdrop} />
       <div className={s.vignette} />
 
@@ -327,15 +517,17 @@ export function UnpackExperience() {
                     </>
                   )}
                   <div className={s.seamGlow}>
-                    <div className={s.seamCore} />
-                    <div className={s.seamSpark} />
+                    <div className={s.seamAura} />
+                    <div className={s.seamBolt} />
+                    <div className={s.seamBoltFine} />
                   </div>
+
+                  <SparkCanvas ref={sparksRef} />
 
                   {phase === 'burst' && (
                     <div className={s.burstFx}>
                       <div className={s.flash} />
                       <div className={s.flashStreak} />
-                      <div className={s.shockwave} />
                     </div>
                   )}
                 </div>
