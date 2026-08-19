@@ -454,6 +454,13 @@ export function Unpack2Experience() {
       <div className={s.backdrop} />
       <div className={s.vignette} />
 
+      {/* invisible warm-up copies of the card faces: they request the exact same
+          optimized image URLs as the burst-phase cards, so nothing pops in mid-flight */}
+      <div className={s.preload} aria-hidden="true">
+        <Image src="/unpack2/card.png" alt="" fill loading="eager" sizes="(max-width: 768px) 66vw, 300px" />
+        <Image src="/unpack2/back.png" alt="" fill loading="eager" sizes="(max-width: 768px) 55vw, 260px" />
+      </div>
+
       <header className={s.header}>
         <span className={s.headerWord}>GEOLET</span>
         <span className={s.headerDivider} />

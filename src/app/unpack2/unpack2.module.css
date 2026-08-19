@@ -42,6 +42,17 @@
   pointer-events: none;
 }
 
+/* sized like the real cards so the browser picks the same srcset entry */
+.preload {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--card-w);
+  aspect-ratio: 63 / 88;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* ---------- chrome ---------- */
 
 .header {
