@@ -733,7 +733,7 @@
   );
   transform: translate(calc(var(--tx) * 14%), calc(var(--ty) * 14%));
   mix-blend-mode: color-dodge;
-  opacity: calc(0.18 + var(--hyp) * 0.5);
+  opacity: calc(0.18 + var(--hyp) * 0.38);
   filter: brightness(0.62) contrast(1.3) saturate(1.4);
   animation: polychrome 16s linear infinite;
   pointer-events: none;
